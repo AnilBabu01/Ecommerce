@@ -160,6 +160,8 @@ exports.deleteReview = async (req, res, next) => {
     (review) => review._id.toString() !== req.query.id.toString()
   );
 
+
+  
   const numOfReviews = reviews.length;
 
   const ratings =
