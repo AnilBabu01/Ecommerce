@@ -21,9 +21,9 @@ router.route("/admin/product/updateProduct/:id").put(isAuthenticatedUser,authori
 router.route("/admin/product/:id").put(isAuthenticatedUser,authorizeRoles('admin'),updateProduct).delete(isAuthenticatedUser,authorizeRoles,deleteProduct);
 router.route("/admin/product/deleteProduct/:id").delete(isAuthenticatedUser,authorizeRoles('admin'),deleteProduct);
 
-router.route("/product/getAllProduct").get(isAuthenticatedUser,getProducts);
+router.route("/product/getAllProduct").get(getProducts);
 
-router.route("/product/getSingleProduct/:id").get(isAuthenticatedUser,getSingleProduct);
+router.route("/product/getSingleProduct/:id").get(getSingleProduct);
 
 router.route("/product/review").put(isAuthenticatedUser,createProductReview);
 
