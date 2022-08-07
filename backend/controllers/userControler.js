@@ -2,6 +2,7 @@ const User = require("../models/user");
 const { validationResult } = require("express-validator");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
+const cloudinary = require('cloudinary');
 const crypto = require("crypto");
 
 // Register a user   api/auth/register
@@ -10,7 +11,13 @@ exports.registerUser = async (req, res, next) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ success: errors.array() });
   }
+  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: 'userprofile',
+    width: 150,
+    crop: "scale"
+})
   const { name, email, password } = req.body;
+  
   let user = await User.findOne({ email });
 
   if (user) {
@@ -23,9 +30,9 @@ exports.registerUser = async (req, res, next) => {
     email,
     password,
     avatar: {
-      public_id: "products/bshmuo9qisfhz4azvnsd",
-      url: "https://res.cloudinary.com/bookit/image/upload/v1606293153/products/bshmuo9qisfhz4azvnsd.jpg",
-    },
+      public_id: result.public_id,
+      url: result.secure_url
+     },
   });
 
   sendToken(user, 200, res);

@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getProducts} from "../actions/productActions";
-
+import React, {useState} from "react";
+import {useNavigate} from 'react-router-dom';
 const Search = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
-  useEffect(() => {}, [dispatch, keyword]);
   const searchHandler = (e) => {
     e.preventDefault();
-     if (keyword.trim()) {
-      dispatch(getProducts(keyword));
-    } else {
-    }
+     
+    if (keyword.trim()) {
+      navigate(`/search/${keyword}`)
+  } else {
+    navigate('/')
+  }
   };
   return (
     <>
