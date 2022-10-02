@@ -13,20 +13,14 @@ exports.registerUser = async (req, res, next) => {
       return res.status(400).json({ success: errors.array() });
     }
     const { name, email, password, avatar } = req.body;
-    const result = await cloudinary.v2.uploader.upload(avatar, {
-      folder: "userprofile",
+
+    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
       width: 150,
       crop: "scale",
     });
 
-    let user = await User.findOne({ email });
-
-    if (user) {
-      return res
-        .status(401)
-        .json({ msg: "User allready exist with email or password" });
-    }
-    user = await User.create({
+    const user = await User.create({
       name,
       email,
       password,

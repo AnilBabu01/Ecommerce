@@ -86,11 +86,30 @@ export const login = (email, password) => async (dispatch) => {
 
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: data.user,
+      payload: data,
     });
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+//loader user
+export const loadUser = () => async (dispatch) => {
+  try {
+    dispatch({ type: LOAD_USER_REQUEST });
+
+    const { data } = await axios.get("http://localhost:8080/api/auth/me");
+
+    dispatch({
+      type: LOAD_USER_SUCCESS,
+      payload: data.user,
+    });
+  } catch (error) {
+    dispatch({
+      type: LOAD_USER_FAIL,
       payload: error.response.data.message,
     });
   }

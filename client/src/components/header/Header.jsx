@@ -5,10 +5,10 @@ import Search from "../search/Search";
 const Header = ({ history }) => {
   return (
     <>
-      <nav class="navbar row">
+      <nav style={{ possition: "fixed" }} class="navbar row">
         <div class="col-12 col-md-3">
           <div class="navbar-brand">
-            <img src="./images/logo.png" alt="img" />
+            <h2 style={{ color: "#fa9c23" }}>Ab-coder</h2>
           </div>
         </div>
 

@@ -13,6 +13,11 @@ const Login = () => {
   const { loading, error, isAuthenticated, user } = useSelector(
     (state) => state.auth
   );
+  if (user) {
+    localStorage.setItem("etoken", user.token);
+    console.log(user.token);
+  }
+  const token = localStorage.getItem("etoken");
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();

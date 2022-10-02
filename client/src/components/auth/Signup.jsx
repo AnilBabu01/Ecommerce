@@ -60,6 +60,9 @@ const Signup = () => {
         if (reader.readyState === 2) {
           setAvatarPreview(reader.result);
           setAvatar(reader.result);
+
+          const original = Buffer.toString("ascii");
+          console.log(original);
         }
       };
 
@@ -87,7 +90,7 @@ const Signup = () => {
                 <h1 className="mb-3">Register</h1>
 
                 <div className="form-group">
-                  <label for="name_field">Name</label>
+                  <label htmlFor="name_field">Name</label>
                   <input
                     type="name"
                     id="name_field"
@@ -99,7 +102,7 @@ const Signup = () => {
                 </div>
 
                 <div className="form-group">
-                  <label for="email_field">Email</label>
+                  <label htmlFor="email_field">Email</label>
                   <input
                     type="email"
                     id="email_field"
@@ -111,7 +114,7 @@ const Signup = () => {
                 </div>
 
                 <div className="form-group">
-                  <label for="password_field">Password</label>
+                  <label htmlFor="password_field">Password</label>
                   <input
                     type="password"
                     id="password_field"
@@ -123,14 +126,14 @@ const Signup = () => {
                 </div>
 
                 <div className="form-group">
-                  <label for="avatar_upload">Avatar</label>
+                  <label htmlfor="avatar_upload">Avatar</label>
                   <div className="d-flex align-items-center">
                     <div>
                       <figure className="avatar mr-3 item-rtl">
                         <img
                           src={avatarPreview}
                           className="rounded-circle"
-                          alt="image"
+                          alt="imag"
                         />
                       </figure>
                     </div>
@@ -143,7 +146,7 @@ const Signup = () => {
                         accept="images/*"
                         onChange={onChange}
                       />
-                      <label className="custom-file-label" for="customFile">
+                      <label className="custom-file-label" htmlFor="customFile">
                         Choose Avatar
                       </label>
                     </div>
@@ -154,6 +157,7 @@ const Signup = () => {
                   id="register_button"
                   type="submit"
                   className="btn btn-block py-3"
+                  disabled={loading ? true : false}
                 >
                   REGISTER
                 </button>
