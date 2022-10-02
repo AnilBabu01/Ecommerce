@@ -196,25 +196,29 @@ exports.getUserProfile = async (req, res, next) => {
 
 // get currently user logged in details   api/auth/password/update
 exports.updatePassword = async (req, res, next) => {
-  const user = await User.findById(req.user.id).select("+password");
+  try {
+    const user = await User.findById(req.user.id).select("+password");
 
-  // Check previous user password
-  const isMatched = await user.comparePassword(req.body.oldPassword);
-  if (!isMatched) {
-    return res.status(400).json({
-      success: false,
-      message: "Old password is incorrect",
-    });
+    // Check previous user password
+    const isMatched = await user.comparePassword(req.body.oldPassword);
+    if (!isMatched) {
+      return res.status(400).json({
+        success: false,
+        message: "Old password is incorrect",
+      });
+    }
+    // if (req.body.password !== req.body.oldPassword) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "Both must be same",
+    //   });
+    // }
+    user.password = req.body.password;
+    await user.save();
+    sendToken(user, 200, res);
+  } catch (error) {
+    console.log(error);
   }
-  if (req.body.password !== req.body.confirmPassword) {
-    return res.status(400).json({
-      success: false,
-      message: "Both must be same",
-    });
-  }
-  user.password = req.body.password;
-  await user.save();
-  sendToken(user, 200, res);
 };
 
 //admin routes
