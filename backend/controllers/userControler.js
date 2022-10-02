@@ -2,40 +2,44 @@ const User = require("../models/user");
 const { validationResult } = require("express-validator");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
-const cloudinary = require('cloudinary');
+const cloudinary = require("cloudinary");
 const crypto = require("crypto");
 
 // Register a user   api/auth/register
 exports.registerUser = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ success: errors.array() });
-  }
-  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    folder: 'userprofile',
-    width: 150,
-    crop: "scale"
-})
-  const { name, email, password } = req.body;
-  
-  let user = await User.findOne({ email });
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success: errors.array() });
+    }
+    const { name, email, password, avatar } = req.body;
+    const result = await cloudinary.v2.uploader.upload(avatar, {
+      folder: "userprofile",
+      width: 150,
+      crop: "scale",
+    });
 
-  if (user) {
-    return res
-      .status(401)
-      .json({ msg: "User allready exist with email or password" });
-  }
-  user = await User.create({
-    name,
-    email,
-    password,
-    avatar: {
-      public_id: result.public_id,
-      url: result.secure_url
-     },
-  });
+    let user = await User.findOne({ email });
 
-  sendToken(user, 200, res);
+    if (user) {
+      return res
+        .status(401)
+        .json({ msg: "User allready exist with email or password" });
+    }
+    user = await User.create({
+      name,
+      email,
+      password,
+      avatar: {
+        public_id: result.public_id,
+        url: result.secure_url,
+      },
+    });
+
+    sendToken(user, 200, res);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // Login User  => api/auth/login

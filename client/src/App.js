@@ -12,14 +12,14 @@ function App() {
     <>
       <BrowserRouter>
         <Header />
-        <div className='container container-fluid'>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/product/:id" element={<ProductDetails/>} />
-          <Route path="/search/:keyword" element={<Home/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Signup/>} />
-        </Routes>
+        <div className="container container-fluid">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/search/:keyword" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Signup />} />
+          </Routes>
         </div>
         <Footer />
       </BrowserRouter>

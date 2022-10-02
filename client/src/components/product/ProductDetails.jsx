@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Carousel } from "react-bootstrap";
@@ -20,7 +20,7 @@ const ProductDetails = () => {
       dispatch(clearErrors);
     }
     dispatch(getProductDetails(id));
-  }, [dispatch, alert, error]);
+  }, [dispatch, alert, error, id]);
 
   return (
     <div>
@@ -180,9 +180,6 @@ const ProductDetails = () => {
           </div>
         </>
       )}
-  
-
-      
     </div>
   );
 };

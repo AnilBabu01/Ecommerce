@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
-import {Link, Route,Routes} from 'react-router-dom'
+import { Link, Route, Routes } from "react-router-dom";
 import Search from "../search/Search";
-const Header = ({history}) => {
+
+const Header = ({ history }) => {
   return (
     <>
       <nav class="navbar row">
@@ -12,12 +13,11 @@ const Header = ({history}) => {
         </div>
 
         <div class="col-12 col-md-6 mt-2 mt-md-0">
-          
-         <Search  history={history}/>
+          <Search history={history} />
         </div>
 
         <div class="col-12 col-md-3 mt-4 mt-md-0 text-center">
-          <Link  to="/login" class="btn" id="login_btn">
+          <Link to="/login" class="btn" id="login_btn">
             Login
           </Link>
 

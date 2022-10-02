@@ -10,7 +10,7 @@ import { login, clearErrors } from "../actions/authActions";
 const Login = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const { loading, error, isAuthenticated,user } = useSelector(
+  const { loading, error, isAuthenticated, user } = useSelector(
     (state) => state.auth
   );
   const dispatch = useDispatch();
@@ -24,12 +24,11 @@ const Login = () => {
       alert.error(error);
       dispatch(clearErrors);
     }
-   
-  }, [dispatch, error, isAuthenticated,alert]);
+  }, [dispatch, error, isAuthenticated, alert]);
 
   const submit = (e) => {
     e.preventDefault();
-    dispatch(login(email, password))
+    dispatch(login(email, password));
   };
 
   return (
