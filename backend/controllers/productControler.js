@@ -17,7 +17,6 @@ exports.newProduct = async (req, res, next) => {
 };
 //get all product api/product/getallproduct?keyword=apple
 exports.getProducts = async (req, res, next) => {
-
   try {
     const resPerPage = 4;
     const productsCount = await Product.countDocuments();
@@ -27,16 +26,14 @@ exports.getProducts = async (req, res, next) => {
     apiFeatures.filter();
     apiFeatures.pagination(resPerPage);
     let products = await apiFeatures.query;
-       setTimeout(() => {
-        res.status(201).json({
-          status: true,
-          productsCount,
-          products,
-          resPerPage
-        });
-       }, 1000);
-    
-  
+    setTimeout(() => {
+      res.status(201).json({
+        status: true,
+        productsCount,
+        products,
+        resPerPage,
+      });
+    }, 1000);
   } catch (error) {
     console.log(error);
   }
@@ -164,8 +161,6 @@ exports.deleteReview = async (req, res, next) => {
     (review) => review._id.toString() !== req.query.id.toString()
   );
 
-
-  
   const numOfReviews = reviews.length;
 
   const ratings =

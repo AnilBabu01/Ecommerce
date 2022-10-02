@@ -36,6 +36,32 @@ exports.registerUser = async (req, res, next) => {
   }
 };
 
+// Update user profile   =>   /api/auth/me/update
+exports.updateProfile = async (req, res, next) => {
+  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+    avatar: {
+      public_id: result.public_id,
+      url: result.secure_url,
+    },
+  };
+  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+};
 // Login User  => api/auth/login
 exports.loginUser = async (req, res, next) => {
   const errors = validationResult(req);
@@ -189,24 +215,6 @@ exports.updatePassword = async (req, res, next) => {
   user.password = req.body.password;
   await user.save();
   sendToken(user, 200, res);
-};
-
-// Update user profile   =>   /api/auth/me/update
-exports.updateProfile = async (req, res, next) => {
-  const newUserData = {
-    name: req.body.name,
-    email: req.body.email,
-  };
-  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
-    new: true,
-    runValidators: true,
-    useFindAndModify: false,
-  });
-
-  res.status(200).json({
-    success: true,
-    user,
-  });
 };
 
 //admin routes

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
@@ -11,6 +12,8 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { getProducts, clearErrors } from "../actions/productActions";
+
+import { loadUser } from "../actions/authActions";
 
 const Home = ({ match }) => {
   const dispatch = useDispatch();
@@ -41,6 +44,8 @@ const Home = ({ match }) => {
   );
 
   useEffect(() => {
+    dispatch(loadUser());
+
     dispatch(getProducts(keyword, currentPage, price, category, rating));
     if (error) {
       return alert.error(error);
@@ -63,6 +68,7 @@ const Home = ({ match }) => {
         <>
           <Metadata title={"Buy best product by"} />
           <h1 id="products_heading">Latest Products</h1>
+
           {keyword ? (
             <>
               <hr className="my-5" />

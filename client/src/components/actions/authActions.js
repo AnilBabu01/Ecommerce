@@ -68,19 +68,23 @@ export const register = (userData) => async (dispatch) => {
 };
 
 // Login
+
 export const login = (email, password) => async (dispatch) => {
+  axios.defaults.withCredentials = true;
   try {
     dispatch({ type: LOGIN_REQUEST });
 
     const config = {
       headers: {
         "Content-Type": "application/json",
+        Credentials: "include",
       },
     };
 
     const { data } = await axios.post(
       "http://localhost:8080/api/auth/login",
       { email, password },
+
       config
     );
 
@@ -100,8 +104,15 @@ export const login = (email, password) => async (dispatch) => {
 export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
-
-    const { data } = await axios.get("http://localhost:8080/api/auth/me");
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.get(
+      "http://localhost:8080/api/auth/me",
+      config
+    );
 
     dispatch({
       type: LOAD_USER_SUCCESS,
@@ -110,6 +121,80 @@ export const loadUser = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOAD_USER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Logout user
+export const logout = () => async (dispatch) => {
+  try {
+    await axios.get("http://localhost:8080/api/auth/logout");
+
+    dispatch({
+      type: LOGOUT_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: LOGOUT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Update profile
+export const updateProfile = (userData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PROFILE_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    const { data } = await axios.put(
+      "http://localhost:8080/api/auth/updateprofile",
+      userData,
+      config
+    );
+
+    dispatch({
+      type: UPDATE_PROFILE_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_PROFILE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Update password
+export const updatePassword = (passwords) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PASSWORD_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.put(
+      "http://localhost:8080/api/auth/password/update",
+      passwords,
+      config
+    );
+
+    dispatch({
+      type: UPDATE_PASSWORD_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_PASSWORD_FAIL,
       payload: error.response.data.message,
     });
   }

@@ -8,10 +8,18 @@ var cors = require("cors");
 const app = express();
 
 app.use(expresfileupload());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+    optionsSuccessStatus: 200,
+  })
+);
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookiesParser());
+
+app.set("trust proxy", 1);
 // import all routes here
 const product = require("./routes/product");
 const user = require("./routes/auth");
