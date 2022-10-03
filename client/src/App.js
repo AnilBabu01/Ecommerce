@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -15,32 +15,43 @@ import Cart from "./components/cart/Cart";
 import ShippingInfo from "./components/cart/ShippingInfo";
 import Confirmorder from "./components/cart/Confirmorder";
 import Payment from "./components/cart/Payment";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import "./App.css";
+import { axios } from "axios";
+
+const stripe = loadStripe(
+  "pk_test_51LopskSGAjDSZQyBVlYz24jYhviKM94BLmSCmiimOAre20S8Ti9RD2CF8BPfAsofbNl1fdmQK2UxyFXSPvzS0Tmm00PM0lilLG"
+);
 function App() {
+  useEffect(() => {}, []);
+
   return (
     <>
-      <BrowserRouter>
-        <Header />
-        <div className="container container-fluid">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/product/:id" element={<ProductDetails />} />
-            <Route path="/search/:keyword" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Signup />} />
-            <Route path="/me" element={<Profile />} />
-            <Route path="/me/update" element={<UpdateProfile />} />
-            <Route path="/password/update" element={<UpdatePassword />} />
-            <Route path="/password/forgot" element={<ResetPassword />} />
-            <Route path="/password/reset/:token" element={<NewPassword />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/shipping" element={<ShippingInfo />} />
-            <Route path="/confirm" element={<Confirmorder />} />
-            <Route path="/payment" element={<Payment />} />
-          </Routes>
-        </div>
-        <Footer />
-      </BrowserRouter>
+      <Elements stripe={stripe}>
+        <BrowserRouter>
+          <Header />
+          <div className="container container-fluid">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
+              <Route path="/search/:keyword" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Signup />} />
+              <Route path="/me" element={<Profile />} />
+              <Route path="/me/update" element={<UpdateProfile />} />
+              <Route path="/password/update" element={<UpdatePassword />} />
+              <Route path="/password/forgot" element={<ResetPassword />} />
+              <Route path="/password/reset/:token" element={<NewPassword />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/shipping" element={<ShippingInfo />} />
+              <Route path="/confirm" element={<Confirmorder />} />
+              <Route path="/payment" element={<Payment />} />
+            </Routes>
+          </div>
+          <Footer />
+        </BrowserRouter>
+      </Elements>
     </>
   );
 }

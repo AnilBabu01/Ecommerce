@@ -25,9 +25,11 @@ app.set("trust proxy", 1);
 const product = require("./routes/product");
 const user = require("./routes/auth");
 const order = require("./routes/order");
+const payment = require("./routes/payment");
 app.use("/api/auth", user);
 app.use("/api", product);
 app.use("/api", order);
+app.use("/api", payment);
 
 //middleware to handle errors
 app.use(errorMiddleware);
