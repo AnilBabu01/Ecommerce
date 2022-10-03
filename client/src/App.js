@@ -11,6 +11,10 @@ import UpdateProfile from "./components/user/UpdateProfile";
 import UpdatePassword from "./components/user/UpdatePassword";
 import ResetPassword from "./components/user/ResetPassword";
 import NewPassword from "./components/user/NewPassword";
+import Cart from "./components/cart/Cart";
+import ShippingInfo from "./components/cart/ShippingInfo";
+import Confirmorder from "./components/cart/Confirmorder";
+import Payment from "./components/cart/Payment";
 import "./App.css";
 function App() {
   return (
@@ -29,6 +33,10 @@ function App() {
             <Route path="/password/update" element={<UpdatePassword />} />
             <Route path="/password/forgot" element={<ResetPassword />} />
             <Route path="/password/reset/:token" element={<NewPassword />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/shipping" element={<ShippingInfo />} />
+            <Route path="/confirm" element={<Confirmorder />} />
+            <Route path="/payment" element={<Payment />} />
           </Routes>
         </div>
         <Footer />

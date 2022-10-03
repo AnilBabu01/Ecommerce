@@ -7,7 +7,7 @@ import { useAlert } from "react-alert";
 import Metadata from "../metadata/Metadata";
 import { login, clearErrors } from "../actions/authActions";
 
-const Login = () => {
+const Login = ({ location }) => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const { loading, error, isAuthenticated, user } = useSelector(
