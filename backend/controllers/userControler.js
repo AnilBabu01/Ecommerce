@@ -114,10 +114,13 @@ exports.forgotPassword = async (req, res, next) => {
   const resetToken = user.getResetPasswordToken();
 
   await user.save({ validateBeforeSave: false });
+  //for production model
+  // const resetUrl = `${req.protocol}://${req.get(
+  //   "host"
+  // )}/api/auth/password/reset/${resetToken}`;
 
-  const resetUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/api/auth/password/reset/${resetToken}`;
+  ///for check email service in local mode
+  const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
   const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`;
 

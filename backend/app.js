@@ -15,6 +15,7 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
+
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookiesParser());

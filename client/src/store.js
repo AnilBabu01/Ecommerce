@@ -5,15 +5,29 @@ import {
   productsReducer,
   productDetailsReducer,
 } from "./components/reducers/productReducers";
-import { authReducer, userReducer } from "./components/reducers/authReducers";
+import {
+  authReducer,
+  userReducer,
+  forgotPasswordReducer,
+} from "./components/reducers/authReducers";
+
+import { cartReducer } from "./components/reducers/cartReducer";
 const reducer = combineReducers({
   products: productsReducer,
   productDetails: productDetailsReducer,
   auth: authReducer,
   user: userReducer,
+  forgotPassword: forgotPasswordReducer,
+  cart: cartReducer,
 });
 
-let initialState = {};
+let initialState = {
+  cart: {
+    cartItems: localStorage.getItem("cartItems")
+      ? JSON.parse(localStorage.getItem("cartItems"))
+      : [],
+  },
+};
 
 const middlware = [thunk];
 const store = createStore(
