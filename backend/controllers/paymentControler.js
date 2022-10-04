@@ -1,10 +1,13 @@
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")(
+  "sk_test_51LopskSGAjDSZQyBE82uyqFif3fMQEClZtqfQNa9ShGl5AJx40if6T7PIX1n5GRNx0OFBi8PwSCzzU54ixoOEbYd00ln4Qgd3F"
+);
 
 // Process stripe payments   =>   /api/payment/process
 exports.processPayment = async (req, res, next) => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: req.body.amount,
-    currency: "usd",
+    description: "Software development services",
+    currency: "inr",
 
     metadata: { integration_check: "accept_a_payment" },
   });
