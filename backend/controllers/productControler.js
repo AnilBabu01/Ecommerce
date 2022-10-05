@@ -56,6 +56,16 @@ exports.getSingleProduct = async (req, res, next) => {
   }
 };
 
+// Get all products (Admin)  =>   /api/v1/admin/products
+exports.getAdminProducts = async (req, res, next) => {
+  const products = await Product.find();
+
+  res.status(200).json({
+    success: true,
+    products,
+  });
+};
+
 //update product api/product/update/:id
 
 exports.updateProduct = async (req, res, next) => {

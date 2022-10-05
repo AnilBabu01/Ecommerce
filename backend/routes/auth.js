@@ -54,6 +54,7 @@ router.get(
   authorizeRoles("admin"),
   allUsers
 );
+
 router
   .route("/admin/user/:id")
   .get(isAuthenticatedUser, authorizeRoles("admin"), getUserDetails)

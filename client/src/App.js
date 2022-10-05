@@ -20,6 +20,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import ListOrders from "./components/order/ListOrders";
 import OrderDetails from "./components/order/OrderDetails";
+import Dashboard from "./components/admin/dashboard/Dashboard";
+import ProductsList from "./components/admin/productlist/ProductsList";
 import "./App.css";
 import { axios } from "axios";
 
@@ -34,7 +36,7 @@ function App() {
       <Elements stripe={stripe}>
         <BrowserRouter>
           <Header />
-          <div className="container container-fluid">
+          <div className="">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/product/:id" element={<ProductDetails />} />
@@ -53,6 +55,8 @@ function App() {
               <Route path="/success" element={<PaymentSuccess />} />
               <Route path="/orders/me" element={<ListOrders />} />
               <Route path="/order/:id" element={<OrderDetails />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/admin/products" element={<ProductsList />} />
             </Routes>
           </div>
           <Footer />
