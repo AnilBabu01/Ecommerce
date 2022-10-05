@@ -18,6 +18,8 @@ import Payment from "./components/cart/Payment";
 import PaymentSuccess from "./components/cart/PaymentSuccess";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import ListOrders from "./components/order/ListOrders";
+import OrderDetails from "./components/order/OrderDetails";
 import "./App.css";
 import { axios } from "axios";
 
@@ -49,6 +51,8 @@ function App() {
               <Route path="/confirm" element={<Confirmorder />} />
               <Route path="/payment" element={<Payment />} />
               <Route path="/success" element={<PaymentSuccess />} />
+              <Route path="/orders/me" element={<ListOrders />} />
+              <Route path="/order/:id" element={<OrderDetails />} />
             </Routes>
           </div>
           <Footer />

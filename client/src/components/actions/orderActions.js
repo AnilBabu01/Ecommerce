@@ -77,7 +77,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
     dispatch({ type: ORDER_DETAILS_REQUEST });
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/api/orders/order/${id}`
+      `${process.env.REACT_APP_URL}/api/order/${id}`
     );
 
     dispatch({
