@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
+  const { loading, error, orders } = useSelector((state) => state.allOrders);
 
   let outOfStock = 0;
   products.forEach((product) => {
@@ -74,7 +75,7 @@ const Dashboard = () => {
                   <div className="card-body">
                     <div className="text-center card-font-size">
                       Orders
-                      <br /> <b></b>
+                      <br /> <b>{orders && orders.length}</b>
                     </div>
                   </div>
                   <Link

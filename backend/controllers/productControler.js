@@ -1,19 +1,38 @@
 const Product = require("../models/product");
 const APIFeatures = require("../utils/apiFeatures");
+const cloudinary = require("cloudinary");
 //create new product api/product/new
 
 exports.newProduct = async (req, res, next) => {
-  try {
-    req.body.user = req.user.id;
-    const product = await Product.create(req.body);
-
-    res.status(201).json({
-      success: true,
-      product,
-    });
-  } catch (error) {
-    console.log(error);
+  let images = [];
+  if (typeof req.body.images === "string") {
+    images.push(req.body.images);
+  } else {
+    images = req.body.images;
   }
+
+  let imagesLinks = [];
+
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.v2.uploader.upload(images[i], {
+      folder: "products",
+    });
+
+    imagesLinks.push({
+      public_id: result.public_id,
+      url: result.secure_url,
+    });
+  }
+
+  req.body.images = imagesLinks;
+  req.body.user = req.user.id;
+
+  const product = await Product.create(req.body);
+
+  res.status(201).json({
+    success: true,
+    product,
+  });
 };
 //get all product api/product/getallproduct?keyword=apple
 exports.getProducts = async (req, res, next) => {
@@ -71,20 +90,55 @@ exports.getAdminProducts = async (req, res, next) => {
 exports.updateProduct = async (req, res, next) => {
   try {
     let product = await Product.findById(req.params.id);
-    if (!product) {
-      return res.status(404).json({ status: false, msg: "Product not fund" });
-    } else {
-      const reuset = await Product.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-        runValidators: true,
-        useFindAndModify: false,
-      });
 
-      res.status(201).json({
-        status: true,
-        reuset,
+    if (!product) {
+      return res.status(404).json({
+        status: false,
+        msg: "not found",
       });
     }
+
+    let images = [];
+    if (typeof req.body.images === "string") {
+      images.push(req.body.images);
+    } else {
+      images = req.body.images;
+    }
+
+    if (images !== undefined) {
+      // Deleting images associated with the product
+      for (let i = 0; i < product.images.length; i++) {
+        const result = await cloudinary.v2.uploader.destroy(
+          product.images[i].public_id
+        );
+      }
+
+      let imagesLinks = [];
+
+      for (let i = 0; i < images.length; i++) {
+        const result = await cloudinary.v2.uploader.upload(images[i], {
+          folder: "products",
+        });
+
+        imagesLinks.push({
+          public_id: result.public_id,
+          url: result.secure_url,
+        });
+      }
+
+      req.body.images = imagesLinks;
+    }
+
+    product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    });
+
+    res.status(200).json({
+      success: true,
+      product,
+    });
   } catch (error) {
     console.log(error);
   }

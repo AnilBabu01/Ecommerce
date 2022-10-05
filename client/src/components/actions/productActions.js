@@ -127,13 +127,43 @@ export const getAdminProducts = () => async (dispatch) => {
   }
 };
 
+/// create new product by admin
+
+export const newProduct = (productData) => async (dispatch) => {
+  try {
+    dispatch({ type: NEW_PRODUCT_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.post(
+      `http://localhost:8080/api/admin/product/create`,
+      productData,
+      config
+    );
+
+    dispatch({
+      type: NEW_PRODUCT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: NEW_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
 // Delete product (Admin)
 export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
 
     const { data } = await axios.delete(
-      `http://localhost:8080/api/admin/product//${id}`
+      `http://localhost:8080/api/admin/product/deleteProduct/${id}`
     );
 
     dispatch({
@@ -160,7 +190,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:8080/api/admin/product//${id}`,
+      `http://localhost:8080/api/admin/product/updateProduct/${id}`,
       productData,
       config
     );

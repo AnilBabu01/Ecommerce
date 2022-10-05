@@ -98,7 +98,7 @@ export const allOrders = () => async (dispatch) => {
     dispatch({ type: ALL_ORDERS_REQUEST });
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/api/v1/admin/orders`
+      `${process.env.REACT_APP_URL}/api/admin/orders`
     );
 
     dispatch({
@@ -125,7 +125,7 @@ export const updateOrder = (id, orderData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `/api/v1/admin/order/${id}`,
+      `${process.env.REACT_APP_URL}/api/admin/order/${id}`,
       orderData,
       config
     );
@@ -148,7 +148,7 @@ export const deleteOrder = (id) => async (dispatch) => {
     dispatch({ type: DELETE_ORDER_REQUEST });
 
     const { data } = await axios.delete(
-      `${process.env.REACT_APP_URL}/api/v1/admin/order/${id}`
+      `${process.env.REACT_APP_URL}/api/admin/order/${id}`
     );
 
     dispatch({

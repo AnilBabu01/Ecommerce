@@ -22,6 +22,10 @@ import ListOrders from "./components/order/ListOrders";
 import OrderDetails from "./components/order/OrderDetails";
 import Dashboard from "./components/admin/dashboard/Dashboard";
 import ProductsList from "./components/admin/productlist/ProductsList";
+import NewProduct from "./components/admin/newproduct/NewProduct";
+import UpdateProduct from "./components/admin/updateproduct/UpdateProduct";
+import OrdersList from "./components/admin/orderlist/OrderList";
+import ProcessOrder from "./components/admin/processorder/ProcessOrder";
 import "./App.css";
 import { axios } from "axios";
 
@@ -57,6 +61,10 @@ function App() {
               <Route path="/order/:id" element={<OrderDetails />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/admin/products" element={<ProductsList />} />
+              <Route path="/admin/product" element={<NewProduct />} />
+              <Route path="/admin/product/:id" element={<UpdateProduct />} />
+              <Route path="/admin/orders" element={<OrdersList />} />
+              <Route path="/admin/order/:id" element={<ProcessOrder />} />
             </Routes>
           </div>
           <Footer />

@@ -1,7 +1,7 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MDBDataTable } from "mdbreact";
-
+import axios from "axios";
 import MetaData from "../../metadata/Metadata";
 import Loader from "../../loader/Loader";
 import Sidebar from "../sidebar/Sidebar";
@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAdminProducts,
   deleteProduct,
+  updateProduct,
   clearErrors,
 } from "../../actions/productActions";
 import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
@@ -20,12 +21,13 @@ const ProductsList = () => {
   const navigate = useNavigate();
   const alert = useAlert();
   const dispatch = useDispatch();
-
+  const [callagain, setcallagain] = useState(false);
   const { loading, error, products } = useSelector((state) => state.products);
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.product
   );
 
+  console.log(isDeleted, products);
   useEffect(() => {
     dispatch(getAdminProducts());
 
@@ -41,7 +43,7 @@ const ProductsList = () => {
 
     if (isDeleted) {
       alert.success("Product deleted successfully");
-      navigate("/admin/products");
+
       dispatch({ type: DELETE_PRODUCT_RESET });
     }
   }, [dispatch, alert, error, deleteError, isDeleted]);
@@ -105,8 +107,16 @@ const ProductsList = () => {
     return data;
   };
 
-  const deleteProductHandler = (id) => {
-    dispatch(deleteProduct(id));
+  const deleteProductHandler = async (id) => {
+    const data = await axios.delete(
+      `http://localhost:8080/api/admin/product/deleteProduct/${id}`
+    );
+
+    console.log("delete is", data.data.status);
+    if (data.data.status === true) {
+      alert.success("Product deleted successfully");
+      dispatch(getAdminProducts());
+    }
   };
 
   return (
