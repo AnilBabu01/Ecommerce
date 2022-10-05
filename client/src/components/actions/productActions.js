@@ -206,6 +206,51 @@ export const updateProduct = (id, productData) => async (dispatch) => {
     });
   }
 };
+
+// Get product reviews
+export const getProductReviews = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_REVIEWS_REQUEST });
+
+    const { data } = await axios.get(
+      `http://localhost:8080/api/admin/product/reviews"?id=${id}`
+    );
+
+    dispatch({
+      type: GET_REVIEWS_SUCCESS,
+      payload: data.reviews,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_REVIEWS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Delete product review
+export const deleteReview = (id, productId) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_REVIEW_REQUEST });
+
+    const { data } = await axios.delete(
+      `http://localhost:8080/api/admin/product/updateProduct?id=${id}&productId=${productId}`
+    );
+
+    dispatch({
+      type: DELETE_REVIEW_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    console.log(error.response);
+
+    dispatch({
+      type: DELETE_REVIEW_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
 // Clear Errors
 export const clearErrors = () => async (dispatch) => {
   dispatch({

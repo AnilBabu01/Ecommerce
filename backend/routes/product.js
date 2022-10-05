@@ -42,7 +42,7 @@ router.route("/product/getSingleProduct/:id").get(getSingleProduct);
 router.route("/product/review").put(isAuthenticatedUser, createProductReview);
 
 router
-  .route("/product/reviews")
+  .route("/admin/product/reviews")
   .get(isAuthenticatedUser, getProductReviews)
   .delete(isAuthenticatedUser, deleteReview);
 module.exports = router;

@@ -28,6 +28,7 @@ import OrdersList from "./components/admin/orderlist/OrderList";
 import ProcessOrder from "./components/admin/processorder/ProcessOrder";
 import UsersList from "./components/admin/userlist/UsersList";
 import UpdateUser from "./components/admin/updateuser/UpdateUser";
+import ProductReviews from "./components/admin/productreviews/ProductReviews";
 import "./App.css";
 import { axios } from "axios";
 
@@ -69,6 +70,7 @@ function App() {
               <Route path="/admin/order/:id" element={<ProcessOrder />} />
               <Route path="/admin/users" element={<UsersList />} />
               <Route path="/admin/user/:id" element={<UpdateUser />} />
+              <Route path="/admin/reviews" element={<ProductReviews />} />
             </Routes>
           </div>
           <Footer />
