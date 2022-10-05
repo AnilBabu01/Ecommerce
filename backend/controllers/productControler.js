@@ -207,7 +207,7 @@ exports.createProductReview = async (req, res, next) => {
 
 //Get Product Reviews   =>   /api/reviews
 exports.getProductReviews = async (req, res, next) => {
-  const product = await Product.findById(req.query.id);
+  const product = await Product.findById(req.params.id);
 
   res.status(200).json({
     success: true,
