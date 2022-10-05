@@ -6,7 +6,6 @@ import "rc-slider/assets/index.css";
 import Metadata from "../metadata/Metadata";
 import Product from "../product/Product";
 import Loader from "../loader/Loader";
-
 import Pagination from "react-js-pagination";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

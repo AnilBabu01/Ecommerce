@@ -48,7 +48,12 @@ router.put("/password/reset/:token", resetPassword);
 router.put("/password/update", isAuthenticatedUser, updatePassword);
 router.put("/updateprofile", isAuthenticatedUser, updateProfile);
 router.get("/me", isAuthenticatedUser, getUserProfile);
-router.get("/admin/users",isAuthenticatedUser,authorizeRoles("admin"),allUsers);
+router.get(
+  "/admin/users",
+  isAuthenticatedUser,
+  authorizeRoles("admin"),
+  allUsers
+);
 router
   .route("/admin/user/:id")
   .get(isAuthenticatedUser, authorizeRoles("admin"), getUserDetails)

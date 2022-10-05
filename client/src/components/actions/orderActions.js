@@ -33,7 +33,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:8080/api/order/neworder",
+      `${process.env.REACT_APP_URL}/api/order/neworder`,
       order,
       config
     );
@@ -55,7 +55,9 @@ export const myOrders = () => async (dispatch) => {
   try {
     dispatch({ type: MY_ORDERS_REQUEST });
 
-    const { data } = await axios.get("/api/v1/orders/me");
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_URL}/api/orders/me`
+    );
 
     dispatch({
       type: MY_ORDERS_SUCCESS,
@@ -74,7 +76,9 @@ export const getOrderDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: ORDER_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/order/${id}`);
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_URL}/api/orders/order/${id}`
+    );
 
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
@@ -93,7 +97,9 @@ export const allOrders = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_ORDERS_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/admin/orders`);
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_URL}/api/v1/admin/orders`
+    );
 
     dispatch({
       type: ALL_ORDERS_SUCCESS,
@@ -141,7 +147,9 @@ export const deleteOrder = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_ORDER_REQUEST });
 
-    const { data } = await axios.delete(`/api/v1/admin/order/${id}`);
+    const { data } = await axios.delete(
+      `${process.env.REACT_APP_URL}/api/v1/admin/order/${id}`
+    );
 
     dispatch({
       type: DELETE_ORDER_SUCCESS,
