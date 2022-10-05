@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import MetaData from "../../metadata/Metadata";
 import Loader from "../../loader/Loader";
@@ -16,6 +16,7 @@ import { UPDATE_ORDER_RESET } from "../../constants/orderConstants";
 
 const ProcessOrder = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [status, setStatus] = useState("");
 
   const alert = useAlert();
@@ -45,12 +46,13 @@ const ProcessOrder = () => {
     if (isUpdated) {
       alert.success("Order updated successfully");
       dispatch({ type: UPDATE_ORDER_RESET });
+      navigate("/admin/orders");
     }
   }, [dispatch, alert, error, isUpdated, orderId]);
 
   const updateOrderHandler = (id) => {
     const formData = new FormData();
-    formData.set("status", status);
+    formData.set("orderStatus", status);
 
     dispatch(updateOrder(id, formData));
   };

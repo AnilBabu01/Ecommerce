@@ -11,6 +11,7 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
   const { loading, error, orders } = useSelector((state) => state.allOrders);
+  const { users } = useSelector((state) => state.allUsers);
 
   let outOfStock = 0;
   products.forEach((product) => {
@@ -95,7 +96,7 @@ const Dashboard = () => {
                   <div className="card-body">
                     <div className="text-center card-font-size">
                       Users
-                      <br /> <b></b>
+                      <br /> <b>{users && users.length}</b>
                     </div>
                   </div>
                   <Link

@@ -94,7 +94,7 @@ exports.updateOrder = async (req, res, next) => {
   order.orderItems.forEach(async (item) => {
     await updateStock(item.product, item.quantity);
   });
-  console.log(req.body.orderStatus);
+  console.log("orderstate", req.body.orderStatus);
   (order.orderStatus = req.body.orderStatus), (order.deliveredAt = Date.now());
 
   await order.save();
@@ -110,7 +110,7 @@ async function updateStock(id, quantity) {
 
   product.stock = product.stock - quantity;
 
-  await product.save({ validateBeforeSave: false });
+  await product.save();
 }
 
 // Delete order   =>   /api/admin/order/:id
