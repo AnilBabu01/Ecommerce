@@ -26,14 +26,25 @@ const Header = ({ history }) => {
         </div>
 
         <div class="col-12 col-md-3 mt-4 mt-md-0 text-center">
-          <Link to="/cart" state={{ textDeration: "none" }}>
+          {user && user.role === "user" && (
+            <Link to="/cart" state={{ textDeration: "none" }}>
+              <span id="cart" class="ml-3">
+                Cart
+              </span>
+              <span
+                class="ml-1"
+                id="cart_count"
+                style={{ marginRight: "20px" }}
+              >
+                {cartItems.length}
+              </span>
+            </Link>
+          )}
+          {user && user.role === "admin" && (
             <span id="cart" class="ml-3">
-              Cart
+              Admin
             </span>
-            <span class="ml-1" id="cart_count" style={{ marginRight: "20px" }}>
-              {cartItems.length}
-            </span>
-          </Link>
+          )}
 
           {user ? (
             <div className="ml-4 dropdown d-inline">
