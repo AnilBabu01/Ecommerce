@@ -31,11 +31,24 @@ import {
   DELETE_REVIEW_FAIL,
   CLEAR_ERRORS,
 } from "../constants/productConstants";
+axios.defaults.headers.get["Authorization"] = `Bearer ${localStorage.getItem(
+  "token"
+)}`;
 
+axios.defaults.headers.post["Authorization"] = `Bearer ${localStorage.getItem(
+  "token"
+)}`;
 export const getProducts =
   (keyword = "", currentPage, price = 0, category, rating) =>
   async (dispatch) => {
     try {
+      axios.defaults.headers.get[
+        "Authorization"
+      ] = `Bearer ${localStorage.getItem("token")}`;
+
+      axios.defaults.headers.post[
+        "Authorization"
+      ] = `Bearer ${localStorage.getItem("token")}`;
       dispatch({ type: ALL_PRODUCTS_REQUEST });
 
       let link = `${process.env.REACT_APP_URL}/api/product/getAllProduct?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}&ratings[gte]=${rating}`;
@@ -58,6 +71,13 @@ export const getProducts =
 
 export const getProductDetails = (id) => async (dispatch) => {
   try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    axios.defaults.headers.post[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
     const { data } = await axios.get(
@@ -79,6 +99,13 @@ export const getProductDetails = (id) => async (dispatch) => {
 ///new review
 export const newReview = (reviewData) => async (dispatch) => {
   try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    axios.defaults.headers.put[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: NEW_REVIEW_REQUEST });
 
     const config = {
@@ -109,6 +136,13 @@ export const newReview = (reviewData) => async (dispatch) => {
 
 export const getAdminProducts = () => async (dispatch) => {
   try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    axios.defaults.headers.post[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: ADMIN_PRODUCTS_REQUEST });
 
     const { data } = await axios.get(
@@ -131,6 +165,13 @@ export const getAdminProducts = () => async (dispatch) => {
 
 export const newProduct = (productData) => async (dispatch) => {
   try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    axios.defaults.headers.post[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: NEW_PRODUCT_REQUEST });
 
     const config = {
@@ -160,6 +201,13 @@ export const newProduct = (productData) => async (dispatch) => {
 // Delete product (Admin)
 export const deleteProduct = (id) => async (dispatch) => {
   try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    axios.defaults.headers.delete[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: DELETE_PRODUCT_REQUEST });
 
     const { data } = await axios.delete(
@@ -181,6 +229,13 @@ export const deleteProduct = (id) => async (dispatch) => {
 // Update Product (ADMIN)
 export const updateProduct = (id, productData) => async (dispatch) => {
   try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    axios.defaults.headers.put[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
 
     const config = {
@@ -210,6 +265,13 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 // Get product reviews
 export const getProductReviews = (id) => async (dispatch) => {
   try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    axios.defaults.headers.post[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: GET_REVIEWS_REQUEST });
 
     const { data } = await axios.get(
@@ -231,6 +293,13 @@ export const getProductReviews = (id) => async (dispatch) => {
 // Delete product review
 export const deleteReview = (id, productId) => async (dispatch) => {
   try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    axios.defaults.headers.delete[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: DELETE_REVIEW_REQUEST });
 
     const { data } = await axios.delete(

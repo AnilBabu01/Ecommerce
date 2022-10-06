@@ -2,9 +2,11 @@ const User = require("../models/user");
 const { validationResult } = require("express-validator");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
+const jwt = require("jsonwebtoken");
+
 const cloudinary = require("cloudinary");
 const crypto = require("crypto");
-
+const JWT_SECRET = "anilbabu$oy";
 // Register a user   api/auth/register
 exports.registerUser = async (req, res, next) => {
   try {
@@ -77,11 +79,17 @@ exports.loginUser = async (req, res, next) => {
   }
 
   const PasswordMatch = await user.comparePassword(password);
-  if (!PasswordMatch) {
-    return res.status(401).json({ msg: "Invalid email or password" });
-  }
 
-  sendToken(user, 200, res);
+  if (!PasswordMatch) {
+    return res.status(401).json({ msg: "  Invalid email or password" });
+  }
+  const data = {
+    user: {
+      id: user.id,
+    },
+  };
+  const token = jwt.sign(data, JWT_SECRET);
+  return res.status(200).json({ status: true, token: token, user: user });
 };
 
 // Logout user   =>  api/auth/logout

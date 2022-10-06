@@ -41,10 +41,11 @@ const Home = ({ match }) => {
   const { loading, products, error, productsCount, resPerPage } = useSelector(
     (state) => state.products
   );
-
-  useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (token) {
     dispatch(loadUser());
-
+  }
+  useEffect(() => {
     dispatch(getProducts(keyword, currentPage, price, category, rating));
     if (error) {
       return alert.error(error);
