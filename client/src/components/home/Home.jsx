@@ -17,6 +17,7 @@ import { loadUser } from "../actions/authActions";
 const Home = ({ match }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
+  const [onstinegetuserinfo, setonstinegetuserinfo] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([1, 1000]);
   const [category, setCategory] = useState("");
@@ -41,10 +42,15 @@ const Home = ({ match }) => {
   const { loading, products, error, productsCount, resPerPage } = useSelector(
     (state) => state.products
   );
-  const token = localStorage.getItem("token");
-  if (token) {
-    dispatch(loadUser());
+
+  if (onstinegetuserinfo === true) {
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(loadUser());
+      setonstinegetuserinfo(false);
+    }
   }
+
   useEffect(() => {
     dispatch(getProducts(keyword, currentPage, price, category, rating));
     if (error) {
