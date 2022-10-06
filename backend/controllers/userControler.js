@@ -3,7 +3,7 @@ const { validationResult } = require("express-validator");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const jwt = require("jsonwebtoken");
-
+const fs = require("fs");
 const cloudinary = require("cloudinary");
 const crypto = require("crypto");
 const JWT_SECRET = "anilbabu$oy";
@@ -24,23 +24,21 @@ exports.registerUser = async (req, res, next) => {
     }
     const { name, email, password, avatar } = req.body;
 
-    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-      folder: "avatars",
-      width: 150,
-      crop: "scale",
-    });
-
+    const url = req.protocol + "://" + req.get("host");
     user = await User.create({
       name,
       email,
       password,
-      avatar: {
-        public_id: result.public_id,
-        url: result.secure_url,
-      },
+      avatar: url + "/images/" + req.file.filename,
     });
 
-    sendToken(user, 200, res);
+    const data = {
+      user: {
+        id: user.id,
+      },
+    };
+    const token = jwt.sign(data, JWT_SECRET);
+    return res.status(200).json({ status: true, token: token, user: user });
   } catch (error) {
     console.log(error);
   }
@@ -48,18 +46,18 @@ exports.registerUser = async (req, res, next) => {
 
 // Update user profile   =>   /api/auth/me/update
 exports.updateProfile = async (req, res, next) => {
-  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    folder: "avatars",
-    width: 150,
-    crop: "scale",
-  });
+  let delimage = await User.findOne({ email: req.body.email });
+  if (delimage) {
+    var str = delimage.avatar.substring(22);
+    fs.unlinkSync(str);
+    console.log("successfully deleted /tmp/hello", str);
+  }
+
+  const url = req.protocol + "://" + req.get("host");
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
-    avatar: {
-      public_id: result.public_id,
-      url: result.secure_url,
-    },
+    avatar: url + "/images/" + req.file.filename,
   };
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,

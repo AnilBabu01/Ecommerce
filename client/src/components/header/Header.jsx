@@ -59,7 +59,7 @@ const Header = ({ history }) => {
               >
                 <figure className="avatar avatar-nav">
                   <img
-                    src={user.avatar && user.avatar.url}
+                    src={user && user.avatar}
                     alt={user && user.name}
                     className="rounded-circle"
                   />
