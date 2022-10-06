@@ -28,8 +28,7 @@ const Signup = () => {
   );
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/");
+    if (isAuthenticated === true) {
     }
 
     if (error) {
@@ -48,7 +47,7 @@ const Signup = () => {
     formData.set("avatar", avatar);
 
     dispatch(register(formData));
-
+    navigate("/login");
     console.log("form data ", formData);
   };
 

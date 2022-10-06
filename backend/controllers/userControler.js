@@ -11,6 +11,14 @@ const JWT_SECRET = "anilbabu$oy";
 exports.registerUser = async (req, res, next) => {
   try {
     const errors = validationResult(req);
+
+    let user = await User.findOne({ email: req.body.email });
+    if (user) {
+      res
+        .status(404)
+        .json({ status: false, msg: "user allready exixit with mail" });
+    }
+
     if (!errors.isEmpty()) {
       return res.status(400).json({ success: errors.array() });
     }
@@ -22,7 +30,7 @@ exports.registerUser = async (req, res, next) => {
       crop: "scale",
     });
 
-    const user = await User.create({
+    user = await User.create({
       name,
       email,
       password,
