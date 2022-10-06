@@ -9,6 +9,7 @@ const Header = ({ history }) => {
   const { user, loading } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
   const logoutHandler = () => {
+    localStorage.removeItem("token");
     dispatch(logout());
   };
   return (
