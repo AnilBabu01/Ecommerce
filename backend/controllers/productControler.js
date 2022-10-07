@@ -135,6 +135,13 @@ exports.deleteProduct = async (req, res, next) => {
       return res.status(404).json({ status: false, msg: "Product not fund" });
     }
 
+    if (product) {
+      for (var i = 0; i < product.images.length; i++) {
+        var str = product.images[i].Url.substring(22);
+        fs.unlinkSync(str);
+        console.log("successfully deleted /tmp/hello", str);
+      }
+    }
     await product.remove();
 
     res.status(201).json({

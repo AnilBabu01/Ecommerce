@@ -300,6 +300,11 @@ exports.deleteUser = async (req, res, next) => {
     });
   }
 
+  if (user) {
+    var str = user.avatar.substring(22);
+    fs.unlinkSync(str);
+    console.log("successfully deleted /tmp/hello", str);
+  }
   await user.remove();
 
   res.status(200).json({
