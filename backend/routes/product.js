@@ -50,6 +50,7 @@ router.route("/product/review").put(isAuthenticatedUser, createProductReview);
 
 router
   .route("/admin/product/reviews/:id")
-  .get(isAuthenticatedUser, getProductReviews)
-  .delete(isAuthenticatedUser, deleteReview);
+  .get(isAuthenticatedUser, getProductReviews);
+
+router.delete("/admin/productreview", isAuthenticatedUser, deleteReview);
 module.exports = router;
