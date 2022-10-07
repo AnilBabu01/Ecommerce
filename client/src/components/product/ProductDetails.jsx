@@ -131,7 +131,7 @@ const ProductDetails = () => {
                     <Carousel.Item key={image.public_id}>
                       <img
                         className="d-block w-100"
-                        src={image.url}
+                        src={image.Url}
                         alt={product.title}
                       />
                     </Carousel.Item>

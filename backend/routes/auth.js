@@ -1,8 +1,8 @@
 const express = require("express");
 const { body } = require("express-validator");
+const upload = require("../middlewares/upload");
 const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
 const router = express.Router();
-const multer = require("multer");
 
 const {
   registerUser,
@@ -19,16 +19,6 @@ const {
   deleteUser,
 } = require("../controllers/userControler");
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cd) {
-    cd(null, "./images");
-  },
-  filename: function (req, file, cd) {
-    cd(null, Date.now() + " " + file.originalname);
-  },
-});
-
-const upload = multer({ storage });
 router.post(
   "/regster",
 

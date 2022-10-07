@@ -1,4 +1,5 @@
 const express = require("express");
+const upload = require("../middlewares/upload");
 const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
 const router = express.Router();
 
@@ -18,6 +19,7 @@ const {
 
 router.post(
   "/admin/product/create",
+  upload.array("avatar"),
   isAuthenticatedUser,
   authorizeRoles("admin"),
   newProduct

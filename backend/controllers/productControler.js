@@ -4,24 +4,18 @@ const cloudinary = require("cloudinary");
 //create new product api/product/new
 
 exports.newProduct = async (req, res, next) => {
-  let images = [];
-  if (typeof req.body.images === "string") {
-    images.push(req.body.images);
-  } else {
-    images = req.body.images;
+  const files = req.files;
+  console.log(req.files);
+  let imagesLinks = [];
+  const url = req.protocol + "://" + req.get("host");
+  for (let i = 0; i < files.length; i++) {
+    imagesLinks.push({
+      Url: url + "/images/" + files[i].filename,
+    });
   }
 
-  let imagesLinks = [];
-
-  for (let i = 0; i < images.length; i++) {
-    const result = await cloudinary.v2.uploader.upload(images[i], {
-      folder: "products",
-    });
-
-    imagesLinks.push({
-      public_id: result.public_id,
-      url: result.secure_url,
-    });
+  for (let i = 0; i < imagesLinks.length; i++) {
+    console.log(imagesLinks[i]);
   }
 
   req.body.images = imagesLinks;

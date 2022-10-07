@@ -7,7 +7,7 @@ import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { newProduct, clearErrors } from "../../actions/productActions";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
-
+const formData = new FormData();
 const NewProduct = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -52,43 +52,28 @@ const NewProduct = () => {
       dispatch({ type: NEW_PRODUCT_RESET });
     }
   }, [dispatch, alert, error, success]);
+  /// formdata type
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.set("name", name);
-    formData.set("price", price);
-    formData.set("description", description);
-    formData.set("category", category);
-    formData.set("stock", stock);
-    formData.set("seller", seller);
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("description", description);
+    formData.append("category", category);
+    formData.append("stock", stock);
+    formData.append("seller", seller);
 
-    images.forEach((image) => {
-      formData.append("images", image);
-    });
-
+    console.log("form data", formData.getAll);
     dispatch(newProduct(formData));
   };
 
-  const onChange = (e) => {
-    const files = Array.from(e.target.files);
-
-    setImagesPreview([]);
-    setImages([]);
-
-    files.forEach((file) => {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setImagesPreview((oldArray) => [...oldArray, reader.result]);
-          setImages((oldArray) => [...oldArray, reader.result]);
-        }
-      };
-
-      reader.readAsDataURL(file);
-    });
+  const setfileinfoform = (filelist) => {
+    for (var i = 0; i < filelist.length; i++) {
+      const file = filelist[i];
+      formData.append("avatar", file);
+      console.log("file is ", file);
+    }
   };
 
   return (
@@ -102,11 +87,7 @@ const NewProduct = () => {
         <div className="col-12 col-md-10">
           <Fragment>
             <div className="wrapper my-5">
-              <form
-                className="shadow-lg"
-                onSubmit={submitHandler}
-                encType="multipart/form-data"
-              >
+              <form className="shadow-lg" onSubmit={submitHandler}>
                 <h1 className="mb-4">New Product</h1>
 
                 <div className="form-group">
@@ -188,7 +169,29 @@ const NewProduct = () => {
                       name="product_images"
                       className="custom-file-input"
                       id="customFile"
-                      onChange={onChange}
+                      onChange={(e) => {
+                        const files = Array.from(e.target.files);
+
+                        setImagesPreview([]);
+
+                        files.forEach((file) => {
+                          const reader = new FileReader();
+
+                          reader.onload = () => {
+                            if (reader.readyState === 2) {
+                              setImagesPreview((oldArray) => [
+                                ...oldArray,
+                                reader.result,
+                              ]);
+                            }
+                          };
+
+                          reader.readAsDataURL(file);
+                        });
+                        const filelist = e.target.files;
+                        console.log(filelist);
+                        setfileinfoform(filelist);
+                      }}
                       multiple
                     />
                     <label className="custom-file-label" htmlFor="customFile">
