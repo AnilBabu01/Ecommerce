@@ -57,20 +57,25 @@ const NewProduct = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    formData.append("name", name);
-    formData.append("price", price);
-    formData.append("description", description);
-    formData.append("category", category);
-    formData.append("stock", stock);
-    formData.append("seller", seller);
+    formData.set("name", name);
+    formData.set("price", price);
+    formData.set("description", description);
+    formData.set("category", category);
+    formData.set("stock", stock);
+    formData.set("seller", seller);
 
-    console.log("form data", formData.getAll);
     dispatch(newProduct(formData));
   };
 
   const setfileinfoform = (filelist) => {
+    for (let [name, value] of formData) {
+      if (name === "avatar") {
+        formData.delete(name);
+      }
+    }
     for (var i = 0; i < filelist.length; i++) {
       const file = filelist[i];
+
       formData.append("avatar", file);
       console.log("file is ", file);
     }

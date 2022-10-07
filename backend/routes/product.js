@@ -26,7 +26,12 @@ router.post(
 );
 router
   .route("/admin/product/updateProduct/:id")
-  .put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct);
+  .put(
+    isAuthenticatedUser,
+    upload.array("avatar"),
+    authorizeRoles("admin"),
+    updateProduct
+  );
 router
   .route("/admin/product/:id")
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct)
