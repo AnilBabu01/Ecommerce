@@ -6,7 +6,7 @@ import { logout } from "../actions/authActions";
 const Header = ({ history }) => {
   const dispatch = useDispatch();
 
-  const { user, loading } = useSelector((state) => state.auth);
+  const { user, loading, isAuthenticated } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
   const logoutHandler = () => {
     localStorage.removeItem("token");
@@ -46,7 +46,7 @@ const Header = ({ history }) => {
             </span>
           )}
 
-          {user ? (
+          {isAuthenticated && user ? (
             <div className="ml-4 dropdown d-inline">
               <Link
                 to="#"

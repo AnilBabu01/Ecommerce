@@ -28,9 +28,6 @@ const Signup = () => {
   );
 
   useEffect(() => {
-    if (isAuthenticated === true) {
-    }
-
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
@@ -48,7 +45,7 @@ const Signup = () => {
     formdata.append("password", password);
 
     dispatch(register(formdata));
-
+    navigate("/login");
     console.log("form data ", formdata);
   };
   const onChange = (e) => {
