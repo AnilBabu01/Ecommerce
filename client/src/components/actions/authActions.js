@@ -354,6 +354,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
       config
     );
 
+    console.log("data form update api", data, userData);
     dispatch({
       type: UPDATE_USER_SUCCESS,
       payload: data.success,

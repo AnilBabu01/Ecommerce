@@ -276,6 +276,7 @@ exports.updateUser = async (req, res, next) => {
     role: req.body.role,
   };
 
+  console.log(req.body);
   const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
     new: true,
     runValidators: true,
