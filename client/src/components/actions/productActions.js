@@ -275,7 +275,7 @@ export const getProductReviews = (id) => async (dispatch) => {
     dispatch({ type: GET_REVIEWS_REQUEST });
 
     const { data } = await axios.get(
-      `http://localhost:8080/api/admin/product/reviews"?id=${id}`
+      `http://localhost:8080/api/admin/product/reviews/${id}`
     );
 
     dispatch({
@@ -303,7 +303,7 @@ export const deleteReview = (id, productId) => async (dispatch) => {
     dispatch({ type: DELETE_REVIEW_REQUEST });
 
     const { data } = await axios.delete(
-      `http://localhost:8080/api/admin/product/updateProduct?id=${id}&productId=${productId}`
+      `http://localhost:8080/api/admin/productreview?id=${id}&productId=${productId}`
     );
 
     dispatch({
