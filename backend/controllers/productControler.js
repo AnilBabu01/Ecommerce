@@ -1,6 +1,7 @@
 const Product = require("../models/product");
 const APIFeatures = require("../utils/apiFeatures");
 const cloudinary = require("cloudinary");
+const fs = require("fs");
 //create new product api/product/new
 
 exports.newProduct = async (req, res, next) => {
@@ -84,6 +85,7 @@ exports.getAdminProducts = async (req, res, next) => {
 exports.updateProduct = async (req, res, next) => {
   try {
     let product = await Product.findById(req.params.id);
+    const files = req.files;
 
     if (!product) {
       return res.status(404).json({
@@ -92,24 +94,19 @@ exports.updateProduct = async (req, res, next) => {
       });
     }
     if (product) {
-      for (var i = 0; i < product.length; i++) {
-        var str = product.images[i].substring(22);
+      for (var i = 0; i < product.images.length; i++) {
+        var str = product.images[i].Url.substring(22);
         fs.unlinkSync(str);
         console.log("successfully deleted /tmp/hello", str);
       }
     }
-    const files = req.files;
-    console.log(req.files);
+
     let imagesLinks = [];
     const url = req.protocol + "://" + req.get("host");
     for (let i = 0; i < files.length; i++) {
       imagesLinks.push({
         Url: url + "/images/" + files[i].filename,
       });
-    }
-
-    for (let i = 0; i < imagesLinks.length; i++) {
-      console.log(imagesLinks[i]);
     }
 
     req.body.images = imagesLinks;
