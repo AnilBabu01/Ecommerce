@@ -91,7 +91,13 @@ exports.updateProduct = async (req, res, next) => {
         msg: "not found",
       });
     }
-
+    if (product) {
+      for (var i = 0; i < product.length; i++) {
+        var str = product.images[i].substring(22);
+        fs.unlinkSync(str);
+        console.log("successfully deleted /tmp/hello", str);
+      }
+    }
     const files = req.files;
     console.log(req.files);
     let imagesLinks = [];
