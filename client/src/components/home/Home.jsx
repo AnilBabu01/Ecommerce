@@ -13,7 +13,7 @@ import { useAlert } from "react-alert";
 import { getProducts, clearErrors } from "../actions/productActions";
 
 import { loadUser } from "../actions/authActions";
-
+import "./Home.css";
 const Home = ({ match }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -73,7 +73,11 @@ const Home = ({ match }) => {
       ) : (
         <>
           <Metadata title={"Buy best product by"} />
-          <h1 id="products_heading">Latest Products</h1>
+          <div>
+            <h1 className="latesttext " id="products_heading">
+              Latest Products
+            </h1>
+          </div>
 
           {keyword ? (
             <>

@@ -108,13 +108,13 @@ const ProductDetails = () => {
     }
   }
   const reviewHandler = () => {
-    const formData = new FormData();
+    const ratingdata = {
+      rating: rating,
+      comment: comment,
+      productId: id,
+    };
 
-    formData.set("rating", rating);
-    formData.set("comment", comment);
-    formData.set("productId", id);
-
-    dispatch(newReview(formData));
+    dispatch(newReview(ratingdata));
   };
   return (
     <div>

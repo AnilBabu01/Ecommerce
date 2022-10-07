@@ -3,6 +3,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import Search from "../search/Search";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/authActions";
+import "./Header.css";
 const Header = ({ history }) => {
   const dispatch = useDispatch();
 
@@ -14,10 +15,10 @@ const Header = ({ history }) => {
   };
   return (
     <>
-      <nav style={{ possition: "fixed" }} class="navbar row">
+      <nav class="navbar  navbarwith row">
         <div class="col-12 col-md-3">
           <div class="navbar-brand">
-            <h2 style={{ color: "#fa9c23" }}>Ab-coder</h2>
+            <h2 style={{ color: "#fa9c23" }}>Nepalify-Kart</h2>
           </div>
         </div>
 
