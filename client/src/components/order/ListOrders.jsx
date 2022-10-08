@@ -130,7 +130,6 @@ const ListOrders = () => {
                 </>
               );
             })}
-          <tr></tr>
         </table>
       )}
     </Fragment>
