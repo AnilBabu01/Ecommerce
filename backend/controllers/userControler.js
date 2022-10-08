@@ -46,56 +46,64 @@ exports.registerUser = async (req, res, next) => {
 
 // Update user profile   =>   /api/auth/me/update
 exports.updateProfile = async (req, res, next) => {
-  let delimage = await User.findOne({ email: req.body.email });
-  if (delimage) {
-    var str = delimage.avatar.substring(22);
-    fs.unlinkSync(str);
-    console.log("successfully deleted /tmp/hello", str);
+  try {
+    let delimage = await User.findOne({ email: req.body.email });
+    if (delimage) {
+      var str = delimage.avatar.substring(22);
+      fs.unlinkSync(str);
+      console.log("successfully deleted /tmp/hello", str);
+    }
+
+    const url = req.protocol + "://" + req.get("host");
+    const newUserData = {
+      name: req.body.name,
+      email: req.body.email,
+      avatar: url + "/images/" + req.file.filename,
+    };
+    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    });
+
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    console(error);
   }
-
-  const url = req.protocol + "://" + req.get("host");
-  const newUserData = {
-    name: req.body.name,
-    email: req.body.email,
-    avatar: url + "/images/" + req.file.filename,
-  };
-  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
-    new: true,
-    runValidators: true,
-    useFindAndModify: false,
-  });
-
-  res.status(200).json({
-    success: true,
-    user,
-  });
 };
 // Login User  => api/auth/login
 exports.loginUser = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ success: errors.array() });
-  }
-  const { email, password } = req.body;
-  // Finding user in database
-  const user = await User.findOne({ email }).select("+password");
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success: errors.array() });
+    }
+    const { email, password } = req.body;
+    // Finding user in database
+    const user = await User.findOne({ email }).select("+password");
 
-  if (!user) {
-    return res.status(401).json({ msg: "Invalid email or password" });
-  }
+    if (!user) {
+      return res.status(401).json({ msg: "Invalid email or password" });
+    }
 
-  const PasswordMatch = await user.comparePassword(password);
+    const PasswordMatch = await user.comparePassword(password);
 
-  if (!PasswordMatch) {
-    return res.status(401).json({ msg: "  Invalid email or password" });
+    if (!PasswordMatch) {
+      return res.status(401).json({ msg: "  Invalid email or password" });
+    }
+    const data = {
+      user: {
+        id: user.id,
+      },
+    };
+    const token = jwt.sign(data, JWT_SECRET);
+    return res.status(200).json({ status: true, token: token, user: user });
+  } catch (error) {
+    console.log(error, "internal server error");
   }
-  const data = {
-    user: {
-      id: user.id,
-    },
-  };
-  const token = jwt.sign(data, JWT_SECRET);
-  return res.status(200).json({ status: true, token: token, user: user });
 };
 
 // Logout user   =>  api/auth/logout
@@ -203,12 +211,16 @@ exports.resetPassword = async (req, res, next) => {
 // get currently user logged in details   api/auth/me
 exports.getUserProfile = async (req, res, next) => {
   //req.user.id is possible by authentocate middleware
-  const user = await User.findById(req.user.id);
+  try {
+    const user = await User.findById(req.user.id);
 
-  res.status(200).json({
-    success: true,
-    user,
-  });
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // get currently user logged in details   api/auth/password/update

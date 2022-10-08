@@ -30,7 +30,9 @@ app.use("/api/auth", user);
 app.use("/api", product);
 app.use("/api", order);
 app.use("/api", payment);
-
+app.get("/api", (req, res) => {
+  res.send("Api is working on Port ");
+});
 //middleware to handle errors
 app.use(errorMiddleware);
 module.exports = app;

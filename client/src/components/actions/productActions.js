@@ -81,7 +81,7 @@ export const getProductDetails = (id) => async (dispatch) => {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
     const { data } = await axios.get(
-      `http://localhost:8080/api/product/getSingleProduct/${id}`
+      `${process.env.REACT_APP_URL}/api/product/getSingleProduct/${id}`
     );
 
     dispatch({
@@ -115,7 +115,7 @@ export const newReview = (reviewData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:8080/api/product/review`,
+      `${process.env.REACT_APP_URL}/api/product/review`,
       reviewData,
       config
     );
@@ -146,7 +146,7 @@ export const getAdminProducts = () => async (dispatch) => {
     dispatch({ type: ADMIN_PRODUCTS_REQUEST });
 
     const { data } = await axios.get(
-      `http://localhost:8080/api/admin/getallproduct`
+      `${process.env.REACT_APP_URL}/api/admin/getallproduct`
     );
 
     dispatch({
@@ -181,7 +181,7 @@ export const newProduct = (productData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `http://localhost:8080/api/admin/product/create`,
+      `${process.env.REACT_APP_URL}/api/admin/product/create`,
       productData,
       config
     );
@@ -211,7 +211,7 @@ export const deleteProduct = (id) => async (dispatch) => {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
 
     const { data } = await axios.delete(
-      `http://localhost:8080/api/admin/product/deleteProduct/${id}`
+      `${process.env.REACT_APP_URL}/api/admin/product/deleteProduct/${id}`
     );
 
     dispatch({
@@ -245,7 +245,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:8080/api/admin/product/updateProduct/${id}`,
+      `${process.env.REACT_APP_URL}/api/admin/product/updateProduct/${id}`,
       productData,
       config
     );
@@ -275,7 +275,7 @@ export const getProductReviews = (id) => async (dispatch) => {
     dispatch({ type: GET_REVIEWS_REQUEST });
 
     const { data } = await axios.get(
-      `http://localhost:8080/api/admin/product/reviews/${id}`
+      `${process.env.REACT_APP_URL}/api/admin/product/reviews/${id}`
     );
 
     dispatch({
@@ -303,7 +303,7 @@ export const deleteReview = (id, productId) => async (dispatch) => {
     dispatch({ type: DELETE_REVIEW_REQUEST });
 
     const { data } = await axios.delete(
-      `http://localhost:8080/api/admin/productreview?id=${id}&productId=${productId}`
+      `${process.env.REACT_APP_URL}/api/admin/productreview?id=${id}&productId=${productId}`
     );
 
     dispatch({

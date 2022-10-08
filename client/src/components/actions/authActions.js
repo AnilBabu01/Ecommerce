@@ -109,10 +109,6 @@ export const loadUser = () => async (dispatch) => {
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
 
-    axios.defaults.headers.post[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
-    dispatch({ type: LOAD_USER_REQUEST });
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -142,9 +138,6 @@ export const logout = () => async (dispatch) => {
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
 
-    axios.defaults.headers.post[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
     await axios.get(`${process.env.REACT_APP_URL}/api/auth/logout`);
 
     dispatch({
@@ -161,10 +154,6 @@ export const logout = () => async (dispatch) => {
 // Update profile
 export const updateProfile = (userData) => async (dispatch) => {
   try {
-    axios.defaults.headers.get[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
-
     axios.defaults.headers.put[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
@@ -197,10 +186,6 @@ export const updateProfile = (userData) => async (dispatch) => {
 // Update password
 export const updatePassword = (passwords) => async (dispatch) => {
   try {
-    axios.defaults.headers.get[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
-
     axios.defaults.headers.put[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
@@ -233,10 +218,6 @@ export const updatePassword = (passwords) => async (dispatch) => {
 // Forgot password
 export const forgotPassword = (email) => async (dispatch) => {
   try {
-    axios.defaults.headers.get[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
-
     axios.defaults.headers.post[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
@@ -269,10 +250,6 @@ export const forgotPassword = (email) => async (dispatch) => {
 // Reset password
 export const resetPassword = (token, passwords) => async (dispatch) => {
   try {
-    axios.defaults.headers.get[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
-
     axios.defaults.headers.put[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
@@ -309,9 +286,6 @@ export const allUsers = () => async (dispatch) => {
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
 
-    axios.defaults.headers.post[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: ALL_USERS_REQUEST });
 
     const { data } = await axios.get(
@@ -333,10 +307,6 @@ export const allUsers = () => async (dispatch) => {
 // Update user - ADMIN
 export const updateUser = (id, userData) => async (dispatch) => {
   try {
-    axios.defaults.headers.get[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
-
     axios.defaults.headers.put[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
@@ -374,9 +344,6 @@ export const getUserDetails = (id) => async (dispatch) => {
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
 
-    axios.defaults.headers.post[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
     dispatch({ type: USER_DETAILS_REQUEST });
 
     const { data } = await axios.get(
@@ -398,10 +365,6 @@ export const getUserDetails = (id) => async (dispatch) => {
 // Delete user - ADMIN
 export const deleteUser = (id) => async (dispatch) => {
   try {
-    axios.defaults.headers.get[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
-
     axios.defaults.headers.delete[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;

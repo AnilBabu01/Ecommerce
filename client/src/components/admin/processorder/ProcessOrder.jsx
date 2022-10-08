@@ -51,7 +51,10 @@ const ProcessOrder = () => {
   }, [dispatch, alert, error, isUpdated, orderId]);
 
   const updateOrderHandler = (id) => {
-    dispatch(updateOrder(id, status));
+    const orderupdatedata = {
+      orderStatus: status,
+    };
+    dispatch(updateOrder(id, orderupdatedata));
   };
 
   const shippingDetails =

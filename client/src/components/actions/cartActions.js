@@ -4,21 +4,12 @@ import {
   REMOVE_ITEM_CART,
   SAVE_SHIPPING_INFO,
 } from "../constants/cartConstants";
-axios.defaults.headers.get["Authorization"] = `Bearer ${localStorage.getItem(
-  "token"
-)}`;
 
-axios.defaults.headers.post["Authorization"] = `Bearer ${localStorage.getItem(
-  "token"
-)}`;
 export const addItemToCart = (id, quantity) => async (dispatch, getState) => {
   axios.defaults.headers.get["Authorization"] = `Bearer ${localStorage.getItem(
     "token"
   )}`;
 
-  axios.defaults.headers.post["Authorization"] = `Bearer ${localStorage.getItem(
-    "token"
-  )}`;
   const { data } = await axios.get(
     `${process.env.REACT_APP_URL}/api/product/getSingleProduct/${id}`
   );

@@ -47,7 +47,7 @@ const Header = ({ history }) => {
             </span>
           )}
 
-          {isAuthenticated && user ? (
+          {isAuthenticated ? (
             <div className="ml-4 dropdown d-inline">
               <Link
                 to="#"
