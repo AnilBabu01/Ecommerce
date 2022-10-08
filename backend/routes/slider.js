@@ -19,8 +19,7 @@ router.post(
 
 router.get(
   "/admin/getslider",
-  isAuthenticatedUser,
-  authorizeRoles("admin"),
+
   getsilder
 );
 
