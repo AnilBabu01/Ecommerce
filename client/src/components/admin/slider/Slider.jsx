@@ -78,9 +78,7 @@ const Slider = ({ history }) => {
 
       config
     );
-    if (data) {
-      getsilderimg();
-    }
+
     console.log(data);
   };
   useEffect(() => {
