@@ -18,7 +18,10 @@ const Header = ({ history }) => {
       <nav class="navbar  navbarwith row">
         <div class="col-12 col-md-3">
           <div class="navbar-brand">
-            <h2 style={{ color: "#fa9c23" }}>Nepalify-Kart</h2>
+            <img
+              style={{ width: "200px", height: "50px" }}
+              src="./images/logo.png"
+            />
           </div>
         </div>
 
