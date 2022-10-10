@@ -4,7 +4,7 @@
  .navbarwith{
     width: 105%!important;
     position: fixed!important;
-    top: 0;
+  
     z-index: 2;
     
 }
@@ -16,7 +16,7 @@
 }
 .latesttext{
     margin-top: 1rem!important;
-   
+     text-align: center;
     margin-bottom: -2rem!important;
     margin-left: 1rem!important;
 }

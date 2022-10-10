@@ -93,7 +93,7 @@ exports.updateProduct = async (req, res, next) => {
         msg: "not found",
       });
     }
-    if (product) {
+    if (product.images) {
       for (var i = 0; i < product.images.length; i++) {
         var str = product.images[i].Url.substring(22);
         fs.unlinkSync(str);

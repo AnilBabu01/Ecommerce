@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "rc-slider/assets/index.css";
-
+import Sliderhome from "./Silderhome";
 import Metadata from "../metadata/Metadata";
 import Product from "../product/Product";
 import Loader from "../loader/Loader";
@@ -12,7 +12,9 @@ import { useAlert } from "react-alert";
 import { getProducts, clearErrors } from "../actions/productActions";
 import Slideruse from "../slider/Silderuse";
 import { loadUser } from "../actions/authActions";
+import Navbar from "../header/Navbar";
 import "./Home.css";
+
 const Home = ({ match }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -23,7 +25,11 @@ const Home = ({ match }) => {
   const [rating, setRating] = useState(0);
   const [imagess, setimagess] = useState("");
   const { keyword } = useParams();
-
+  const [electronic, setelectronic] = useState([]);
+  const [mobile, setmobile] = useState([]);
+  const [accessories, setaccessories] = useState([]);
+  const [clothing, setclothing] = useState([]);
+  const [lewellery, setlewellery] = useState([]);
   const categories = [
     "Electronics",
     "Cameras",
@@ -72,7 +78,12 @@ const Home = ({ match }) => {
     setimagess(data.data.images);
   };
   useEffect(() => {
+    getproduct();
     getsilderimg();
+    getproductAccessories();
+    getproductmobile();
+    getproductcloth();
+    getprodutlewellery();
     dispatch(getProducts(keyword, currentPage, price, category, rating));
   }, [dispatch, error, alert, currentPage, keyword, price, category, rating]);
 
@@ -82,6 +93,70 @@ const Home = ({ match }) => {
 
   const onchancge = (e) => {
     setCategory(e.target.value);
+  };
+
+  const getproduct = async () => {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=Electronic Device`
+    );
+
+    console.log("drom category", data.products);
+    setelectronic(data.products);
+  };
+
+  const getproductAccessories = async () => {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=Accessories`
+    );
+
+    console.log("accesso", data.products);
+    setaccessories(data.products);
+  };
+  const getproductmobile = async () => {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=Mobile`
+    );
+
+    console.log("accesso", data.products);
+    setmobile(data.products);
+  };
+
+  const getproductcloth = async () => {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    const { data } = await axios.get(
+      `http://localhost:8080/api/product/getAllProduct?category=Clothing`
+    );
+
+    console.log("accesso", data.products);
+    setclothing(data.products);
+  };
+
+  const getprodutlewellery = async () => {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=Jewellery`
+    );
+
+    console.log("accesso", data.products);
+    setlewellery(data.products);
   };
   return (
     <>
@@ -93,59 +168,90 @@ const Home = ({ match }) => {
           <Slideruse image={imagess} />
           <div>
             <h1 className="latesttext " id="products_heading">
-              Latest Products
+              Electronic Device
             </h1>
           </div>
 
-          {keyword ? (
-            <>
-              <hr className="my-5" />
+          <section id="products" className="container mt-5">
+            <div className="row">
+              {electronic &&
+                electronic.map((product) => {
+                  return (
+                    <>
+                      <Product key={product._id} product={product} />
+                    </>
+                  );
+                })}
+            </div>
+          </section>
 
-              <div className="mt-5">
-                <h4 className="mb-3">Categories</h4>
-                <select id="cars" onChange={onchancge}>
-                  {categories.map((category) => (
-                    <option value={category} name={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="mt-5">
-                <h4 className="mb-3">Ratings</h4>
-
-                <ul className="pl-0">
-                  {[5, 4, 3, 2, 1].map((star) => (
-                    <li
-                      style={{
-                        cursor: "pointer",
-                        listStyleType: "none",
-                      }}
-                      key={star}
-                      onClick={() => setRating(star)}
-                    >
-                      <div className="rating-outer">
-                        <div
-                          className="rating-inner"
-                          style={{
-                            width: `${star * 20}%`,
-                          }}
-                        ></div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </>
-          ) : (
-            ""
-          )}
+          <div>
+            <h1 className="latesttext " id="products_heading">
+              Accessories
+            </h1>
+          </div>
 
           <section id="products" className="container mt-5">
             <div className="row">
-              {products &&
-                products.map((product) => {
+              {accessories &&
+                accessories.map((product) => {
+                  return (
+                    <>
+                      <Product key={product._id} product={product} />
+                    </>
+                  );
+                })}
+            </div>
+          </section>
+
+          <div>
+            <h1 className="latesttext " id="products_heading">
+              Mobile
+            </h1>
+          </div>
+
+          <section id="products" className="container mt-5">
+            <div className="row">
+              {mobile &&
+                mobile.map((product) => {
+                  return (
+                    <>
+                      <Product key={product._id} product={product} />
+                    </>
+                  );
+                })}
+            </div>
+          </section>
+
+          <div>
+            <h1 className="latesttext " id="products_heading">
+              Clothing
+            </h1>
+          </div>
+
+          <section id="products" className="container mt-5">
+            <div className="row">
+              {clothing &&
+                clothing.map((product) => {
+                  return (
+                    <>
+                      <Product key={product._id} product={product} />
+                    </>
+                  );
+                })}
+            </div>
+          </section>
+
+          <div>
+            <h1 className="latesttext " id="products_heading">
+              Jewellery
+            </h1>
+          </div>
+
+          <section id="products" className="container mt-5">
+            <div className="row">
+              {lewellery &&
+                lewellery.map((product) => {
                   return (
                     <>
                       <Product key={product._id} product={product} />
@@ -155,23 +261,6 @@ const Home = ({ match }) => {
             </div>
           </section>
         </>
-      )}
-
-      {resPerPage <= productsCount && (
-        <div className="d-flex justify-content-center mt-5">
-          <Pagination
-            activePage={currentPage}
-            itemsCountPerPage={resPerPage}
-            totalItemsCount={productsCount}
-            onChange={setCurrentPageNo}
-            nextPageText={"Next"}
-            prevPageText={"Prev"}
-            firstPageText={"First"}
-            lastPageText={"Last"}
-            itemClass="page-item"
-            linkClass="page-link"
-          />
-        </div>
       )}
     </>
   );

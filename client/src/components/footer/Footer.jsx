@@ -11,13 +11,79 @@ const Footer = () => {
       <div className="mainfooter">
         <div className="footercontent">
           <div className="phonecon">
-            <Typography variant="h4" style={{ fontWeight: "400" }}>
-              Instaphantom
+            <Typography variant="h6" style={{ fontWeight: "400" }}>
+              WOMEN
             </Typography>
-            <div className="mardivcontent1">
-              <Typography>New generation social</Typography>
-              <Typography>media management</Typography>
-              <Typography>software</Typography>
+            <div className="mardivcontent">
+              <Typography>Indian Wear</Typography>
+              <Typography>Westen Wear</Typography>
+              <Typography>Lingerie & Night wear</Typography>
+              <Typography>Footwear</Typography>
+              <Typography>Watches</Typography>
+              <Typography>Fragrences</Typography>
+              <Typography>Bags & Wallets</Typography>
+              <Typography>Sunglasses</Typography>
+              <Typography>jewellery</Typography>
+            </div>
+          </div>
+          <div className="phonecon">
+            <Typography variant="h6" style={{ fontWeight: "400" }}>
+              MEN
+            </Typography>
+            <div className="mardivcontent">
+              <Typography>Clothing</Typography>
+              <Typography>Footwear</Typography>
+              <Typography>Watches</Typography>
+              <Typography>fragrances</Typography>
+              <Typography>Grooming For Men</Typography>
+              <Typography>Sunlgasses % Frames</Typography>
+              <Typography>Accessories</Typography>
+              <Typography>Jewellery</Typography>
+            </div>
+          </div>
+          <div className="phonecon">
+            <Typography variant="h6" style={{ fontWeight: "400" }}>
+              Kids
+            </Typography>
+            <div className="mardivcontent">
+              <Typography>Boys</Typography>
+              <Typography>Girls</Typography>
+              <Typography>Infrant</Typography>
+              <Typography>Toys</Typography>
+              <Typography>School Essential</Typography>
+              <Typography>Footwear</Typography>
+              <Typography>Watches</Typography>
+              <Typography>Accessories</Typography>
+            </div>
+          </div>
+          <div className="phonecon">
+            <Typography variant="h6" style={{ fontWeight: "400" }}>
+              BEAUTY
+            </Typography>
+            <div className="mardivcontent">
+              <Typography>Make Up</Typography>
+              <Typography>Skincare</Typography>
+              <Typography>bath & Body</Typography>
+              <Typography>Nails</Typography>
+              <Typography>Haircare</Typography>
+              <Typography>Tools & Accossories</Typography>
+              <Typography>Women's Fragrances</Typography>
+              <Typography>Grooming for Men</Typography>
+              <Typography>Personal Hygiene</Typography>
+            </div>
+          </div>
+          <div className="phonecon">
+            <Typography variant="h6" style={{ fontWeight: "400" }}>
+              MOMESTOP
+            </Typography>
+            <div className="mardivcontent">
+              <Typography>Kitchen & Dining</Typography>
+              <Typography>Decor</Typography>
+              <Typography>HOME Furnishing</Typography>
+              <Typography>Storage & Organization</Typography>
+              <Typography>Smart Home and Applications</Typography>
+              <Typography>Bath</Typography>
+              <Typography>Bedding</Typography>
             </div>
           </div>
           <div className="phonecon">
@@ -40,25 +106,6 @@ const Footer = () => {
               <Typography>Privacy policy</Typography>
             </div>
           </div>
-          <div className="phonecon">
-            <Typography variant="h6" className="instatxt">
-              Business
-            </Typography>
-            <div className="mardivcontent">
-              <Typography>business@instaphantom.com</Typography>
-              <Typography>+91-7454808301</Typography>
-            </div>
-          </div>
-          <div className="phonecon">
-            <Typography variant="h6" className="instatxt">
-              Addreass
-            </Typography>
-            <div className="mardivcontent">
-              <Typography>News xyz market</Typography>
-              <Typography>Trisla Road, Panchkula</Typography>
-              <Typography>Punjab-0123456</Typography>
-            </div>
-          </div>
         </div>
         <div className="pincodediv">
           <div style={{ display: "flex" }}>
@@ -77,7 +124,7 @@ const Footer = () => {
             </svg>
 
             <Typography className="right">
-              2022 instaphantom. All right reserved
+              2022 Nepalify-Kart. All right reserved
             </Typography>
           </div>
           <div>

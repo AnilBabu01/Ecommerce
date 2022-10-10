@@ -34,6 +34,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./components/actions/authActions";
 import "./App.css";
 import { axios } from "axios";
+import Navbar from "./components/header/Navbar";
 
 const stripe = loadStripe(
   "pk_test_51LopskSGAjDSZQyBVlYz24jYhviKM94BLmSCmiimOAre20S8Ti9RD2CF8BPfAsofbNl1fdmQK2UxyFXSPvzS0Tmm00PM0lilLG"
@@ -52,7 +53,8 @@ function App() {
     <>
       <Elements stripe={stripe}>
         <BrowserRouter>
-          <Header />
+          <Navbar />
+
           <div className="">
             <Routes>
               <Route path="/" element={<Home />} />
