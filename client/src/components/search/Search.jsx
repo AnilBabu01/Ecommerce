@@ -4,8 +4,6 @@ const Search = () => {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
   const searchHandler = (e) => {
-    e.preventDefault();
-
     if (keyword.trim()) {
       navigate(`/search/${keyword}`);
     } else {

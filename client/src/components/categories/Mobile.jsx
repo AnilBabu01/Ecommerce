@@ -13,7 +13,7 @@ const Mobile = () => {
     ] = `Bearer ${localStorage.getItem("token")}`;
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=Electronic Device`
+      `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=Mobile`
     );
 
     console.log("ele category", data.products);
@@ -28,7 +28,7 @@ const Mobile = () => {
       <ComNavlink />
       <div>
         <h1 className="latesttext " id="products_heading">
-          Electronic Device
+          Mobile
         </h1>
       </div>
 

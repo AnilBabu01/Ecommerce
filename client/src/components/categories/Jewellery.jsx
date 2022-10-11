@@ -13,7 +13,7 @@ const Jewellery = () => {
     ] = `Bearer ${localStorage.getItem("token")}`;
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=Electronic Device`
+      `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=Jewellery`
     );
 
     console.log("ele category", data.products);
@@ -28,7 +28,7 @@ const Jewellery = () => {
       <ComNavlink />
       <div>
         <h1 className="latesttext " id="products_heading">
-          Electronic Device
+          Jewellery
         </h1>
       </div>
 

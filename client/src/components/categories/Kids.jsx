@@ -28,7 +28,7 @@ const Kids = () => {
       <ComNavlink />
       <div>
         <h1 className="latesttext " id="products_heading">
-          Electronic Device
+          Kids
         </h1>
       </div>
 

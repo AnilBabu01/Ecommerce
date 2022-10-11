@@ -28,7 +28,7 @@ const Men = () => {
       <ComNavlink />
       <div>
         <h1 className="latesttext " id="products_heading">
-          Electronic Device
+          Men
         </h1>
       </div>
 

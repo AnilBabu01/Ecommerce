@@ -63,8 +63,8 @@ const Navbar = ({ history }) => {
               About us
             </NavLink>
           </li>
-          <li>
-            {user && user.role === "user" && (
+          {user && user.role === "user" && (
+            <li>
               <NavLink
                 onClick={() => setisMobile(false)}
                 to="/cart"
@@ -79,15 +79,15 @@ const Navbar = ({ history }) => {
                   {cartItems.length}
                 </span>
               </NavLink>
+            </li>
+          )}
+          <div className={style.hideserchin}>
+            {user && user.role === "admin" && (
+              <span id="cart" class="ml-3">
+                Admin
+              </span>
             )}
-            <div className={style.hideserchin}>
-              {user && user.role === "admin" && (
-                <span id="cart" class="ml-3">
-                  Admin
-                </span>
-              )}
-            </div>
-          </li>
+          </div>
           {localStorage.getItem("token") ? (
             <>
               {user && user.role === "admin" && (
@@ -135,7 +135,7 @@ const Navbar = ({ history }) => {
                   </Link>
 
                   <div
-                    className="dropdown-menu"
+                    className="dropdown-menu modifymenu"
                     aria-labelledby="dropDownMenuButton"
                   >
                     {user && user.role === "admin" && (
