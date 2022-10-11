@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="sidebar-wrapper myallproductmain">
+    <div className="sidebar-wrapper myallproductmain" style={{}}>
       <nav id="sidebar">
         <ul className="list-unstyled components">
           <li>

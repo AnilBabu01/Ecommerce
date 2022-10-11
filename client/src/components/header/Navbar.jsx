@@ -116,9 +116,8 @@ const Navbar = ({ history }) => {
               )}
 
               {isAuthenticated ? (
-                <div className="ml-4 dropdown d-inline ">
+                <div className="ml-4 dropdown d-inline">
                   <Link
-                    className=""
                     to="#"
                     type="button"
                     id="dropDownMenuButton"
@@ -136,7 +135,7 @@ const Navbar = ({ history }) => {
                   </Link>
 
                   <div
-                    className="dropdown-menu modifymenu"
+                    className="dropdown-menu"
                     aria-labelledby="dropDownMenuButton"
                   >
                     {user && user.role === "admin" && (

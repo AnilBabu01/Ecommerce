@@ -101,6 +101,7 @@ const Sliderhome = () => {
       },
     ],
   };
+
   return (
     <div>
       <h2>slider</h2>

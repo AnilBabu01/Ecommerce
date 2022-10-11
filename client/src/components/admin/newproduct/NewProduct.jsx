@@ -21,10 +21,13 @@ const NewProduct = () => {
 
   const categories = [
     "Select Categories",
+    "Women",
+    "Men",
+    "Kids",
+    "Beauty",
     "Electronic Device",
     "Mobile",
     "Accessories",
-    "Clothing",
     "Jewellery",
   ];
 
@@ -214,6 +217,16 @@ const NewProduct = () => {
                   id="login_button"
                   type="submit"
                   className="btn btn-block py-3"
+                  disabled={
+                    name &&
+                    price &&
+                    description &&
+                    categories &&
+                    stock &&
+                    seller
+                      ? false
+                      : true
+                  }
                 >
                   CREATE
                 </button>

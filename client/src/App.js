@@ -36,6 +36,14 @@ import Categories from "./components/categories/Categories";
 import "./App.css";
 import { axios } from "axios";
 import Navbar from "./components/header/Navbar";
+import Women from "./components/categories/Women";
+import Men from "./components/categories/Men";
+import Kids from "./components/categories/Kids";
+import Beauty from "./components/categories/Beauty";
+import Accessories from "./components/categories/Accessories";
+import Electronics from "./components/categories/Electronics";
+import Mobile from "./components/categories/Mobile";
+import Jewellery from "./components/categories/Jewellery";
 
 const stripe = loadStripe(
   "pk_test_51LopskSGAjDSZQyBVlYz24jYhviKM94BLmSCmiimOAre20S8Ti9RD2CF8BPfAsofbNl1fdmQK2UxyFXSPvzS0Tmm00PM0lilLG"
@@ -76,6 +84,14 @@ function App() {
               <Route path="/orders/me" element={<ListOrders />} />
               <Route path="/order/:id" element={<OrderDetails />} />
               <Route path="/categories" element={<Categories />} />
+              <Route path="/category/women" element={<Women />} />
+              <Route path="/category/men" element={<Men />} />
+              <Route path="/category/kids" element={<Kids />} />
+              <Route path="/category/beauty" element={<Beauty />} />
+              <Route path="/category/accessories" element={<Accessories />} />
+              <Route path="/category/eletronic" element={<Electronics />} />
+              <Route path="/category/mobile" element={<Mobile />} />
+              <Route path="/category/jewellery" element={<Jewellery />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/admin/products" element={<ProductsList />} />
               <Route path="/admin/product" element={<NewProduct />} />
