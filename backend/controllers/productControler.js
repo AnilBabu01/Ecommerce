@@ -32,7 +32,7 @@ exports.newProduct = async (req, res, next) => {
 //get all product api/product/getallproduct?keyword=apple
 exports.getProducts = async (req, res, next) => {
   try {
-    const resPerPage = 4;
+    const resPerPage = 8;
     const productsCount = await Product.countDocuments();
 
     const apiFeatures = new APIFeatures(Product.find(), req.query);

@@ -32,6 +32,7 @@ import ProductReviews from "./components/admin/productreviews/ProductReviews";
 import Slider from "./components/admin/slider/Slider";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./components/actions/authActions";
+import Categories from "./components/categories/Categories";
 import "./App.css";
 import { axios } from "axios";
 import Navbar from "./components/header/Navbar";
@@ -74,6 +75,7 @@ function App() {
               <Route path="/success" element={<PaymentSuccess />} />
               <Route path="/orders/me" element={<ListOrders />} />
               <Route path="/order/:id" element={<OrderDetails />} />
+              <Route path="/categories" element={<Categories />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/admin/products" element={<ProductsList />} />
               <Route path="/admin/product" element={<NewProduct />} />

@@ -28,12 +28,12 @@ const Navbar = ({ history }) => {
     <>
       <nav className={style.navbar}>
         <img style={{ width: "200px", height: "50px" }} src={logo} alt="logo" />
-        <Search history={history} />
-        <ul
-          className={isMobile ? style.mobilelinks : style.navlinks}
-          onClick={() => setisMobile(false)}
-        >
-          <li>
+        <div className={style.hideserch}>
+          <Search history={history} />
+        </div>
+
+        <ul className={isMobile ? style.mobilelinks : style.navlinks}>
+          <li onClick={() => setisMobile(false)}>
             <NavLink
               to="/"
               className={({ isActive }) =>
@@ -43,7 +43,17 @@ const Navbar = ({ history }) => {
               Home
             </NavLink>
           </li>
-          <li>
+          <li onClick={() => setisMobile(false)}>
+            <NavLink
+              to="/categories"
+              className={({ isActive }) =>
+                isActive ? style.active : style.home
+              }
+            >
+              Categories
+            </NavLink>
+          </li>
+          <li onClick={() => setisMobile(false)}>
             <NavLink
               to="/about"
               className={({ isActive }) =>
@@ -55,7 +65,11 @@ const Navbar = ({ history }) => {
           </li>
           <li>
             {user && user.role === "user" && (
-              <NavLink to="/cart" state={{ textDecoration: "none" }}>
+              <NavLink
+                onClick={() => setisMobile(false)}
+                to="/cart"
+                state={{ textDecoration: "none" }}
+              >
                 <span id="cart">Cart</span>
                 <span
                   class="ml-1"
@@ -66,17 +80,18 @@ const Navbar = ({ history }) => {
                 </span>
               </NavLink>
             )}
-            {user && user.role === "admin" && (
-              <span id="cart" class="ml-3">
-                Admin
-              </span>
-            )}
+            <div className={style.hideserchin}>
+              {user && user.role === "admin" && (
+                <span id="cart" class="ml-3">
+                  Admin
+                </span>
+              )}
+            </div>
           </li>
-
           {localStorage.getItem("token") ? (
             <>
               {user && user.role === "admin" && (
-                <li>
+                <li onClick={() => setisMobile(false)}>
                   <NavLink
                     to="/dashboard"
                     className={({ isActive }) =>
@@ -88,7 +103,7 @@ const Navbar = ({ history }) => {
                 </li>
               )}
               {user && user.role === "user" && (
-                <li>
+                <li onClick={() => setisMobile(false)}>
                   <NavLink
                     to="/orders/me"
                     className={({ isActive }) =>
@@ -101,8 +116,9 @@ const Navbar = ({ history }) => {
               )}
 
               {isAuthenticated ? (
-                <div className="ml-4 dropdown d-inline">
+                <div className="ml-4 dropdown d-inline ">
                   <Link
+                    className=""
                     to="#"
                     type="button"
                     id="dropDownMenuButton"
@@ -120,7 +136,7 @@ const Navbar = ({ history }) => {
                   </Link>
 
                   <div
-                    className="dropdown-menu"
+                    className="dropdown-menu modifymenu"
                     aria-labelledby="dropDownMenuButton"
                   >
                     {user && user.role === "admin" && (
@@ -156,7 +172,7 @@ const Navbar = ({ history }) => {
             </>
           ) : (
             <>
-              <li>
+              <li onClick={() => setisMobile(false)}>
                 <NavLink
                   to="/login"
                   className={({ isActive }) =>
@@ -167,7 +183,10 @@ const Navbar = ({ history }) => {
                 </NavLink>
               </li>
             </>
-          )}
+          )}{" "}
+          <div className={style.hideserchin}>
+            <Search history={history} />
+          </div>
         </ul>
         <i
           style={{ marginRight: "20px" }}

@@ -74,13 +74,20 @@
   }
   
   .burger{
-    background-color: #27d9e7;
+    background-color: #fa9c23;
     height: 50;
     width: 45px!important;
     border-radius: 5px;
     margin-bottom: 4px;
     color: white;
   }
+
+  .hideserch{
+    display: block;
+    }
+    .hideserchin{
+      display: none;
+    }
   @media screen and (max-width: 780px) {
     .log {
       display: flex;
@@ -92,11 +99,17 @@
     .navlinks {
       display: none;
     }
+.hideserchin{
+  display: block;
+}
+    .showeserch{
+      display: block;
+    }
     .mobilelinks {
       position: absolute;
       display: block;
       list-style: none;
-      background-color: #0f0f99;
+      background-color: #232f3e;
       left: 0;
       top: 77px;
       width: 100%;
@@ -104,7 +117,9 @@
       padding-right: 38px;
     
     }
-  
+    .hideserch{
+    display: none;
+    }
     .home,
     .about,
     .login,
@@ -116,7 +131,7 @@
       transition: all 0.5s ease-out;
       display: grid;
     }
-  
+ 
     .active{
       margin-bottom: 8px;
       color: black;
@@ -125,7 +140,7 @@
       width: 100%;
       transition: all 0.5s ease-out;
       display: grid;
-      background-color: #9e9ece;
+      background-color: #fa9c23;
       border-radius: 5px;
     }
     
