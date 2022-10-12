@@ -118,7 +118,7 @@ const Subhome = ({ match }) => {
     ] = `Bearer ${localStorage.getItem("token")}`;
 
     const { data } = await axios.get(
-      `http://localhost:8080/api/product/getAllProduct?category=Clothing`
+      `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=Women`
     );
 
     console.log("accesso", data.products);
