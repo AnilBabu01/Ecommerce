@@ -88,7 +88,7 @@ const Slider = ({ history }) => {
     <Fragment>
       <MetaData title={"All Users"} />
       <div className="row">
-        <div className="col-12 col-md-2">
+        <div className="col-12 col-md-2" style={{ marginTop: "4.8rem" }}>
           <Sidebar />
         </div>
 

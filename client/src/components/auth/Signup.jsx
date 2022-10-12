@@ -43,10 +43,12 @@ const Signup = () => {
     formdata.append("email", email);
 
     formdata.append("password", password);
-
-    dispatch(register(formdata));
-    navigate("/login");
-    console.log("form data ", formdata);
+    if (email && name && password && avatar) {
+      dispatch(register(formdata));
+      navigate("/login");
+      console.log("form data ", formdata);
+      alert.success("You have Registerwd Successfully");
+    }
   };
   const onChange = (e) => {
     if (e.target.name === "avatar") {
@@ -142,7 +144,7 @@ const Signup = () => {
                   id="register_button"
                   type="submit"
                   className="btn btn-block py-3"
-                  disabled={loading ? true : false}
+                  disabled={email && password && email && avatar ? false : true}
                 >
                   REGISTER
                 </button>

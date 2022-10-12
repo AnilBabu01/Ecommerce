@@ -7,12 +7,13 @@ import { logout } from "../actions/authActions";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useDispatch, useSelector } from "react-redux";
 import Search from "../search/Search";
+import { useAlert } from "react-alert";
 import logo from "../Images/logo.png";
 const Navbar = ({ history }) => {
   const [isMobile, setisMobile] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
-
+  const alert = useAlert();
   const { user, loading, isAuthenticated } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
   console.log(location.pathname);
@@ -22,6 +23,7 @@ const Navbar = ({ history }) => {
   useEffect(() => {}, [isMobile, token]);
   const logoutHandler = () => {
     localStorage.removeItem("token");
+    alert.success("you have logout successfully");
     dispatch(logout());
   };
   return (
@@ -77,7 +79,7 @@ const Navbar = ({ history }) => {
           </li>
           <div className={style.hideserchin}>
             {user && user.role === "admin" && (
-              <span id="cart" class="ml-3">
+              <span id="cart" class="cartlist1">
                 Admin
               </span>
             )}

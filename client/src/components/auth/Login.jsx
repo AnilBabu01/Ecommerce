@@ -24,7 +24,9 @@ const Login = ({ location }) => {
       console.log(user.token);
       const token = user.token;
       localStorage.setItem("token", token);
-
+      if (token) {
+        alert.success("You have login Successfully");
+      }
       navigate("/");
     }
   }, [dispatch, error, isAuthenticated, alert]);
@@ -78,6 +80,7 @@ const Login = ({ location }) => {
                   id="login_button"
                   type="submit"
                   className="btn btn-block py-3"
+                  disabled={email && password ? false : true}
                 >
                   LOGIN
                 </button>
