@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import MetaData from "../../metadata/Metadata";
 import Sidebar from "../sidebar/Sidebar";
 import { useAlert } from "react-alert";
+
 import axios from "axios";
 const formData = new FormData();
 const Slider = ({ history }) => {
@@ -10,8 +11,6 @@ const Slider = ({ history }) => {
   const [imagess, setimagess] = useState("");
   const name = "anil";
   const submitHandler = async (e) => {
-    e.preventDefault();
-
     axios.defaults.headers.post[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
@@ -26,10 +25,11 @@ const Slider = ({ history }) => {
       formData,
       config
     );
-    if (data) {
+
+    if (data.data.success === true) {
       alert.success("You have successfully aaded slider image");
+      getsilderimg();
     }
-    console.log(data);
   };
   const setfileinfoform = (filelist) => {
     console.log(filelist);
@@ -62,8 +62,6 @@ const Slider = ({ history }) => {
       config
     );
 
-    console.log(data.data.images);
-
     setimagess(data.data.images);
   };
 
@@ -83,9 +81,12 @@ const Slider = ({ history }) => {
       config
     );
     if (data) {
-      alert.success("You have successfully delete slider image");
     }
-    console.log(data);
+    console.log(data.data.success);
+    if (data.data.success === true) {
+      alert.success("You have successfully delete slider image");
+      getsilderimg();
+    }
   };
   useEffect(() => {
     getsilderimg();
@@ -146,6 +147,7 @@ const Slider = ({ history }) => {
                 id="login_button"
                 type="submit"
                 className="btn btn-block py-3"
+                disabled={imagesPreview ? false : true}
               >
                 Add
               </button>

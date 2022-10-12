@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import Filter2Icon from "@mui/icons-material/Filter2";
 const Sidebar = () => {
   return (
     <div className="sidebar-wrapper myallproductmain" style={{}}>
@@ -55,7 +55,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link to="/admin/slider">
-              <i className="fa fa-star"></i> Slider
+              <Filter2Icon /> Slider
             </Link>
           </li>
         </ul>
