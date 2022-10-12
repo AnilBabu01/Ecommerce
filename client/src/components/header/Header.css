@@ -39,8 +39,17 @@
     left: 0px;
     transform: translate3d(-244px, -22px, 0px);
 }
-@media screen and (max-width: 780px) {
 
+@media screen and (max-width: 780px) {
+.mobileswrchview{
+    width: 25rem;
+}
+    .cartlist{
+        margin-left: 9rem;
+    }
+    .cartlist1{
+        margin-left: 8rem;
+    }
     .navbarwith{
         width: 105%!important;
         position: fixed!important;

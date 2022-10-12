@@ -164,6 +164,21 @@
       display: grid;
     }
 
+    .home:hover,
+    .about:hover,
+    .login:hover,
+    .singup:hover{
+      text-decoration: none;
+      padding: 10px;
+      width: 100%;
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 0 10px;
+      cursor: pointer;
+      color: black;
+      background-color: #9e9ece;
+     
+    }
     .category{
       color:white;
       text-align: center;

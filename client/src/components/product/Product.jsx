@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Product = ({ product }) => {
   return (
     <>
-      <div className="col-sm-12 col-md-6 col-lg-3 ">
+      <div className="col-sm-12 col-md-6 col-lg-2">
         <div className="card p-2 rounded">
           <img alt="img" className="proimg" src={product.images[0].Url} />
 
@@ -20,7 +20,7 @@ const Product = ({ product }) => {
               </div>
               <span id="no_of_reviews">({product.numOfReviews} Reviews)</span>
             </div>
-            <p className="card-text">{product.price}</p>
+            <p className="card-text">₹{product.price}</p>
             <Link
               to={`/product/${product._id}`}
               id="view_btn"

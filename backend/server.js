@@ -11,7 +11,7 @@ const app = express();
 //allow all to requst domain
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: true,
     credentials: true,
     optionsSuccessStatus: 200,
   })

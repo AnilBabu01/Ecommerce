@@ -63,24 +63,18 @@ const Navbar = ({ history }) => {
               About us
             </NavLink>
           </li>
-          {user && user.role === "user" && (
-            <li>
+          <li className="cartlist">
+            {user && user.role === "user" && (
               <NavLink
                 onClick={() => setisMobile(false)}
                 to="/cart"
                 state={{ textDecoration: "none" }}
               >
                 <span id="cart">Cart</span>
-                <span
-                  class="ml-1"
-                  id="cart_count"
-                  style={{ marginRight: "20px" }}
-                >
-                  {cartItems.length}
-                </span>
+                <span id="cart_count">{cartItems.length}</span>
               </NavLink>
-            </li>
-          )}
+            )}
+          </li>
           <div className={style.hideserchin}>
             {user && user.role === "admin" && (
               <span id="cart" class="ml-3">
@@ -116,8 +110,9 @@ const Navbar = ({ history }) => {
               )}
 
               {isAuthenticated ? (
-                <div className="ml-4 dropdown d-inline">
+                <div className="ml-4 dropdown d-inline ">
                   <Link
+                    className="cartlist1"
                     to="#"
                     type="button"
                     id="dropDownMenuButton"

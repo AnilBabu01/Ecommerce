@@ -154,7 +154,7 @@ const Subhome = ({ match }) => {
           <section id="products" className="container mt-5">
             <div className="row">
               {electronic &&
-                electronic.slice(0, 4).map((product) => {
+                electronic.slice(0, 6).map((product) => {
                   return (
                     <>
                       <Product key={product._id} product={product} />
@@ -173,7 +173,7 @@ const Subhome = ({ match }) => {
           <section id="products" className="container mt-5">
             <div className="row">
               {accessories &&
-                accessories.slice(0, 4).map((product) => {
+                accessories.slice(0, 6).map((product) => {
                   return (
                     <>
                       <Product key={product._id} product={product} />
@@ -192,7 +192,7 @@ const Subhome = ({ match }) => {
           <section id="products" className="container mt-5">
             <div className="row">
               {mobile &&
-                mobile.slice(0, 4).map((product) => {
+                mobile.slice(0, 6).map((product) => {
                   return (
                     <>
                       <Product key={product._id} product={product} />
@@ -211,7 +211,7 @@ const Subhome = ({ match }) => {
           <section id="products" className="container mt-5">
             <div className="row">
               {clothing &&
-                clothing.slice(0, 4).map((product) => {
+                clothing.slice(0, 6).map((product) => {
                   return (
                     <>
                       <Product key={product._id} product={product} />
@@ -230,7 +230,7 @@ const Subhome = ({ match }) => {
           <section id="products" className="container mt-5">
             <div className="row">
               {lewellery &&
-                lewellery.slice(0, 4).map((product) => {
+                lewellery.slice(0, 6).map((product) => {
                   return (
                     <>
                       <Product key={product._id} product={product} />

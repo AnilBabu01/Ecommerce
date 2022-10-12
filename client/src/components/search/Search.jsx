@@ -12,7 +12,7 @@ const Search = () => {
   };
   return (
     <>
-      <form onSubmit={searchHandler}>
+      <form onSubmit={searchHandler} className="mobileswrchview">
         <div className="input-group">
           <input
             type="text"
