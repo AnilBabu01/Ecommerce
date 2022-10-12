@@ -1,9 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
 import MetaData from "../../metadata/Metadata";
 import Sidebar from "../sidebar/Sidebar";
+import { useAlert } from "react-alert";
 import axios from "axios";
 const formData = new FormData();
 const Slider = ({ history }) => {
+  const alert = useAlert();
   const [imagesPreview, setImagesPreview] = useState([]);
   const [imagess, setimagess] = useState("");
   const name = "anil";
@@ -24,7 +26,9 @@ const Slider = ({ history }) => {
       formData,
       config
     );
-
+    if (data) {
+      alert.success("You have successfully aaded slider image");
+    }
     console.log(data);
   };
   const setfileinfoform = (filelist) => {
@@ -78,7 +82,9 @@ const Slider = ({ history }) => {
 
       config
     );
-
+    if (data) {
+      alert.success("You have successfully delete slider image");
+    }
     console.log(data);
   };
   useEffect(() => {

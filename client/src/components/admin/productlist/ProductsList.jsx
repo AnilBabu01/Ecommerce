@@ -113,7 +113,7 @@ const ProductsList = () => {
     ] = `Bearer ${localStorage.getItem("token")}`;
 
     const data = await axios.delete(
-      `http://localhost:8080/api/admin/product/deleteProduct/${id}`
+      `${process.env.REACT_APP_URL}/api/admin/product/deleteProduct/${id}`
     );
 
     console.log("delete is", data.data.status);
