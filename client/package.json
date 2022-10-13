@@ -19,6 +19,7 @@
     "base-64": "^1.0.0",
     "buffer": "^6.0.3",
     "countries-list": "^2.6.1",
+    "emailjs-com": "^3.2.0",
     "mdbreact": "^5.2.0",
     "postcss": "^8.4.17",
     "rc-slider": "^10.0.1",

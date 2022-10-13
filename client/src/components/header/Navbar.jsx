@@ -27,6 +27,7 @@ const Navbar = ({ history }) => {
     alert.success("you have logout successfully");
     dispatch(logout());
   };
+
   return (
     <>
       <nav className={style.navbar}>
@@ -45,7 +46,7 @@ const Navbar = ({ history }) => {
         <ul className={isMobile ? style.mobilelinks : style.navlinks}>
           <li onClick={() => setisMobile(false)}>
             <NavLink
-              to="/"
+              to="/shipping"
               className={({ isActive }) =>
                 isActive ? style.active : style.home
               }
@@ -75,103 +76,164 @@ const Navbar = ({ history }) => {
               </NavLink>
             )}
           </li>
-          <div className={style.hideserchin}>
-            {user && user.role === "admin" && (
-              <span id="cart" class="cartlist1">
-                Admin
-              </span>
-            )}
-          </div>
-          {localStorage.getItem("token") ? (
-            <>
-              {user && user.role === "admin" && (
-                <li onClick={() => setisMobile(false)}>
-                  <NavLink
-                    to="/dashboard"
-                    className={({ isActive }) =>
-                      isActive ? style.active : style.login
-                    }
-                  >
+
+          <div className={style.homeiconhide}>
+            <div className="ml-4 dropdown d-inline  homeiconhide">
+              <Link
+                className={({ isActive }) =>
+                  isActive ? style.active : style.login
+                }
+                to="#"
+                type="button"
+                id="dropDownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <figure className="avatar avatar-nav">
+                  <HomeIcon />
+                </figure>
+              </Link>
+
+              <div
+                className="dropdown-menu modifymenu"
+                aria-labelledby="dropDownMenuButton"
+              >
+                <p className="dropdown-item">user name</p>
+                {user && user.role === "admin" && (
+                  <Link className="dropdown-item" to="/dashboard">
                     Dashboard
-                  </NavLink>
-                </li>
-              )}
+                  </Link>
+                )}
+                {user && user.role === "user" && (
+                  <Link className="dropdown-item" to="/orders/me">
+                    Orders
+                  </Link>
+                )}
 
-              {isAuthenticated ? (
-                <div className="ml-4 dropdown d-inline ">
+                <Link className="dropdown-item" to="/me">
+                  Profile
+                </Link>
+                <Link className="dropdown-item" to="/about">
+                  About Us
+                </Link>
+                <Link className="dropdown-item" to="/contact">
+                  Contact Us
+                </Link>
+                <Link className="dropdown-item" to="/shipping">
+                  Shipping service
+                </Link>
+
+                {isAuthenticated ? (
                   <Link
-                    className={({ isActive }) =>
-                      isActive ? style.active : style.login
-                    }
+                    className="dropdown-item text-danger"
                     to="/"
-                    type="button"
-                    id="dropDownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
+                    onClick={logoutHandler}
                   >
-                    <figure className="avatar avatar-nav">
-                      <HomeIcon />
-                    </figure>
+                    Logout
                   </Link>
+                ) : (
+                  !loading && (
+                    <Link to="/login" className="btn ml-4" id="login_btn">
+                      Login
+                    </Link>
+                  )
+                )}
+              </div>
+            </div>
+          </div>
 
-                  <div
-                    className="dropdown-menu modifymenu"
-                    aria-labelledby="dropDownMenuButton"
-                  >
-                    {user && user.role === "admin" && (
-                      <Link className="dropdown-item" to="/dashboard">
-                        Dashboard
-                      </Link>
-                    )}
-                    {user && user.role === "user" && (
-                      <Link className="dropdown-item" to="/orders/me">
-                        Orders
-                      </Link>
-                    )}
-                    <Link className="dropdown-item" to="/me">
-                      Profile
-                    </Link>
-                    <Link className="dropdown-item" to="/about">
-                      About Us
-                    </Link>
-                    <Link className="dropdown-item" to="/contact">
-                      Contact Us
-                    </Link>
-                    <Link className="dropdown-item" to="/shipping">
-                      Shipping service
-                    </Link>
-                    <Link
-                      className="dropdown-item text-danger"
-                      to="/"
-                      onClick={logoutHandler}
-                    >
-                      Logout
-                    </Link>
-                  </div>
-                </div>
-              ) : (
-                !loading && (
-                  <Link to="/login" className="btn ml-4" id="login_btn">
-                    Login
-                  </Link>
-                )
-              )}
-            </>
-          ) : (
-            <>
+          <div className={style.hideinlapto}>
+            {user && user.role === "admin" && (
               <li onClick={() => setisMobile(false)}>
                 <NavLink
-                  to="/login"
+                  to="/dashboard"
                   className={({ isActive }) =>
-                    isActive ? style.active : style.login
+                    isActive ? style.active : style.home
                   }
                 >
-                  Login
+                  Dashboard
                 </NavLink>
               </li>
-            </>
-          )}{" "}
+            )}
+            {user && user.role === "user" && (
+              <Link className="dropdown-item" to="/orders/me">
+                Orders
+              </Link>
+            )}
+            <li onClick={() => setisMobile(false)}>
+              <NavLink
+                to="/me"
+                className={({ isActive }) =>
+                  isActive ? style.active : style.home
+                }
+              >
+                Profile
+              </NavLink>
+            </li>
+
+            <li onClick={() => setisMobile(false)}>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive ? style.active : style.home
+                }
+              >
+                about
+              </NavLink>
+            </li>
+            <li onClick={() => setisMobile(false)}>
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  isActive ? style.active : style.home
+                }
+              >
+                Contact Us
+              </NavLink>
+            </li>
+            <li onClick={() => setisMobile(false)}>
+              <NavLink
+                to="/shipping"
+                className={({ isActive }) =>
+                  isActive ? style.active : style.home
+                }
+              >
+                Shipping service
+              </NavLink>
+            </li>
+
+            {isAuthenticated ? (
+              <>
+                <li onClick={() => setisMobile(false)}>
+                  <NavLink
+                    to="/"
+                    onClick={logoutHandler}
+                    className={({ isActive }) =>
+                      isActive ? style.active : style.home
+                    }
+                  >
+                    Logout
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              !loading && (
+                <>
+                  <li onClick={() => setisMobile(false)}>
+                    <NavLink
+                      to="//login"
+                      className={({ isActive }) =>
+                        isActive ? style.active : style.home
+                      }
+                    >
+                      Login
+                    </NavLink>
+                  </li>
+                </>
+              )
+            )}
+          </div>
           <div className={style.hideserchin}>
             <Search history={history} />
           </div>

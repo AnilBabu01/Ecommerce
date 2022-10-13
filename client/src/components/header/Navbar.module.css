@@ -120,7 +120,18 @@
       color: black;
       background-color: #9e9ece;
     }
+
+.hideinlapto{
+  display: none;
+}
   @media screen and (max-width: 912px) {
+  .hideinlapto{
+    display: block;
+  }
+     .homeiconhide
+     {
+      display: none;
+     }
 
     .cartstyle{
       display: flex;
@@ -374,3 +385,6 @@
     }
    
   }
+
+
+  
