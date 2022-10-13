@@ -11,6 +11,7 @@ const Slider = ({ history }) => {
   const [imagess, setimagess] = useState("");
   const name = "anil";
   const submitHandler = async (e) => {
+    e.preventDefault();
     axios.defaults.headers.post[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
