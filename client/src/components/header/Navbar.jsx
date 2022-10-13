@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
 import style from "./Navbar.module.css";
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import { logout } from "../actions/authActions";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useDispatch, useSelector } from "react-redux";
+import HomeIcon from "@mui/icons-material/Home";
 import Search from "../search/Search";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import Tooltip from "@mui/material/Tooltip";
-import LogoutIcon from "@mui/icons-material/Logout";
 import { useAlert } from "react-alert";
 import logo from "../Images/logo.png";
 const Navbar = ({ history }) => {
-  const navigate = useNavigate();
   const [isMobile, setisMobile] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
@@ -29,20 +26,23 @@ const Navbar = ({ history }) => {
     localStorage.removeItem("token");
     alert.success("you have logout successfully");
     dispatch(logout());
-    navigate("/");
   };
   return (
     <>
       <nav className={style.navbar}>
-        <img style={{ width: "200px", height: "50px" }} src={logo} alt="logo" />
+        <Link to="/">
+          <img
+            style={{ width: "200px", height: "50px" }}
+            src={logo}
+            alt="logo"
+          />
+        </Link>
+
         <div className={style.hideserch}>
           <Search history={history} />
         </div>
 
         <ul className={isMobile ? style.mobilelinks : style.navlinks}>
-          <li className={style.cartstyle}>
-            <p>Shipping Service</p>
-          </li>
           <li onClick={() => setisMobile(false)}>
             <NavLink
               to="/"
@@ -50,7 +50,7 @@ const Navbar = ({ history }) => {
                 isActive ? style.active : style.home
               }
             >
-              Home
+              Shipping Service
             </NavLink>
           </li>
           <li onClick={() => setisMobile(false)}>
@@ -63,17 +63,7 @@ const Navbar = ({ history }) => {
               Categories
             </NavLink>
           </li>
-          <li onClick={() => setisMobile(false)}>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                isActive ? style.active : style.about
-              }
-            >
-              About us
-            </NavLink>
-          </li>
-          <li className={style.cartstyle}>
+          <li className="cartlist">
             {user && user.role === "user" && (
               <NavLink
                 onClick={() => setisMobile(false)}
@@ -85,43 +75,88 @@ const Navbar = ({ history }) => {
               </NavLink>
             )}
           </li>
+          <div className={style.hideserchin}>
+            {user && user.role === "admin" && (
+              <span id="cart" class="cartlist1">
+                Admin
+              </span>
+            )}
+          </div>
           {localStorage.getItem("token") ? (
             <>
               {user && user.role === "admin" && (
-                <li
-                  className={style.cartstyle}
-                  onClick={() => setisMobile(false)}
-                >
-                  <NavLink to="/dashboard">
-                    <Tooltip title="Deshbord">
-                      <DashboardIcon />
-                    </Tooltip>
-                  </NavLink>
-                </li>
-              )}
-              {user && user.role === "user" && (
                 <li onClick={() => setisMobile(false)}>
                   <NavLink
-                    to="/orders/me"
+                    to="/dashboard"
                     className={({ isActive }) =>
                       isActive ? style.active : style.login
                     }
                   >
-                    My Orders
+                    Dashboard
                   </NavLink>
                 </li>
               )}
-            </>
-          ) : (
-            <></>
-          )}{" "}
-          {isAuthenticated && user ? (
-            <>
-              <li onClick={() => setisMobile(false)}>
-                <NavLink to="" onClick={logoutHandler} className={style.about}>
-                  Logout
-                </NavLink>
-              </li>
+
+              {isAuthenticated ? (
+                <div className="ml-4 dropdown d-inline ">
+                  <Link
+                    className={({ isActive }) =>
+                      isActive ? style.active : style.login
+                    }
+                    to="/"
+                    type="button"
+                    id="dropDownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <figure className="avatar avatar-nav">
+                      <HomeIcon />
+                    </figure>
+                  </Link>
+
+                  <div
+                    className="dropdown-menu modifymenu"
+                    aria-labelledby="dropDownMenuButton"
+                  >
+                    {user && user.role === "admin" && (
+                      <Link className="dropdown-item" to="/dashboard">
+                        Dashboard
+                      </Link>
+                    )}
+                    {user && user.role === "user" && (
+                      <Link className="dropdown-item" to="/orders/me">
+                        Orders
+                      </Link>
+                    )}
+                    <Link className="dropdown-item" to="/me">
+                      Profile
+                    </Link>
+                    <Link className="dropdown-item" to="/about">
+                      About Us
+                    </Link>
+                    <Link className="dropdown-item" to="/contact">
+                      Contact Us
+                    </Link>
+                    <Link className="dropdown-item" to="/shipping">
+                      Shipping service
+                    </Link>
+                    <Link
+                      className="dropdown-item text-danger"
+                      to="/"
+                      onClick={logoutHandler}
+                    >
+                      Logout
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                !loading && (
+                  <Link to="/login" className="btn ml-4" id="login_btn">
+                    Login
+                  </Link>
+                )
+              )}
             </>
           ) : (
             <>
@@ -136,7 +171,7 @@ const Navbar = ({ history }) => {
                 </NavLink>
               </li>
             </>
-          )}
+          )}{" "}
           <div className={style.hideserchin}>
             <Search history={history} />
           </div>

@@ -4,6 +4,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import CallMadeIcon from "@mui/icons-material/CallMade";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 const Footer = () => {
   return (
@@ -12,89 +13,47 @@ const Footer = () => {
         <div className="footercontent">
           <div className="phonecon">
             <Typography variant="h6" style={{ fontWeight: "400" }}>
-              WOMEN
+              Products
             </Typography>
-            <div className="mardivcontent">
-              <Typography>Indian Wear</Typography>
-              <Typography>Westen Wear</Typography>
-              <Typography>Lingerie & Night wear</Typography>
-              <Typography>Footwear</Typography>
-              <Typography>Watches</Typography>
-              <Typography>Fragrences</Typography>
-              <Typography>Bags & Wallets</Typography>
-              <Typography>Sunglasses</Typography>
-              <Typography>jewellery</Typography>
+            <div className="mardivcontentlink">
+              <Link to="/categories">Women</Link>
+              <Link to="/category/men">Men</Link>
+              <Link to="/category/kids">Kids</Link>
+              <Link to="/category/beauty">Beauty</Link>
+              <Link to="/category/accessories">Accessories</Link>
+              <Link to="/category/eletronic">Electronic Devices</Link>
+              <Link to="/category/mobile">Mobile</Link>
+              <Link to="/category/jewellery">Jewellery</Link>
             </div>
           </div>
           <div className="phonecon">
             <Typography variant="h6" style={{ fontWeight: "400" }}>
-              MEN
+              Shipping Service
             </Typography>
-            <div className="mardivcontent">
-              <Typography>Clothing</Typography>
-              <Typography>Footwear</Typography>
-              <Typography>Watches</Typography>
-              <Typography>fragrances</Typography>
-              <Typography>Grooming For Men</Typography>
-              <Typography>Sunlgasses % Frames</Typography>
-              <Typography>Accessories</Typography>
-              <Typography>Jewellery</Typography>
+            <div className="mardivcontentlink">
+              <a target="_blank" href="https://www.amazon.in">
+                Amazon
+              </a>
+              <a target="_blank" href="https://www.flipkart.com">
+                Flipkart
+              </a>
+              <a target="_blank" href="https://www.myntra.com/mantra">
+                mantra
+              </a>
             </div>
           </div>
-          <div className="phonecon">
-            <Typography variant="h6" style={{ fontWeight: "400" }}>
-              Kids
-            </Typography>
-            <div className="mardivcontent">
-              <Typography>Boys</Typography>
-              <Typography>Girls</Typography>
-              <Typography>Infrant</Typography>
-              <Typography>Toys</Typography>
-              <Typography>School Essential</Typography>
-              <Typography>Footwear</Typography>
-              <Typography>Watches</Typography>
-              <Typography>Accessories</Typography>
-            </div>
-          </div>
-          <div className="phonecon">
-            <Typography variant="h6" style={{ fontWeight: "400" }}>
-              BEAUTY
-            </Typography>
-            <div className="mardivcontent">
-              <Typography>Make Up</Typography>
-              <Typography>Skincare</Typography>
-              <Typography>bath & Body</Typography>
-              <Typography>Nails</Typography>
-              <Typography>Haircare</Typography>
-              <Typography>Tools & Accossories</Typography>
-              <Typography>Women's Fragrances</Typography>
-              <Typography>Grooming for Men</Typography>
-              <Typography>Personal Hygiene</Typography>
-            </div>
-          </div>
-          <div className="phonecon">
-            <Typography variant="h6" style={{ fontWeight: "400" }}>
-              MOMESTOP
-            </Typography>
-            <div className="mardivcontent">
-              <Typography>Kitchen & Dining</Typography>
-              <Typography>Decor</Typography>
-              <Typography>HOME Furnishing</Typography>
-              <Typography>Storage & Organization</Typography>
-              <Typography>Smart Home and Applications</Typography>
-              <Typography>Bath</Typography>
-              <Typography>Bedding</Typography>
-            </div>
-          </div>
+
           <div className="phonecon">
             <Typography variant="h6" style={{ fontWeight: "400" }}>
               Explore
             </Typography>
-            <div className="mardivcontent">
-              <Typography>Home</Typography>
-              <Typography>About us</Typography>
-              <Typography>FAQ</Typography>
-              <Typography>Register/Login</Typography>
+            <div className="mardivcontentlink">
+              <Link to="/">Home</Link>
+              <Link to="/about">About us</Link>
+              <Link to="/register">Register</Link>
+              <Link to="/login">Login</Link>
+              <Link to="/contact">Contact Us</Link>
+              <Link to="/shippingt">Shipping Service</Link>
             </div>
           </div>
           <div className="phonecon">
@@ -129,9 +88,8 @@ const Footer = () => {
           </div>
           <div>
             <Typography>
-              Made with{" "}
-              <img src="./images/dil.svg" alt="dil" className="dilimg" /> by
-              Nepalify-Kart Team
+              Made <img src="./images/dil.svg" alt="dil" className="dilimg" />{" "}
+              by Nepalify-Kart Team
             </Typography>
           </div>
         </div>
@@ -143,12 +101,6 @@ const Footer = () => {
           <div className="iconmain">
             <div className="icondiv5">
               <FacebookIcon />
-            </div>
-          </div>
-
-          <div className="iconmain">
-            <div className="icondiv5">
-              <TwitterIcon />
             </div>
           </div>
 

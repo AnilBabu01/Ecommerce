@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 const Product = ({ product }) => {
   return (
     <>
-      <div className="col-sm-12 col-md-6 col-lg-2">
+      <div
+        className="col-sm-12 col-md-6 col-lg-2"
+        style={{ marginBottom: "1rem" }}
+      >
         <div className="card p-2 rounded">
           <img alt="img" className="proimg" src={product.images[0].Url} />
 

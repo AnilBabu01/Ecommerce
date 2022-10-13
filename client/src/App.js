@@ -44,7 +44,9 @@ import Accessories from "./components/categories/Accessories";
 import Electronics from "./components/categories/Electronics";
 import Mobile from "./components/categories/Mobile";
 import Jewellery from "./components/categories/Jewellery";
-
+import AboutUs from "./components/aboutus/AboutUs";
+import ContactUs from "./components/contact/ContactUs";
+import Shipping from "./components/shipping/Shipping";
 const stripe = loadStripe(
   "pk_test_51LopskSGAjDSZQyBVlYz24jYhviKM94BLmSCmiimOAre20S8Ti9RD2CF8BPfAsofbNl1fdmQK2UxyFXSPvzS0Tmm00PM0lilLG"
 );
@@ -71,6 +73,9 @@ function App() {
               <Route path="/search/:keyword" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Signup />} />
+              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/shipping" element={<Shipping />} />
               <Route path="/me" element={<Profile />} />
               <Route path="/me/update" element={<UpdateProfile />} />
               <Route path="/password/update" element={<UpdatePassword />} />

@@ -70,7 +70,7 @@ const Subhome = ({ match }) => {
 
           <div>
             <h1 className="latesttext " id="products_heading">
-              Welcome in Nepalikart
+              Welcome To Nepalikart
             </h1>
           </div>
 
