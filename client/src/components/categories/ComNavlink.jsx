@@ -31,19 +31,10 @@ const ComNavlink = () => {
               }
               to="/categories"
             >
-              All
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? style.activecategory : style.category
-              }
-              to="/category/women"
-            >
               Women
             </NavLink>
           </li>
+
           <li>
             <NavLink
               className={({ isActive }) =>

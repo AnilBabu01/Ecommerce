@@ -17,7 +17,7 @@ const Search = () => {
           <input
             type="text"
             id="search_field"
-            className="form-control"
+            className="form-control inmobile"
             placeholder="Enter Product Name ..."
             onChange={(e) => setKeyword(e.target.value)}
           />

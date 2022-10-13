@@ -57,86 +57,9 @@ const Subhome = ({ match }) => {
   }
 
   useEffect(() => {
-    getproduct();
-
-    getproductAccessories();
-    getproductmobile();
-    getproductcloth();
-    getprodutlewellery();
     dispatch(getProducts(keyword, currentPage, price, category, rating));
   }, [dispatch, error, alert, currentPage, keyword, price, category, rating]);
 
-  const setCurrentPageNo = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const onchancge = (e) => {
-    setCategory(e.target.value);
-  };
-
-  const getproduct = async () => {
-    axios.defaults.headers.get[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
-
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=Electronic Device`
-    );
-
-    console.log("drom category", data.products);
-    setelectronic(data.products);
-  };
-
-  const getproductAccessories = async () => {
-    axios.defaults.headers.get[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
-
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=Accessories`
-    );
-
-    console.log("accesso", data.products);
-    setaccessories(data.products);
-  };
-  const getproductmobile = async () => {
-    axios.defaults.headers.get[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
-
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=Mobile`
-    );
-
-    console.log("accesso", data.products);
-    setmobile(data.products);
-  };
-
-  const getproductcloth = async () => {
-    axios.defaults.headers.get[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
-
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=Women`
-    );
-
-    console.log("accesso", data.products);
-    setclothing(data.products);
-  };
-
-  const getprodutlewellery = async () => {
-    axios.defaults.headers.get[
-      "Authorization"
-    ] = `Bearer ${localStorage.getItem("token")}`;
-
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=Jewellery`
-    );
-
-    console.log("accesso", data.products);
-    setlewellery(data.products);
-  };
   return (
     <>
       {loading ? (
@@ -147,90 +70,14 @@ const Subhome = ({ match }) => {
 
           <div>
             <h1 className="latesttext " id="products_heading">
-              Electronic Device
+              Welcome in Nepalikart
             </h1>
           </div>
 
           <section id="products" className="container mt-5">
             <div className="row">
-              {electronic &&
-                electronic.slice(0, 6).map((product) => {
-                  return (
-                    <>
-                      <Product key={product._id} product={product} />
-                    </>
-                  );
-                })}
-            </div>
-          </section>
-
-          <div>
-            <h1 className="latesttext " id="products_heading">
-              Accessories
-            </h1>
-          </div>
-
-          <section id="products" className="container mt-5">
-            <div className="row">
-              {accessories &&
-                accessories.slice(0, 6).map((product) => {
-                  return (
-                    <>
-                      <Product key={product._id} product={product} />
-                    </>
-                  );
-                })}
-            </div>
-          </section>
-
-          <div>
-            <h1 className="latesttext " id="products_heading">
-              Mobile
-            </h1>
-          </div>
-
-          <section id="products" className="container mt-5">
-            <div className="row">
-              {mobile &&
-                mobile.slice(0, 6).map((product) => {
-                  return (
-                    <>
-                      <Product key={product._id} product={product} />
-                    </>
-                  );
-                })}
-            </div>
-          </section>
-
-          <div>
-            <h1 className="latesttext " id="products_heading">
-              Clothing
-            </h1>
-          </div>
-
-          <section id="products" className="container mt-5">
-            <div className="row">
-              {clothing &&
-                clothing.slice(0, 6).map((product) => {
-                  return (
-                    <>
-                      <Product key={product._id} product={product} />
-                    </>
-                  );
-                })}
-            </div>
-          </section>
-
-          <div>
-            <h1 className="latesttext " id="products_heading">
-              Jewellery
-            </h1>
-          </div>
-
-          <section id="products" className="container mt-5">
-            <div className="row">
-              {lewellery &&
-                lewellery.slice(0, 6).map((product) => {
+              {products &&
+                products.map((product) => {
                   return (
                     <>
                       <Product key={product._id} product={product} />

@@ -5,7 +5,7 @@ import Subhome from "../home/Subgome";
 import Slideruse from "../slider/Silderuse";
 import Product from "../product/Product";
 import Metadata from "../metadata/Metadata";
-
+import Wemon from "./Women";
 import Loader from "../loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import "./Categories.css";
@@ -18,34 +18,7 @@ const Categories = () => {
   console.log("from cate", products);
   return (
     <>
-      <ComNavlink />
-
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <Metadata title={"Buy best product by"} />
-
-          <div>
-            <h1 className="latesttext " id="products_heading">
-              ALL
-            </h1>
-          </div>
-
-          <section id="products" className="container mt-5">
-            <div className="row">
-              {products &&
-                products.map((product) => {
-                  return (
-                    <>
-                      <Product key={product._id} product={product} />
-                    </>
-                  );
-                })}
-            </div>
-          </section>
-        </>
-      )}
+      <Wemon />
     </>
   );
 };

@@ -21,13 +21,17 @@ const Login = ({ location }) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (isAuthenticated) {
-      console.log(user.token);
+      console.log("from login", user);
       const token = user.token;
       localStorage.setItem("token", token);
       if (token) {
         alert.success("You have login Successfully");
       }
+
       navigate("/");
+    }
+    if (error) {
+      alert.error(error);
     }
   }, [dispatch, error, isAuthenticated, alert]);
 

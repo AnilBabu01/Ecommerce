@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Filter2Icon from "@mui/icons-material/Filter2";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 const Sidebar = () => {
   return (
     <div className="sidebar-wrapper myallproductmain" style={{}}>

@@ -120,7 +120,12 @@
       color: black;
       background-color: #9e9ece;
     }
-  @media screen and (max-width: 780px) {
+  @media screen and (max-width: 912px) {
+
+    .cartstyle{
+      display: flex;
+      justify-content: center;
+    }
     .log {
       display: flex;
       position: fixed;
@@ -132,7 +137,8 @@
       display: none;
     }
 .hideserchin{
-  display: block;
+  display: flex;
+  justify-content: center;
 }
     .showeserch{
       display: block;
@@ -162,6 +168,7 @@
       width: 100%;
       transition: all 0.5s ease-out;
       display: grid;
+      text-align: center;
     }
 
     .home:hover,
@@ -172,6 +179,135 @@
       padding: 10px;
       width: 100%;
       font-size: 20px;
+      text-align: center;
+      padding: 10px 20px;
+      margin: 0 10px;
+      cursor: pointer;
+      color: black;
+      background-color: #9e9ece;
+     
+    }
+    .category{
+      color:white;
+      text-align: center;
+      padding: 10px;
+      width: 100%;
+      transition: all 0.5s ease-out;
+      display: grid;
+    }
+    .activecategory{
+      margin-bottom: 8px;
+      color: black;
+      text-align: center;
+      padding: 10px;
+     
+      transition: all 0.5s ease-out;
+      display: grid;
+      background-color: #fa9c23;
+      border-radius: 5px;
+    }
+    .active{
+      margin-bottom: 8px;
+      color: black;
+      text-align: center;
+      padding: 10px;
+      width: 103%;
+      transition: all 0.5s ease-out;
+      display: grid;
+      background-color: #fa9c23;
+      border-radius: 5px;
+    }
+    
+    .mobileMenuIcon {
+      display: block;
+  
+      font-size: 30px;
+      border: none;
+      outline: none;
+      top: 15px;
+      right: 25px;
+    }
+
+    .showcate{
+      position: absolute;
+      display: block;
+      list-style: none;
+      background-color: #232f3e;
+      left: 0;
+      top: 77px;
+      width: 100%;
+      box-shadow: 1px 1px 1px 1px #e2d9d9;
+      padding-right: 38px;
+      z-index: 2;
+    }
+
+    .hidecate{
+      display: none;
+    }
+   
+  }
+
+  @media screen and (max-width: 780px) {
+
+
+    .cartstyle{
+      display: flex;
+      justify-content: center;
+    }
+    .log {
+      display: flex;
+      position: fixed;
+      top: 15px;
+      left: 35px;
+    }
+  
+    .navlinks {
+      display: none;
+    }
+.hideserchin{
+  display: flex;
+  justify-content: center;
+}
+    .showeserch{
+      display: block;
+    }
+    .mobilelinks {
+      position: absolute;
+      display: block;
+      list-style: none;
+      background-color: #232f3e;
+      left: 0;
+      top: 77px;
+      width: 100%;
+      box-shadow: 1px 1px 1px 1px #e2d9d9;
+      padding-right: 38px;
+    
+    }
+    .hideserch{
+    display: none;
+    }
+    .home,
+    .about,
+    .login,
+    .singup {
+      color:white;
+      text-align: center;
+      padding: 10px;
+      width: 100%;
+      transition: all 0.5s ease-out;
+      display: grid;
+      text-align: center;
+    }
+
+    .home:hover,
+    .about:hover,
+    .login:hover,
+    .singup:hover{
+      text-decoration: none;
+      padding: 10px;
+      width: 100%;
+      font-size: 20px;
+      text-align: center;
       padding: 10px 20px;
       margin: 0 10px;
       cursor: pointer;

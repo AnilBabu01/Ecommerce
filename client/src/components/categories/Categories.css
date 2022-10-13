@@ -20,18 +20,7 @@
 }
 @media screen and (max-width: 780px) {
   
-    .catemaindiv{
-        margin-top: 5rem;
-        display: flex;
-        justify-content: space-evenly;
-        background: #a87a3b;
-        flex-direction: column;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        font-size: 20px;
-        color: white;
-        
-    }
+    
 
    
   }
