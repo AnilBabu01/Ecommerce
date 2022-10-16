@@ -10,6 +10,16 @@ import HomeIcon from "@mui/icons-material/Home";
 import Search from "../search/Search";
 import { useAlert } from "react-alert";
 import logo from "../Images/logo.png";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import InfoIcon from "@mui/icons-material/Info";
+import NetworkPingIcon from "@mui/icons-material/NetworkPing";
+import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
+import Person4Icon from "@mui/icons-material/Person4";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import GridOnIcon from "@mui/icons-material/GridOn";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 const Navbar = ({ history }) => {
   const [isMobile, setisMobile] = useState(false);
   const location = useLocation();
@@ -71,7 +81,9 @@ const Navbar = ({ history }) => {
                 to="/cart"
                 state={{ textDecoration: "none" }}
               >
-                <span id="cart">Cart</span>
+                <span id="cart">
+                  <ShoppingCartIcon />
+                </span>
                 <span id="cart_count">{cartItems.length}</span>
               </NavLink>
             )}
@@ -99,29 +111,38 @@ const Navbar = ({ history }) => {
                 className="dropdown-menu modifymenu"
                 aria-labelledby="dropDownMenuButton"
               >
-                <p className="dropdown-item">user name</p>
+                {user && (
+                  <p className="dropdown-item">
+                    {" "}
+                    <AccountCircleIcon />
+                    {user && user.name}
+                  </p>
+                )}
+
                 {user && user.role === "admin" && (
                   <Link className="dropdown-item" to="/dashboard">
-                    Dashboard
+                    <DashboardIcon /> Dashboard
                   </Link>
                 )}
                 {user && user.role === "user" && (
                   <Link className="dropdown-item" to="/orders/me">
-                    Orders
+                    <GridOnIcon /> Orders
+                  </Link>
+                )}
+                {user && isAuthenticated && (
+                  <Link className="dropdown-item" to="/me">
+                    <Person4Icon /> Profile
                   </Link>
                 )}
 
-                <Link className="dropdown-item" to="/me">
-                  Profile
-                </Link>
                 <Link className="dropdown-item" to="/about">
-                  About Us
+                  <InfoIcon /> About Us
                 </Link>
                 <Link className="dropdown-item" to="/contact">
-                  Contact Us
+                  <ContactPhoneIcon /> Contact Us
                 </Link>
                 <Link className="dropdown-item" to="/shipping">
-                  Shipping service
+                  <NetworkPingIcon /> Shipping service
                 </Link>
 
                 {isAuthenticated ? (
@@ -130,12 +151,12 @@ const Navbar = ({ history }) => {
                     to="/"
                     onClick={logoutHandler}
                   >
-                    Logout
+                    <LogoutIcon /> Logout
                   </Link>
                 ) : (
                   !loading && (
-                    <Link to="/login" className="btn ml-4" id="login_btn">
-                      Login
+                    <Link to="/login" className="dropdown-item text-danger">
+                      <LoginIcon /> Login
                     </Link>
                   )
                 )}
@@ -157,20 +178,29 @@ const Navbar = ({ history }) => {
               </li>
             )}
             {user && user.role === "user" && (
-              <Link className="dropdown-item" to="/orders/me">
-                Orders
-              </Link>
+              <li onClick={() => setisMobile(false)}>
+                <NavLink
+                  to="/orders/me"
+                  className={({ isActive }) =>
+                    isActive ? style.active : style.home
+                  }
+                >
+                  Orders
+                </NavLink>
+              </li>
             )}
-            <li onClick={() => setisMobile(false)}>
-              <NavLink
-                to="/me"
-                className={({ isActive }) =>
-                  isActive ? style.active : style.home
-                }
-              >
-                Profile
-              </NavLink>
-            </li>
+            {user && (
+              <li onClick={() => setisMobile(false)}>
+                <NavLink
+                  to="/me"
+                  className={({ isActive }) =>
+                    isActive ? style.active : style.home
+                  }
+                >
+                  Profile
+                </NavLink>
+              </li>
+            )}
 
             <li onClick={() => setisMobile(false)}>
               <NavLink
@@ -222,7 +252,7 @@ const Navbar = ({ history }) => {
                 <>
                   <li onClick={() => setisMobile(false)}>
                     <NavLink
-                      to="//login"
+                      to="/login"
                       className={({ isActive }) =>
                         isActive ? style.active : style.home
                       }
