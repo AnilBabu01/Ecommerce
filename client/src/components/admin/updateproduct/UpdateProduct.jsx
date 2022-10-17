@@ -21,8 +21,7 @@ const UpdateProduct = () => {
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState(0);
   const [seller, setSeller] = useState("");
-  const [images, setImages] = useState([]);
-
+  const [imgcheck, setimgcheck] = useState(false);
   const [oldImages, setOldImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
@@ -90,6 +89,7 @@ const UpdateProduct = () => {
     dispatch(updateProduct(product._id, formData));
   };
   const setfileinfoform = (filelist) => {
+    setimgcheck(true);
     for (let [name, value] of formData) {
       if (name === "avatar") {
         formData.delete(name);
@@ -221,6 +221,14 @@ const UpdateProduct = () => {
                         const filelist = e.target.files;
                         console.log(filelist);
                         setfileinfoform(filelist);
+
+                        if (!filelist) {
+                          for (var i = 0; i < oldImages.length; i++) {
+                            const img = oldImages[i];
+                            formData.append("avatar", img);
+                            console.log("file is ", img);
+                          }
+                        }
                       }}
                       multiple
                     />
@@ -263,6 +271,7 @@ const UpdateProduct = () => {
                     description &&
                     categories &&
                     stock &&
+                    imgcheck &&
                     seller
                       ? false
                       : true

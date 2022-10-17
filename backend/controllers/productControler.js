@@ -82,19 +82,12 @@ exports.updateProduct = async (req, res, next) => {
   try {
     let product = await Product.findById(req.params.id);
     const files = req.files;
-
+    console.log(files);
     if (!product) {
       return res.status(404).json({
         status: false,
         msg: "not found",
       });
-    }
-    if (product.images) {
-      for (var i = 0; i < product.images.length; i++) {
-        var str = product.images[i].Url.substring(22);
-        fs.unlinkSync(str);
-        console.log("successfully deleted /tmp/hello", str);
-      }
     }
 
     let imagesLinks = [];
@@ -135,10 +128,9 @@ exports.deleteProduct = async (req, res, next) => {
       for (var i = 0; i < product.images.length; i++) {
         var str = product.images[i].Url.substring(22);
         fs.unlinkSync(str);
-        console.log("successfully deleted /tmp/hello", str);
       }
     }
-    await product.remove();
+    await Product.findOneAndRemove(req.params.id);
 
     res.status(201).json({
       status: true,

@@ -82,7 +82,7 @@ function App() {
               <Route path="/password/forgot" element={<ResetPassword />} />
               <Route path="/password/reset/:token" element={<NewPassword />} />
               <Route path="/cart" element={<Cart />} />
-              <Route path="/shipping" element={<ShippingInfo />} />
+              <Route path="/shippinginfo" element={<ShippingInfo />} />
               <Route path="/confirm" element={<Confirmorder />} />
               <Route path="/payment" element={<Payment />} />
               <Route path="/success" element={<PaymentSuccess />} />

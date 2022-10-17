@@ -16,9 +16,8 @@ const NewProduct = () => {
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState(0);
   const [seller, setSeller] = useState("");
-  const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
-
+  const [imgcheck, setimgcheck] = useState(false);
   const categories = [
     "Select Categories",
     "Women",
@@ -65,6 +64,7 @@ const NewProduct = () => {
   };
 
   const setfileinfoform = (filelist) => {
+    setimgcheck(true);
     for (let [name, value] of formData) {
       if (name === "avatar") {
         formData.delete(name);
@@ -223,7 +223,8 @@ const NewProduct = () => {
                     description &&
                     categories &&
                     stock &&
-                    seller
+                    seller &&
+                    imgcheck
                       ? false
                       : true
                   }

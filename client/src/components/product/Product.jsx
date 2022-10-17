@@ -8,7 +8,11 @@ const Product = ({ product }) => {
         style={{ marginBottom: "1rem" }}
       >
         <div className="card p-2 rounded">
-          <img alt="img" className="proimg" src={product.images[0].Url} />
+          <img
+            alt="img"
+            className="proimg"
+            src={product.images[0].Url ? product.images[0].Url : ""}
+          />
 
           <div className="card-body d-flex flex-column">
             <h5 className="card-title">

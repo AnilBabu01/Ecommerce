@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Filter2Icon from "@mui/icons-material/Filter2";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import RocketIcon from "@mui/icons-material/Rocket";
+import InventoryIcon from "@mui/icons-material/Inventory";
 const Sidebar = () => {
   return (
     <div className="sidebar-wrapper myallproductmain" style={{}}>
@@ -57,6 +59,16 @@ const Sidebar = () => {
           <li>
             <Link to="/admin/slider">
               <Filter2Icon /> Slider
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/slider">
+              <RocketIcon /> Shipping Service
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/slider">
+              <InventoryIcon /> Rental Service
             </Link>
           </li>
         </ul>

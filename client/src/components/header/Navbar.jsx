@@ -31,7 +31,7 @@ const Navbar = ({ history }) => {
   const token = localStorage.getItem("token");
 
   console.log("toekn from nav", token);
-  useEffect(() => {}, [isMobile, token]);
+  useEffect(() => {}, [isMobile, token, isAuthenticated]);
   const logoutHandler = () => {
     localStorage.removeItem("token");
     alert.success("you have logout successfully");
@@ -220,16 +220,6 @@ const Navbar = ({ history }) => {
                 }
               >
                 Contact Us
-              </NavLink>
-            </li>
-            <li onClick={() => setisMobile(false)}>
-              <NavLink
-                to="/shipping"
-                className={({ isActive }) =>
-                  isActive ? style.active : style.home
-                }
-              >
-                Shipping service
               </NavLink>
             </li>
 
