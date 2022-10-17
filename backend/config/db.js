@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const url = "";
+
 const connectDatabase = () => {
   mongoose
     .connect(
@@ -8,6 +9,7 @@ const connectDatabase = () => {
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useCreateIndex: true,
       }
     )
     .then((con) => {

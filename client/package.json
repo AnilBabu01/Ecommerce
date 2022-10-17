@@ -67,5 +67,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://backendanil.nepalifykart.com"
+  "proxy": "http://localhost:8080"
 }

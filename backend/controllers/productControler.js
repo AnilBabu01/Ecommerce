@@ -32,8 +32,6 @@ exports.newProduct = async (req, res, next) => {
 //get all product api/product/getallproduct?keyword=apple
 exports.getProducts = async (req, res, next) => {
   try {
-    const productsCount = await Product.countDocuments();
-
     const apiFeatures = new APIFeatures(Product.find(), req.query);
     apiFeatures.search();
     apiFeatures.filter();
@@ -42,7 +40,7 @@ exports.getProducts = async (req, res, next) => {
     setTimeout(() => {
       res.status(201).json({
         status: true,
-        productsCount,
+        productsCount: products.length,
         products,
       });
     }, 1000);
