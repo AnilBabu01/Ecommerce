@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAlert } from "react-alert";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Shipping.css";
 const formData = new FormData();
@@ -8,7 +9,7 @@ const Shipping = () => {
   const [url, seturl] = useState("");
   const [address, setaddress] = useState("");
   const [phone, setphone] = useState("");
-
+  const navigate = useNavigate();
   const alert = useAlert();
 
   const submitHandler = async (e) => {
@@ -34,6 +35,7 @@ const Shipping = () => {
     console.log(data.status);
     if (data.status === true) {
       alert.success("You have successfully aaded Shipping");
+      navigate("/");
     }
   };
 

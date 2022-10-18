@@ -9,6 +9,7 @@ const {
   updaterental,
   getrentall,
   userrental,
+  getsinglerental,
 } = require("../controllers/rentalControler");
 
 router.post(
@@ -21,6 +22,8 @@ router.post(
 router.get("/rental/getAll", getrentall);
 
 router.get("/rental/usergetAll", isAuthenticatedUser, userrental);
+
+router.get("/rental/getsinglerental/:id", getsinglerental);
 
 //admin
 router.post(

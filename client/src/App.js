@@ -51,6 +51,7 @@ import Rental from "./components/rental/Rental";
 import Shippingadmin from "./components/admin/shipping/Shippingadmin";
 import Shippinginfoadmin from "./components/admin/shipping/Shippinginfoadmin";
 import Updateshipping from "./components/admin/shipping/updateshipping";
+import RentalDetails from "./components/rental/RentalDetails";
 const stripe = loadStripe(
   "pk_test_51LopskSGAjDSZQyBVlYz24jYhviKM94BLmSCmiimOAre20S8Ti9RD2CF8BPfAsofbNl1fdmQK2UxyFXSPvzS0Tmm00PM0lilLG"
 );
@@ -101,7 +102,8 @@ function App() {
               <Route path="/category/accessories" element={<Accessories />} />
               <Route path="/category/eletronic" element={<Electronics />} />
               <Route path="/category/mobile" element={<Mobile />} />
-              <Route path="/category/jewellery" element={<Jewellery />} />
+              <Route path="/rentaldetails" element={<Jewellery />} />
+              <Route path="/category/jewellery" element={<RentalDetails />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/admin/products" element={<ProductsList />} />
               <Route path="/admin/product" element={<NewProduct />} />

@@ -9,13 +9,16 @@ exports.addrental = async (req, res, next) => {
     // const { name, url, address, phone } = req.body;
     // const urll = req.protocol + "://" + req.get("host");
 
-    const { address, phone, status, image, productname } = req.body;
+    const { address, phone, status, image, productname, price, desc } =
+      req.body;
     const rental = await Rental.create({
       productname: productname,
       phone: phone,
       address: address,
       image: image,
       status: status,
+      price: price,
+      desc: desc,
       user: req.user.id,
     });
     console.log(req.body);
@@ -24,6 +27,18 @@ exports.addrental = async (req, res, next) => {
       msg: "your product addedd successfully",
       rental: rental,
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.getsinglerental = async (req, res) => {
+  try {
+    const rental = await Rental.findById(req.params.id);
+    if (!rental) {
+      return res.status(404).json({ status: false, msg: "not found" });
+    }
+    res.status(200).json({ status: true, rental: rental });
   } catch (error) {
     console.log(error);
   }

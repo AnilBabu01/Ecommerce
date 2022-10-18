@@ -23,6 +23,14 @@ const rentalmodel = new Schema({
     type: String,
     required: true,
   },
+  price: {
+    type: String,
+    required: true,
+  },
+  desc: {
+    type: String,
+    required: true,
+  },
   status: {
     type: String,
     default: "Avaible",
