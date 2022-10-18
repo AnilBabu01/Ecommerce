@@ -9,18 +9,21 @@ import Metadata from "../../metadata/Metadata";
 const ShippingDetails = () => {
   const { id } = useParams();
   const [status, setStatus] = useState("");
-  const [shipping, setshipping] = useState([]);
+  const alert = useAlert();
   const updateOrderHandler = async () => {
-    axios.defaults.headers.get[
+    axios.defaults.headers.put[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
 
-    const data = await axios.get(
-      `${process.env.REACT_APP_URL}/api/shiping/getinfo/${id}`
+    const data = await axios.put(
+      `${process.env.REACT_APP_URL}/api/shiping/update/${id}`,
+      {
+        status: status,
+      }
     );
-
-    console.log("shhipmin form details", data.data.shipping);
-    setshipping(data.data.shipping);
+    if (data.data.status === true) {
+      alert.success("Shipping Updated successfully");
+    }
   };
 
   return (
@@ -49,7 +52,7 @@ const ShippingDetails = () => {
 
           <button
             className="btn btn-primary btn-block"
-            onClick={() => updateOrderHandler(shipping._id)}
+            onClick={() => updateOrderHandler(id)}
           >
             Update Status
           </button>

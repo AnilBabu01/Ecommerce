@@ -88,7 +88,11 @@ exports.deleteshipping = async (req, res) => {
     if (!shipping) {
       return res.status(404).json({ status: false, msg: "Product not fund" });
     }
-
+    if (shipping) {
+      var str = shipping.image.substring(22);
+      fs.unlinkSync(str);
+      console.log("successfully deleted /tmp/hello", str);
+    }
     await Shipping.findOneAndRemove(req.params.id);
 
     res.status(201).json({

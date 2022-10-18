@@ -5,10 +5,10 @@ import axios from "axios";
 import MetaData from "../../metadata/Metadata";
 import Loader from "../../loader/Loader";
 import Sidebar from "../sidebar/Sidebar";
-
+import { useAlert } from "react-alert";
 const Shippingadmin = () => {
   const [shippings, setshippings] = useState([]);
-
+  const alert = useAlert();
   const getallshipping = async () => {
     axios.defaults.headers.get[
       "Authorization"
@@ -18,7 +18,6 @@ const Shippingadmin = () => {
       `${process.env.REACT_APP_URL}/api/shiping/get`
     );
 
-    console.log("all data from shiipin", data.data.shippings);
     setshippings(data.data.shippings);
   };
 
@@ -96,10 +95,10 @@ const Shippingadmin = () => {
     ] = `Bearer ${localStorage.getItem("token")}`;
 
     const data = await axios.delete(
-      `${process.env.REACT_APP_URL}/api/admin/product/deleteProduct/${id}`
+      `${process.env.REACT_APP_URL}/api/shiping/delete/${id}`
     );
+    getallshipping();
 
-    console.log("delete is", data.data.status);
     if (data.data.status === true) {
       alert.success("Product deleted successfully");
     }

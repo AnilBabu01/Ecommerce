@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useAlert } from "react-alert";
 import axios from "axios";
 import "./Shipping.css";
 const formData = new FormData();
@@ -7,7 +8,8 @@ const Shipping = () => {
   const [url, seturl] = useState("");
   const [address, setaddress] = useState("");
   const [phone, setphone] = useState("");
-  const [image, setimage] = useState("");
+
+  const alert = useAlert();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -24,13 +26,13 @@ const Shipping = () => {
       },
     };
 
-    const data = await axios.post(
+    const { data } = await axios.post(
       `${process.env.REACT_APP_URL}/api/shiping/new`,
       formData,
       config
     );
-
-    if (data.data.success === true) {
+    console.log(data.status);
+    if (data.status === true) {
       alert.success("You have successfully aaded Shipping");
     }
   };
