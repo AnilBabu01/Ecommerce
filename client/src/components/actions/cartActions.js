@@ -44,10 +44,10 @@ export const addItemToCartrental =
       type: ADD_TO_CART,
       payload: {
         product: data.product._id,
-        name: data.product.name,
+        name: data.product.productname,
         price: data.product.price,
-        image: data.product.images[0].Url,
-        stock: data.product.stock,
+        image: data.product.image,
+
         quantity,
       },
     });

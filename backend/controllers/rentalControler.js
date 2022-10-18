@@ -4,10 +4,10 @@ const fs = require("fs");
 const { json } = require("body-parser");
 exports.addrental = async (req, res, next) => {
   try {
-    // const files = req.files;
-    // console.log(files);
-    // const { name, url, address, phone } = req.body;
-    // const urll = req.protocol + "://" + req.get("host");
+    const files = req.files;
+    console.log(files);
+
+    const urll = req.protocol + "://" + req.get("host");
 
     const { address, phone, status, image, productname, price, desc } =
       req.body;
@@ -15,7 +15,7 @@ exports.addrental = async (req, res, next) => {
       productname: productname,
       phone: phone,
       address: address,
-      image: image,
+      image: urll + "/images/" + req.files[0].filename,
       status: status,
       price: price,
       desc: desc,
@@ -38,7 +38,7 @@ exports.getsinglerental = async (req, res) => {
     if (!rental) {
       return res.status(404).json({ status: false, msg: "not found" });
     }
-    res.status(200).json({ status: true, rental: rental });
+    res.status(200).json({ status: true, product: rental });
   } catch (error) {
     console.log(error);
   }

@@ -24,7 +24,7 @@ const Rentalproduct = ({ product }) => {
             <p className="card-text">₹{product && product.price}</p>
             <p className="card-text">status : {product && product.status}</p>
             <Link
-              to={`/product/${product._id}`}
+              to={`/rentaldetails/${product._id}`}
               id="view_btn"
               className="btn btn-block"
             >

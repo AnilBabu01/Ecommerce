@@ -14,7 +14,7 @@ const {
 
 router.post(
   "/rental/new",
-  upload.array("silder"),
+  upload.array("image"),
   isAuthenticatedUser,
   addrental
 );
