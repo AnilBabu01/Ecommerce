@@ -29,11 +29,13 @@ const user = require("./routes/auth");
 const order = require("./routes/order");
 const payment = require("./routes/payment");
 const slider = require("./routes/slider");
+const shipping = require("./routes/shipping");
 app.use("/api/auth", user);
 app.use("/api", product);
 app.use("/api", order);
 app.use("/api", payment);
 app.use("/api", slider);
+app.use("/api", shipping);
 
 app.get("/api", async (req, res) => {
   try {
