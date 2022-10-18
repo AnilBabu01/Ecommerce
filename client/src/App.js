@@ -48,6 +48,9 @@ import AboutUs from "./components/aboutus/AboutUs";
 import ContactUs from "./components/contact/ContactUs";
 import Shipping from "./components/shipping/Shipping";
 import Rental from "./components/rental/Rental";
+import Shippingadmin from "./components/admin/shipping/Shippingadmin";
+import Shippinginfoadmin from "./components/admin/shipping/Shippinginfoadmin";
+import Updateshipping from "./components/admin/shipping/updateshipping";
 const stripe = loadStripe(
   "pk_test_51LopskSGAjDSZQyBVlYz24jYhviKM94BLmSCmiimOAre20S8Ti9RD2CF8BPfAsofbNl1fdmQK2UxyFXSPvzS0Tmm00PM0lilLG"
 );
@@ -109,6 +112,15 @@ function App() {
               <Route path="/admin/user/:id" element={<UpdateUser />} />
               <Route path="/admin/reviews" element={<ProductReviews />} />
               <Route path="/admin/slider" element={<Slider />} />
+              <Route path="/admin/shipping" element={<Shippingadmin />} />
+              <Route
+                path="/admin/shippingupdate/:id"
+                element={<Updateshipping />}
+              />
+              <Route
+                path="/admin/shippingdetails/:id"
+                element={<Shippinginfoadmin />}
+              />
             </Routes>
           </div>
           <Footer />

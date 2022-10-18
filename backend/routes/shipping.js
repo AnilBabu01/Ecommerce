@@ -9,6 +9,7 @@ const {
   deleteshipping,
   getshipping,
   updateshipping,
+  getshipingbyid,
 } = require("../controllers/shippingControler");
 
 router.post(
@@ -27,6 +28,12 @@ router.delete(
   deleteshipping
 );
 
+router.get(
+  "/shiping/getinfo/:id",
+  isAuthenticatedUser,
+  authorizeRoles("admin"),
+  getshipingbyid
+);
 router.put(
   "/shiping/update/:id",
   isAuthenticatedUser,

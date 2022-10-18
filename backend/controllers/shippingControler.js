@@ -49,6 +49,14 @@ exports.getshipping = async (req, res) => {
   }
 };
 
+exports.getshipingbyid = async (req, res) => {
+  const shipping = await Shipping.findById(req.params.id);
+  if (!shipping) {
+    res.status(404).json({ status: false, msg: "not found" });
+  }
+  res.status(200).json({ status: true, shipping: shipping });
+};
+
 exports.updateshipping = async (req, res) => {
   try {
     const { status } = req.body;
