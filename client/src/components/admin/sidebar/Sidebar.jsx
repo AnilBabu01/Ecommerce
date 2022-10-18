@@ -67,7 +67,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/admin/slider">
+            <Link to="/admin/rentaladmin">
               <InventoryIcon /> Rental Service
             </Link>
           </li>

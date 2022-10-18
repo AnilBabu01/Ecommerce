@@ -54,6 +54,7 @@ import Updateshipping from "./components/admin/shipping/updateshipping";
 import RentalDetails from "./components/rental/RentalDetails";
 import Addrental from "./components/rental/Addrental";
 import Deleterental from "./components/rental/Deleterental";
+import Rentaladmin from "./components/admin/rental/Rentaladmin";
 const stripe = loadStripe(
   "pk_test_51LopskSGAjDSZQyBVlYz24jYhviKM94BLmSCmiimOAre20S8Ti9RD2CF8BPfAsofbNl1fdmQK2UxyFXSPvzS0Tmm00PM0lilLG"
 );
@@ -119,6 +120,7 @@ function App() {
               <Route path="/admin/reviews" element={<ProductReviews />} />
               <Route path="/admin/slider" element={<Slider />} />
               <Route path="/admin/shipping" element={<Shippingadmin />} />
+              <Route path="/admin/rentaladmin" element={<Rentaladmin />} />
               <Route
                 path="/admin/shippingupdate/:id"
                 element={<Updateshipping />}
