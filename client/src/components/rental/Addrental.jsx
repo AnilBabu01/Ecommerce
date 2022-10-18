@@ -22,14 +22,14 @@ const Addrental = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    axios.defaults.headers.get[
+    axios.defaults.headers.post[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
 
     formData.set("productname", name);
     formData.set("price", price);
     formData.set("desc", description);
-    formData.set("addrress", addrress);
+    formData.set("address", addrress);
     formData.set("phone", phone);
 
     const { data } = await axios.post(
@@ -37,7 +37,10 @@ const Addrental = () => {
       formData
     );
 
-    console.log("from add rental", data);
+    console.log("from add rental", data.status);
+    if (data.status === true) {
+      alert.success(data.msg);
+    }
   };
 
   const setfileinfoform = (filelist) => {
@@ -57,15 +60,15 @@ const Addrental = () => {
   return (
     <Fragment>
       <MetaData title={"New Product"} />
-      <div className="row" style={{ marginTop: "2rem" }}>
+      <div className="mainaddrental">
         <div className="col-12 col-md-10">
           <Fragment>
             <div className="wrapper my-5">
               <form className="shadow-lg" onSubmit={submitHandler}>
-                <h1 className="mb-4">New Product</h1>
+                <h1 className="mb-4 centerrental">New Rental Product</h1>
 
                 <div className="form-group">
-                  <label htmlFor="name_field">Name</label>
+                  <label htmlFor="name_field">Enter Product Name</label>
                   <input
                     type="text"
                     id="name_field"

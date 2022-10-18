@@ -18,3 +18,14 @@
 .adddbutton:focus{
     outline: none;
 }
+
+.mainaddrental{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerrental{
+    text-align: center;
+}

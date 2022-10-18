@@ -1,6 +1,23 @@
 import React from "react";
+import axios from "axios";
+import { useAlert } from "react-alert";
 import { Link } from "react-router-dom";
-const Rentalproduct = ({ product }) => {
+const Rentalproduct = ({ product, deleted, getproduct }) => {
+  const alert = useAlert();
+  const deleterental = async (id) => {
+    axios.defaults.headers.delete[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+
+    const data = await axios.delete(
+      `${process.env.REACT_APP_URL}/api/rental/userdelete/${id}`
+    );
+    if (data.data.status === true) {
+      getproduct();
+      alert.success(data.data.msg);
+    }
+  };
+
   return (
     <>
       <div
@@ -23,13 +40,29 @@ const Rentalproduct = ({ product }) => {
 
             <p className="card-text">₹{product && product.price}</p>
             <p className="card-text">status : {product && product.status}</p>
-            <Link
-              to={`/rentaldetails/${product._id}`}
-              id="view_btn"
-              className="btn btn-block"
-            >
-              View Details
-            </Link>
+            {deleted ? (
+              <>
+                {" "}
+                <button
+                  onClick={() => deleterental(product._id)}
+                  id="view_btn"
+                  className="btn btn-block"
+                >
+                  Delete
+                </button>
+              </>
+            ) : (
+              <>
+                {" "}
+                <Link
+                  to={`/rentaldetails/${product._id}`}
+                  id="view_btn"
+                  className="btn btn-block"
+                >
+                  View Details
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

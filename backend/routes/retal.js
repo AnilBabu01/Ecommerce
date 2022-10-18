@@ -40,4 +40,11 @@ router.delete(
   deleterental
 );
 
+router.delete(
+  "/rental/userdelete/:id",
+  isAuthenticatedUser,
+
+  deleterental
+);
+
 module.exports = router;
