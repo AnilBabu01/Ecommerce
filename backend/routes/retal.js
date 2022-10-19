@@ -26,7 +26,7 @@ router.get("/rental/usergetAll", isAuthenticatedUser, userrental);
 router.get("/rental/getsinglerental/:id", getsinglerental);
 
 //admin
-router.post(
+router.put(
   "/rental/update/:id",
   isAuthenticatedUser,
   authorizeRoles("admin"),

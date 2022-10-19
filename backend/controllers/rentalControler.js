@@ -94,7 +94,7 @@ exports.updaterental = async (req, res) => {
     const rental = await Rental.findById(req.params.id);
     if (rental.status === "sold") {
       return res.status(400).json({
-        success: true,
+        status: false,
         msg: "this is sold please check another product",
       });
     }
