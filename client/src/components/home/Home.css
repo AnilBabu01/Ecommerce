@@ -1,8 +1,22 @@
-.latestxt{
-    margin-top: 0%!important;
-   
+.latestxt {
+  margin-top: 0% !important;
 }
 
-.proimg{
-    width: "240px";height: "150px";
+.proimg {
+  width: 240px;
+  height: 150px;
+}
+
+@media screen and (max-width: 912px) {
+  .proimg {
+    width:310px;
+    height: 220px;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .proimg {
+    width: 310px;
+    height: 150px;
+  }
 }

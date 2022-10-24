@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Slideruse from "../slider/Silderuse";
 import { useParams } from "react-router-dom";
+import Loader from "../loader/Loader";
 import axios from "axios";
 import Subhome from "./Subgome";
 import Product from "../product/Product";
-const Home = ({ match }) => {
+const Home = () => {
   const [products, setproducts] = useState([]);
   const { keyword } = useParams();
   const getproduct = async () => {
@@ -28,27 +29,33 @@ const Home = ({ match }) => {
     <>
       {keyword ? (
         <>
-          <div>
-            <h1
-              className="latesttext "
-              id="products_heading"
-              style={{ marginTop: "6rem" }}
-            >
-              Your Searched Item from {keyword}
-            </h1>
-          </div>
-          <section id="products" className="container mt-5">
-            <div className="row">
-              {products &&
-                products.slice(0, 4).map((product) => {
-                  return (
-                    <>
-                      <Product key={product._id} product={product} />
-                    </>
-                  );
-                })}
-            </div>
-          </section>
+          {!products ? (
+            <Loader />
+          ) : (
+            <>
+              <div>
+                <h1
+                  className="centertext"
+                  id="products_heading"
+                  style={{ marginTop: "6rem" }}
+                >
+                  Your Searched Item from {keyword}
+                </h1>
+              </div>
+              <section id="products" className="container mt-5">
+                <div className="row">
+                  {products &&
+                    products.slice(0, 4).map((product) => {
+                      return (
+                        <>
+                          <Product key={product._id} product={product} />
+                        </>
+                      );
+                    })}
+                </div>
+              </section>
+            </>
+          )}
         </>
       ) : (
         <>

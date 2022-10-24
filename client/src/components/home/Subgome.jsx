@@ -15,10 +15,6 @@ const Subhome = ({ match }) => {
   const alert = useAlert();
   const [onstinegetuserinfo, setonstinegetuserinfo] = useState(true);
 
-  const [price, setPrice] = useState([1, 1000]);
-  const [category, setCategory] = useState("");
-  const [rating, setRating] = useState(0);
-
   const { keyword } = useParams();
 
   const { loading, products, error } = useSelector((state) => state.products);
@@ -32,8 +28,11 @@ const Subhome = ({ match }) => {
   }
 
   useEffect(() => {
-    dispatch(getProducts(keyword, price, category, rating));
-  }, [dispatch, error, alert, keyword, price, category, rating]);
+    dispatch(getProducts(keyword));
+    if (error) {
+      alert.error(error);
+    }
+  }, [dispatch, error, alert, keyword]);
 
   return (
     <>
