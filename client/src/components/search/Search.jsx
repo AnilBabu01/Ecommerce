@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Search.css";
 const Search = () => {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
@@ -12,16 +13,16 @@ const Search = () => {
   };
   return (
     <>
-      <form onSubmit={searchHandler} className="mobileswrchview">
-        <div className="input-group">
+      <form onSubmit={searchHandler} className="mobileform">
+        <div className="input-group mobileinputgruop">
           <input
             type="text"
             id="search_field"
-            className="form-control inmobile"
+            className="form-control  mobileform"
             placeholder="Enter Category"
             onChange={(e) => setKeyword(e.target.value)}
           />
-          <div className="input-group-append">
+          <div className="input-group-append mobilesearchbtn">
             <button id="search_btn" className="btn">
               <i className="fa fa-search" aria-hidden="true"></i>
             </button>

@@ -20,6 +20,7 @@ import Person4Icon from "@mui/icons-material/Person4";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import GridOnIcon from "@mui/icons-material/GridOn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import "./Header.css";
 const Navbar = ({ history }) => {
   const [isMobile, setisMobile] = useState(false);
   const location = useLocation();
@@ -41,7 +42,7 @@ const Navbar = ({ history }) => {
   return (
     <>
       <nav className={style.navbar}>
-        <Link to="/">
+        <Link to="/" onClick={() => setisMobile(false)}>
           <img
             style={{ width: "200px", height: "50px" }}
             src={logo}
