@@ -27,7 +27,7 @@ const Accessories = () => {
     <div>
       <ComNavlink />
       <div>
-        <h1 className="latesttext " id="products_heading">
+        <h1 className="centertext" id="products_heading">
           Accessories
         </h1>
       </div>

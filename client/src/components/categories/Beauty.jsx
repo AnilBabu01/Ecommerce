@@ -27,7 +27,7 @@ const Beauty = () => {
     <div>
       <ComNavlink />
       <div>
-        <h1 className="latesttext " id="products_heading">
+        <h1 className="centertext" id="products_heading">
           Beauty
         </h1>
       </div>
@@ -44,7 +44,6 @@ const Beauty = () => {
             })}
         </div>
       </section>
-      <Slideruse />
     </div>
   );
 };

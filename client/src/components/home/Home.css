@@ -6,11 +6,17 @@
   width: 240px;
   height: 150px;
 }
-
+.centertext {
+  text-align: center;
+}
 @media screen and (max-width: 912px) {
   .proimg {
-    width:310px;
+    width: 310px;
     height: 220px;
+  }
+
+  .centertext {
+     font-size: 20px;
   }
 }
 
@@ -19,4 +25,5 @@
     width: 310px;
     height: 150px;
   }
+ 
 }

@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import MetaData from "../../metadata/Metadata";
-import Loader from "../../loader/Loader";
 import Sidebar from "../sidebar/Sidebar";
 import { getAdminProducts } from "../../actions/productActions";
 import { allOrders } from "../../actions/orderActions";
@@ -12,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
-  const { loading, error, orders } = useSelector((state) => state.allOrders);
+  const { orders } = useSelector((state) => state.allOrders);
   const { users } = useSelector((state) => state.allUsers);
   const [shippings, setshippings] = useState([]);
   const [rental, setrental] = useState([]);

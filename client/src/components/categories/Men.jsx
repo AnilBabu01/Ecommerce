@@ -27,7 +27,7 @@ const Men = () => {
     <div>
       <ComNavlink />
       <div>
-        <h1 className="latesttext " id="products_heading">
+        <h1 className="centertext" id="products_heading">
           Men
         </h1>
       </div>
@@ -44,7 +44,6 @@ const Men = () => {
             })}
         </div>
       </section>
-      <Slideruse />
     </div>
   );
 };

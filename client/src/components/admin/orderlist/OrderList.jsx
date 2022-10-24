@@ -1,11 +1,9 @@
 import React, { Fragment, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { MDBDataTable } from "mdbreact";
-
 import MetaData from "../../metadata/Metadata";
 import Loader from "../../loader/Loader";
 import Sidebar from "../sidebar/Sidebar";
-
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,7 +13,7 @@ import {
 } from "../../actions/orderActions";
 import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
 
-const OrdersList = ({ history }) => {
+const OrdersList = () => {
   const navigate = useNavigate();
   const alert = useAlert();
   const dispatch = useDispatch();
@@ -36,7 +34,7 @@ const OrdersList = ({ history }) => {
       navigate("/admin/orders");
       dispatch({ type: DELETE_ORDER_RESET });
     }
-  }, [dispatch, alert, error, isDeleted, history]);
+  }, [dispatch, alert, error, isDeleted]);
 
   const deleteOrderHandler = (id) => {
     dispatch(deleteOrder(id));

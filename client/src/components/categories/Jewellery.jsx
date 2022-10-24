@@ -27,7 +27,7 @@ const Jewellery = () => {
     <div>
       <ComNavlink />
       <div>
-        <h1 className="latesttext " id="products_heading">
+        <h1 className="centertext" id="products_heading">
           Jewellery
         </h1>
       </div>
@@ -44,7 +44,6 @@ const Jewellery = () => {
             })}
         </div>
       </section>
-      <Slideruse />
     </div>
   );
 };

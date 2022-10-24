@@ -2,7 +2,6 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MetaData from "../../metadata/Metadata";
 import Sidebar from "../sidebar/Sidebar";
-
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { newProduct, clearErrors } from "../../actions/productActions";
@@ -33,7 +32,7 @@ const NewProduct = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
 
-  const { loading, error, success } = useSelector((state) => state.newProduct);
+  const { error, success } = useSelector((state) => state.newProduct);
 
   console.log(success);
   useEffect(() => {

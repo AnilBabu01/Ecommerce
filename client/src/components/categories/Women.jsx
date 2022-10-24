@@ -30,7 +30,7 @@ const Women = () => {
     <div>
       <ComNavlink />
       <div>
-        <h1 className="latesttext " id="products_heading">
+        <h1 className="centertext" id="products_heading">
           Women
         </h1>
       </div>
@@ -47,7 +47,6 @@ const Women = () => {
             })}
         </div>
       </section>
-      <Slideruse />
     </div>
   );
 };
