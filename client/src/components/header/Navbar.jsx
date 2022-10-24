@@ -122,11 +122,11 @@ const Navbar = ({ history }) => {
                 aria-labelledby="dropDownMenuButton"
               >
                 {user && (
-                  <p className="dropdown-item">
+                  <Link to="/me" className="dropdown-item">
                     {" "}
                     <AccountCircleIcon />
                     {user && user.name}
-                  </p>
+                  </Link>
                 )}
 
                 {user && user.role === "admin" && (

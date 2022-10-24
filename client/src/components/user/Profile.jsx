@@ -18,11 +18,9 @@ const Profile = () => {
       ) : (
         <>
           <Metadata title={"Profile"} />
-          <h2 className="mt-5 ml-5" style={{ marginTop: "8rem" }}>
-            My Profile
-          </h2>
-          <div className="row justify-content-around mt-5 user-info">
-            <div className="col-12 col-md-5">
+          <h2 className="profileheading">My Profile</h2>
+          <div className="row justify-content-around mt-5 ">
+            <div className="col-12 col-md-5 user-info">
               <h4>Full Name</h4>
               <p>{user.name}</p>
 

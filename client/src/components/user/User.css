@@ -1,10 +1,14 @@
-.profilemobile{
-    margin-top: 6rem!important;
+.profileheading{
+    margin-top: 8rem;
+    text-align: center;
+    margin-bottom: -4rem;
 }
+
 
 @media screen and (max-width:780px)
 {
-    .profilemobile{
-        margin-top: 12.5rem!important;
+   
+    .user-info{
+        text-align: center;
     }
 }
