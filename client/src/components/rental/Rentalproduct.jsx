@@ -21,7 +21,7 @@ const Rentalproduct = ({ product, deleted, getproduct }) => {
   return (
     <>
       <div
-        className="col-sm-12 col-md-6 col-lg-2"
+        className="col-sm-12 col-md-6 col-lg-3"
         style={{ marginBottom: "1rem" }}
       >
         <div className="card p-2 rounded">

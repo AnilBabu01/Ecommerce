@@ -33,7 +33,7 @@ const Rental = () => {
           Delete Rental
         </button>
       </div>
-      <h1 className="latesttext " id="products_heading">
+      <h1 className="centertext" id="products_heading">
         Rental Products
       </h1>
       <section id="products" className="container mt-5">

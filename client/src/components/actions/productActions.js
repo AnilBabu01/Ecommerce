@@ -51,7 +51,7 @@ export const getProducts =
       ] = `Bearer ${localStorage.getItem("token")}`;
       dispatch({ type: ALL_PRODUCTS_REQUEST });
 
-      let link = `${process.env.REACT_APP_URL}/api/product/getAllProduct?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}&ratings[gte]=${rating}`;
+      let link = `${process.env.REACT_APP_URL}/api/product/getAllProduct`;
       if (category) {
         link = `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=${category}`;
       }
