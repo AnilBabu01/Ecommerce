@@ -35,7 +35,13 @@ const Profile = () => {
                   My Orders
                 </Link>
               )}
-
+              <Link
+                to="/me/update"
+                id="edit_profile"
+                className="btn btn-primary btn-block my-3"
+              >
+                Edit Profile
+              </Link>
               <Link
                 to="/password/update"
                 className="btn btn-primary btn-block mt-3"

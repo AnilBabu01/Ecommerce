@@ -2,11 +2,9 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MetaData from "../metadata/Metadata";
 import CheckoutSteps from "./CheckoutSteps";
-
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder, clearErrors } from "../actions/orderActions";
-import { loadStripe } from "@stripe/stripe-js";
 import {
   useStripe,
   useElements,

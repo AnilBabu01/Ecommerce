@@ -3,7 +3,6 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
-import Loader from "../loader/Loader";
 import Metadata from "../metadata/Metadata";
 import { addItemToCartrental } from "../actions/cartActions";
 

@@ -11,10 +11,7 @@ const UpdateProfile = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [avatarPreview, setAvatarPreview] = useState(
-    "/images/default_avatar.jpg"
-  );
+
   const alert = useAlert();
   const dispatch = useDispatch();
 
@@ -25,7 +22,6 @@ const UpdateProfile = () => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
-      setAvatarPreview(user.avatar);
     }
     if (error) {
       alert.error(error);
@@ -48,14 +44,10 @@ const UpdateProfile = () => {
     const formData = new FormData();
     formData.set("name", name);
     formData.set("email", email);
-    formData.set("avatar", avatar, avatar.name);
 
     dispatch(updateProfile(formData));
   };
-  const onChange = (e) => {
-    setAvatar(e.target.files[0]);
-    setAvatarPreview(URL.createObjectURL(e.target.files[0]));
-  };
+
   return (
     <Fragment>
       <MetaData title={"Update Profile"} />
@@ -91,34 +83,6 @@ const UpdateProfile = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="avatar_upload">Avatar</label>
-              <div className="d-flex align-items-center">
-                <div>
-                  <figure className="avatar mr-3 item-rtl">
-                    <img
-                      src={avatarPreview}
-                      className="rounded-circle"
-                      alt="Avatar Preview"
-                    />
-                  </figure>
-                </div>
-                <div className="custom-file">
-                  <input
-                    type="file"
-                    name="avatar"
-                    className="custom-file-input"
-                    id="customFile"
-                    accept="image/*"
-                    onChange={onChange}
-                  />
-                  <label className="custom-file-label" htmlFor="customFile">
-                    Choose Avatar
-                  </label>
-                </div>
-              </div>
             </div>
 
             <button

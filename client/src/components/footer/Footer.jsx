@@ -1,7 +1,6 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import CallMadeIcon from "@mui/icons-material/CallMade";
 import { Link } from "react-router-dom";
@@ -61,7 +60,6 @@ const Footer = () => {
               <Link to="/register">Register</Link>
               <Link to="/login">Login</Link>
               <Link to="/contact">Contact Us</Link>
-              <Link to="/shippingt">Shipping Service</Link>
             </div>
           </div>
           <div className="phonecon">
@@ -95,10 +93,7 @@ const Footer = () => {
             </Typography>
           </div>
           <div>
-            <Typography>
-              Made <img src="./images/dil.svg" alt="dil" className="dilimg" />{" "}
-              by Nepalify-Kart Team
-            </Typography>
+            <Typography>Made by Nepalify-Kart Team</Typography>
           </div>
         </div>
         <div className="hrdiv">

@@ -2,7 +2,7 @@ const Order = require("../models/order");
 const Product = require("../models/product");
 
 // Create a new order   =>  /api/order/new
-exports.newOrder = async (req, res, next) => {
+exports.newOrder = async (req, res) => {
   const {
     orderItems,
     shippingInfo,
@@ -31,79 +31,99 @@ exports.newOrder = async (req, res, next) => {
 };
 // Get single order   =>   /api/order/:id
 exports.getSingleOrder = async (req, res, next) => {
-  //user is ref in populate fun and name . email are field
-  const order = await Order.findById(req.params.id).populate(
-    "user",
-    "name email"
-  );
+  try {
+    //user is ref in populate fun and name . email are field
+    const order = await Order.findById(req.params.id).populate(
+      "user",
+      "name email"
+    );
 
-  if (!order) {
-    return res.status(404).json({
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        msg: "No Order found with this ID",
+      });
+    }
+
+    res.status(200).json({
       success: true,
-      msg: "No Order found with this ID",
       order,
     });
+  } catch (error) {
+    console.log(error);
   }
-
-  res.status(200).json({
-    success: true,
-    order,
-  });
 };
 
 // Get logged in user orders   =>   /api/orders/me
 exports.myOrders = async (req, res, next) => {
-  const orders = await Order.find({ user: req.user.id });
+  try {
+    const orders = await Order.find({ user: req.user.id });
+    if (!orders) {
+      return res.status(404).json({
+        success: false,
+        msg: "No Order found with this ID",
+      });
+    }
 
-  res.status(200).json({
-    success: true,
-    count: orders.length,
-    orders,
-  });
+    res.status(200).json({
+      success: true,
+      count: orders.length,
+      orders,
+    });
+  } catch (error) {}
 };
 
 // Get all orders - ADMIN  =>   /api/admin/orders/
 exports.allOrders = async (req, res, next) => {
-  const orders = await Order.find();
+  try {
+    const orders = await Order.find();
 
-  let totalAmount = 0;
+    let totalAmount = 0;
 
-  orders.forEach((order) => {
-    totalAmount += order.totalPrice;
-  });
+    orders.forEach((order) => {
+      totalAmount += order.totalPrice;
+    });
 
-  res.status(200).json({
-    success: true,
-    totalAmount,
-    count: orders.length,
-    orders,
-  });
+    res.status(200).json({
+      success: true,
+      totalAmount,
+      count: orders.length,
+      orders,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // Update / Process order - ADMIN  =>   /api/admin/order/:id
 exports.updateOrder = async (req, res, next) => {
-  const order = await Order.findById(req.params.id);
+  try {
+    const order = await Order.findById(req.params.id);
 
-  if (order.orderStatus === "Delivered") {
-    return res.status(400).json({
-      success: true,
-      msg: "You have already delivered this order",
+    if (order.orderStatus === "Delivered") {
+      return res.status(400).json({
+        success: true,
+        msg: "You have already delivered this order",
+      });
+    }
+
+    order.orderItems.forEach(async (item) => {
+      await updateStock(item.product, item.quantity);
     });
+
+    console.log("orderstate", req.body.orderStatus);
+    (order.orderStatus = req.body.orderStatus),
+      (order.deliveredAt = Date.now());
+
+    await order.save();
+
+    res.status(200).json({
+      success: true,
+      order,
+    });
+  } catch (error) {
+    console.log(error);
   }
-
-  order.orderItems.forEach(async (item) => {
-    await updateStock(item.product, item.quantity);
-  });
-
-  console.log("orderstate", req.body.orderStatus);
-  (order.orderStatus = req.body.orderStatus), (order.deliveredAt = Date.now());
-
-  await order.save();
-
-  res.status(200).json({
-    success: true,
-    order,
-  });
 };
 
 async function updateStock(id, quantity) {
@@ -116,19 +136,23 @@ async function updateStock(id, quantity) {
 
 // Delete order   =>   /api/admin/order/:id
 exports.deleteOrder = async (req, res, next) => {
-  const order = await Order.findById(req.params.id);
+  try {
+    const order = await Order.findById(req.params.id);
 
-  if (!order) {
-    return res.status(404).json({
+    if (!order) {
+      return res.status(404).json({
+        success: true,
+        msg: "No Order found with this ID",
+      });
+    }
+
+    await Order.findOneAndRemove(req.params.id);
+
+    res.status(200).json({
       success: true,
-      msg: "No Order found with this ID",
+      msg: "Order Deleted Successfully",
     });
+  } catch (error) {
+    console.log(error);
   }
-
-  await Order.findOneAndRemove(req.params.id);
-
-  res.status(200).json({
-    success: true,
-    msg: "Order Deleted Successfully",
-  });
 };

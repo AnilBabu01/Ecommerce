@@ -34,7 +34,6 @@ exports.getProducts = async (req, res, next) => {
   try {
     const apiFeatures = new APIFeatures(Product.find(), req.query);
     apiFeatures.search();
-    apiFeatures.filter();
 
     let products = await apiFeatures.query;
     setTimeout(() => {
@@ -68,12 +67,16 @@ exports.getSingleProduct = async (req, res, next) => {
 
 // Get all products (Admin)  =>   /api/v1/admin/products
 exports.getAdminProducts = async (req, res, next) => {
-  const products = await Product.find();
+  try {
+    const products = await Product.find();
 
-  res.status(200).json({
-    success: true,
-    products,
-  });
+    res.status(200).json({
+      success: true,
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //update product api/product/update/:id
@@ -143,43 +146,47 @@ exports.deleteProduct = async (req, res, next) => {
 
 // Create new review   =>   /api/review
 exports.createProductReview = async (req, res, next) => {
-  const { rating, comment, productId } = req.body;
+  try {
+    const { rating, comment, productId } = req.body;
 
-  const review = {
-    user: req.user._id,
-    name: req.user.name,
-    rating: Number(rating),
-    comment,
-  };
+    const review = {
+      user: req.user._id,
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+    };
 
-  const product = await Product.findById(productId);
+    const product = await Product.findById(productId);
 
-  const isReviewed = product.reviews.find(
-    (r) => r.user.toString() === req.user._id.toString()
-  );
+    const isReviewed = product.reviews.find(
+      (r) => r.user.toString() === req.user._id.toString()
+    );
 
-  if (isReviewed) {
-    product.reviews.forEach((review) => {
-      if (review.user.toString() === req.user._id.toString()) {
-        review.comment = comment;
-        review.rating = rating;
-      }
+    if (isReviewed) {
+      product.reviews.forEach((review) => {
+        if (review.user.toString() === req.user._id.toString()) {
+          review.comment = comment;
+          review.rating = rating;
+        }
+      });
+    } else {
+      product.reviews.push(review);
+      product.numOfReviews = product.reviews.length;
+    }
+
+    product.ratings =
+      product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      product.reviews.length;
+
+    await product.save({ validateBeforeSave: false });
+
+    res.status(200).json({
+      success: true,
+      msg: "Rating added Successfully",
     });
-  } else {
-    product.reviews.push(review);
-    product.numOfReviews = product.reviews.length;
+  } catch (error) {
+    console.log(error);
   }
-
-  product.ratings =
-    product.reviews.reduce((acc, item) => item.rating + acc, 0) /
-    product.reviews.length;
-
-  await product.save({ validateBeforeSave: false });
-
-  res.status(200).json({
-    success: true,
-    msg: "Rating added Successfully",
-  });
 };
 
 //Get Product Reviews   =>   /api/reviews

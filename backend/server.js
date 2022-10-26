@@ -3,7 +3,7 @@ const connectDatabase = require("./config/db");
 const express = require("express");
 const Product = require("./models/product");
 const cookiesParser = require("cookie-parser");
-const errorMiddleware = require("./middlewares/errors");
+
 const bodyparser = require("body-parser");
 
 var cors = require("cors");
@@ -51,8 +51,6 @@ app.get("/api", async (req, res) => {
     console.log(error);
   }
 });
-//middleware to handle errors
-app.use(errorMiddleware);
 //setupn of cloudnary
 cloudinary.config({
   cloud_name: "ab-ecommerce",

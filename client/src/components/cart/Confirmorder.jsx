@@ -1,9 +1,7 @@
 import React, { Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import MetaData from "../metadata/Metadata";
 import CheckoutSteps from "./CheckoutSteps";
-
 import { useSelector } from "react-redux";
 
 const Confirmorder = ({ history }) => {

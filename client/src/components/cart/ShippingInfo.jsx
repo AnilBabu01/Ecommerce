@@ -3,7 +3,6 @@ import { countries } from "countries-list";
 import { useNavigate } from "react-router-dom";
 import MetaData from "../metadata/Metadata";
 import CheckoutSteps from "./CheckoutSteps";
-
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingInfo } from "../actions/cartActions";
 

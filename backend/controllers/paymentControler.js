@@ -4,23 +4,20 @@ const stripe = require("stripe")(
 
 // Process stripe payments   =>   /api/payment/process
 exports.processPayment = async (req, res, next) => {
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: req.body.amount,
-    description: "Software development services",
-    currency: "inr",
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: req.body.amount,
+      description: "Software development services",
+      currency: "inr",
 
-    metadata: { integration_check: "accept_a_payment" },
-  });
+      metadata: { integration_check: "accept_a_payment" },
+    });
 
-  res.status(200).json({
-    success: true,
-    client_secret: paymentIntent.client_secret,
-  });
-};
-
-// Send stripe API Key   =>   /api/stripeapi
-exports.sendStripApi = async (req, res, next) => {
-  res.status(200).json({
-    stripeApiKey: process.env.STRIPE_API_KEY,
-  });
+    res.status(200).json({
+      success: true,
+      client_secret: paymentIntent.client_secret,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
