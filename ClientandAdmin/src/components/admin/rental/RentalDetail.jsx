@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useAlert } from "react-alert";
 import Sidebar from "../sidebar/Sidebar";
-import Loader from "../../loader/Loader";
-import Metadata from "../../metadata/Metadata";
 import "../shipping/shipping.css";
 const RentalDetail = () => {
   const { id } = useParams();
@@ -28,7 +26,6 @@ const RentalDetail = () => {
 
   return (
     <div>
-      {/* <Metadata title={product.name} /> */}
       <div className="row">
         <div className="col-12 col-md-2" style={{ marginTop: "4.8rem" }}>
           <Sidebar />
