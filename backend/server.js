@@ -1,28 +1,23 @@
-const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/db");
 const express = require("express");
-const Product = require("./models/product");
-const cookiesParser = require("cookie-parser");
-
 const bodyparser = require("body-parser");
 
 var cors = require("cors");
 const app = express();
 
 //allow all to requst domain
+
 app.use(
   cors({
     origin: true,
     credentials: true,
-    optionsSuccessStatus: 200,
   })
 );
-app.use("/images", express.static("images"));
-app.use(express.json({ limit: "50mb" }));
-app.use(bodyparser.urlencoded({ extended: true }));
-app.use(cookiesParser());
 
-app.set("trust proxy", 1);
+app.use("/images", express.static("images"));
+app.use(express.json());
+app.use(bodyparser.urlencoded({ extended: true }));
+
 // import all routes here
 const product = require("./routes/product");
 const user = require("./routes/auth");
@@ -39,24 +34,15 @@ app.use("/api", payment);
 app.use("/api", slider);
 app.use("/api", shipping);
 app.use("/api", rental);
+// for check apis
 app.get("/api", async (req, res) => {
   try {
-    const products = await Product.find();
-
-    res.status(201).json({
-      status: true,
-      products: products,
-    });
+    res.send("API is working");
   } catch (error) {
     console.log(error);
   }
 });
-//setupn of cloudnary
-cloudinary.config({
-  cloud_name: "ab-ecommerce",
-  api_key: "441619151451343",
-  api_secret: "U_hWsazTOwFgvjhipPB6kr8Hloo",
-});
+
 //setting up config file
 const path = require("path");
 require("dotenv").config({

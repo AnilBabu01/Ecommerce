@@ -24,7 +24,11 @@ const Sidebar = () => {
             >
               <i className="fa fa-product-hunt"></i> Products
             </a>
-            <ul className="collapse list-unstyled" id="productSubmenu">
+            <ul
+              className=" list-unstyled"
+              style={{ visibility: "visible" }}
+              id="productSubmenu"
+            >
               <li>
                 <Link to="/admin/products">
                   <i className="fa fa-clipboard"></i> All

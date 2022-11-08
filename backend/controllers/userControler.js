@@ -4,7 +4,7 @@ const { validationResult } = require("express-validator");
 const sendEmail = require("../utils/sendEmail");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
-const cloudinary = require("cloudinary");
+
 const crypto = require("crypto");
 const JWT_SECRET = "anilbabu$oy";
 // Register a user   api/auth/register
@@ -149,15 +149,7 @@ exports.forgotPassword = async (req, res, next) => {
       message: `Email sent to: ${user.email}`,
     });
   } catch (error) {
-    user.resetResetPasswordToken = undefined;
-    user.resetResetPasswordExpire = undefined;
-
-    await user.save({ validateBeforeSave: false });
-
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    console.log(error);
   }
 };
 
@@ -198,7 +190,11 @@ exports.resetPassword = async (req, res, next) => {
     user.resetPasswordExpire = undefined;
 
     await user.save();
-    sendToken(user, 200, res);
+    return res.status(400).json({
+      success: true,
+      user: user,
+      message: "Password Reset successfully",
+    });
   } catch (error) {
     console.log(error);
   }

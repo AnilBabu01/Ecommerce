@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const url = "";
 
 const connectDatabase = () => {
-  mongoose.connect("mongodb://0.0.0.0:27017/ecommerce").then((con) => {
+  mongoose.connect(process.env.DB_LOCAL_URI).then((con) => {
     console.log(`MongoDB Database connected with HOST: ${con.connection.host}`);
   });
 };
