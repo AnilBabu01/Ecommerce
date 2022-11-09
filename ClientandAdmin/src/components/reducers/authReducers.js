@@ -64,6 +64,7 @@ export const authReducer = (state = { user: {} }, action) => {
         ...state,
         isRegisterGoLogin: true,
         loading: false,
+        data: action.token,
       };
     case LOGOUT_SUCCESS:
       return {
@@ -94,6 +95,8 @@ export const authReducer = (state = { user: {} }, action) => {
         isAuthenticated: false,
         user: null,
         error: action.payload,
+        isNotAuth: true,
+        isRegisterGoLogin: false,
       };
 
     case CLEAR_ERRORS:

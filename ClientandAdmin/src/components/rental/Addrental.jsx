@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MetaData from "../metadata/Metadata";
+import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { useAlert } from "react-alert";
 
@@ -14,7 +15,7 @@ const Addrental = () => {
   const [phone, setphone] = useState("");
   const [imagesPreview, setImagesPreview] = useState([]);
   const [imgcheck, setimgcheck] = useState(false);
-
+  const [showprocess, setshowprocess] = useState(false);
   const alert = useAlert();
 
   useEffect(() => {}, []);
@@ -22,6 +23,7 @@ const Addrental = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setshowprocess(true);
     axios.defaults.headers.post[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
@@ -40,20 +42,17 @@ const Addrental = () => {
     console.log("from add rental", data.status);
     if (data.status === true) {
       alert.success(data.msg);
+      setshowprocess(false);
+      navigate("/rental");
     }
   };
 
   const setfileinfoform = (filelist) => {
     setimgcheck(true);
-    for (let [name, value] of formData) {
-      if (name === "avatar") {
-        formData.delete(name);
-      }
-    }
 
     const file = filelist[0];
 
-    formData.append("image", file);
+    formData.set("image", file);
     console.log("file is ", file);
   };
 
@@ -178,7 +177,11 @@ const Addrental = () => {
                     name && price && description && imgcheck ? false : true
                   }
                 >
-                  CREATE
+                  {showprocess ? (
+                    <CircularProgress className="procress" />
+                  ) : (
+                    "CREATE"
+                  )}
                 </button>
               </form>
             </div>

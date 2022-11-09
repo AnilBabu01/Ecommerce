@@ -122,6 +122,7 @@ exports.deleterental = async (req, res) => {
 
     await Rental.findOneAndRemove(req.params.id);
 
+    console.log(req.params.id);
     res.status(201).json({
       status: true,
       msg: "Product deleted Successfully",

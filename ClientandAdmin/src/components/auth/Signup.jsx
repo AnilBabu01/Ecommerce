@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import CircularProgress from "@mui/material/CircularProgress";
 import Metadata from "../metadata/Metadata";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
@@ -9,10 +10,16 @@ import axios from "axios";
 const Signup = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
+  const [showprocess, setshowprocess] = useState(false);
   const navigate = useNavigate();
-  const { loading, error, isAuthenticated } = useSelector(
-    (state) => state.auth
-  );
+  const {
+    loading,
+    error,
+    isAuthenticated,
+    isRegisterGoLogin,
+    data,
+    isNotAuth,
+  } = useSelector((state) => state.auth);
 
   const [user, setUser] = useState({
     name: "",
@@ -22,50 +29,33 @@ const Signup = () => {
 
   const { name, email, password } = user;
 
-  const [avatar, setAvatar] = useState("");
-  const [avatarPreview, setAvatarPreview] = useState(
-    "/images/default_avatar.jpg"
-  );
-
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, alert, isAuthenticated, error]);
+
+    if (isRegisterGoLogin) {
+      setshowprocess(false);
+      console.log(data);
+      alert.success("You have Register Successfully");
+      navigate("/login");
+    }
+    if (isNotAuth) {
+      setshowprocess(false);
+      alert.error("Sorry a user with this email already exists");
+    }
+  }, [dispatch, alert, isAuthenticated, error, isRegisterGoLogin]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
-    const formdata = new FormData();
-
-    formdata.append("name", name);
-    formdata.append("email", email);
-
-    formdata.append("password", password);
-    if (email && name && password) {
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      };
-
-      const res = await axios.post(
-        `${process.env.REACT_APP_URL}/api/auth/regster`,
-        { name: name, email: email, password: password }
-      );
-
-      if (res) {
-        dispatch(register(formdata));
-        navigate("/login");
-        console.log("form data ", formdata);
-        alert.success("You have Registerwd Successfully");
-      } else {
-        alert.success("You have Registerwd Successfully");
-      }
-
-      console.log(res);
-    }
+    setshowprocess(true);
+    const data = {
+      name: name,
+      email: email,
+      password: password,
+    };
+    dispatch(register(data));
   };
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -130,7 +120,11 @@ const Signup = () => {
                   className="btn btn-block py-3"
                   disabled={email && password && email ? false : true}
                 >
-                  REGISTER
+                  {showprocess ? (
+                    <CircularProgress className="procress" />
+                  ) : (
+                    "REGISTER"
+                  )}
                 </button>
               </form>
             </div>

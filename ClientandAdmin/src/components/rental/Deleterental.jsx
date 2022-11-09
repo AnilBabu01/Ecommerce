@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Rentalproduct from "./Rentalproduct";
 import "./Rental.css";
 const Deleterental = () => {
   const [products, setproducts] = useState([]);
-  const navigate = useNavigate();
+
   const getproduct = async () => {
     axios.defaults.headers.get[
       "Authorization"

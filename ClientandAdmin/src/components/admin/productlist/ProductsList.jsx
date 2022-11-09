@@ -83,7 +83,7 @@ const ProductsList = () => {
       data.rows.push({
         id: index + 1,
         name: product.name,
-        price: `$${product.price}`,
+        price: `₹${product.price}`,
         stock: product.stock,
         actions: (
           <Fragment>

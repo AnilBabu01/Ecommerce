@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 import MetaData from "../../metadata/Metadata";
 import Sidebar from "../sidebar/Sidebar";
 import { useAlert } from "react-alert";
@@ -17,6 +18,7 @@ const NewProduct = () => {
   const [seller, setSeller] = useState("");
   const [imagesPreview, setImagesPreview] = useState([]);
   const [imgcheck, setimgcheck] = useState(false);
+  const [showprocess, setshowprocess] = useState(false);
   const categories = [
     "Select Categories",
     "Women",
@@ -42,6 +44,7 @@ const NewProduct = () => {
     }
 
     if (success) {
+      setshowprocess(false);
       navigate("/admin/products");
       alert.success("Product created successfully");
       dispatch({ type: NEW_PRODUCT_RESET });
@@ -51,7 +54,7 @@ const NewProduct = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
+    setshowprocess(true);
     formData.set("name", name);
     formData.set("price", price);
     formData.set("description", description);
@@ -228,7 +231,11 @@ const NewProduct = () => {
                       : true
                   }
                 >
-                  CREATE
+                  {showprocess ? (
+                    <CircularProgress className="procress" />
+                  ) : (
+                    "CREATE"
+                  )}
                 </button>
               </form>
             </div>

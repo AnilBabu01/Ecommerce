@@ -1,20 +1,24 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAlert } from "react-alert";
 import { Link } from "react-router-dom";
 const Rentalproduct = ({ product, deleted, getproduct }) => {
+  const navigate = useNavigate();
   const alert = useAlert();
   const deleterental = async (id) => {
     axios.defaults.headers.delete[
       "Authorization"
     ] = `Bearer ${localStorage.getItem("token")}`;
 
+    console.log("project id from ", id);
     const data = await axios.delete(
       `${process.env.REACT_APP_URL}/api/rental/userdelete/${id}`
     );
     if (data.data.status === true) {
       getproduct();
       alert.success(data.data.msg);
+      navigate("/rental");
     }
   };
 

@@ -345,6 +345,10 @@ footer {
   border-color: #fa9c23;
   color: white;
   margin-top: 2.5rem;
+  height: 41px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .wrapper form a {

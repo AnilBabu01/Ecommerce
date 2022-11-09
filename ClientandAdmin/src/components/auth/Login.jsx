@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 import Loader from "../loader/Loader";
 import { useAlert } from "react-alert";
 import Metadata from "../metadata/Metadata";
@@ -9,12 +10,13 @@ import "./Auth.css";
 const Login = ({ location }) => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const { loading, error, isAuthenticated, user } = useSelector(
+  const [showprocess, setshowprocess] = useState(false);
+  const { loading, error, isAuthenticated, user, isNotAuth } = useSelector(
     (state) => state.auth
   );
 
   console.log(isAuthenticated);
-
+  console.log("from login", user);
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
@@ -25,17 +27,26 @@ const Login = ({ location }) => {
       localStorage.setItem("token", token);
       if (token) {
         alert.success("You have login Successfully");
+        setshowprocess(false);
       }
 
       navigate("/");
+    } else {
+      console.log("login");
+    }
+
+    if (isNotAuth) {
+      alert.error("Please Check passwrod or email");
+      setshowprocess(false);
     }
     if (error) {
       alert.error(error);
     }
-  }, [dispatch, error, isAuthenticated, alert]);
+  }, [dispatch, error, isAuthenticated, alert, isNotAuth]);
 
   const submit = (e) => {
     e.preventDefault();
+    setshowprocess(true);
     dispatch(login(email, password));
   };
 
@@ -85,7 +96,11 @@ const Login = ({ location }) => {
                   className="btn btn-block py-3"
                   disabled={email && password ? false : true}
                 >
-                  LOGIN
+                  {showprocess ? (
+                    <CircularProgress className="procress" />
+                  ) : (
+                    "Login"
+                  )}
                 </button>
 
                 <Link to="/register" className="float-right mt-3">
