@@ -37,36 +37,34 @@ axios.defaults.headers.get["Authorization"] = `Bearer ${localStorage.getItem(
 axios.defaults.headers.post["Authorization"] = `Bearer ${localStorage.getItem(
   "token"
 )}`;
-export const getProducts =
-  (keyword = "", currentPage, price = 0, category, rating) =>
-  async (dispatch) => {
-    try {
-      axios.defaults.headers.get[
-        "Authorization"
-      ] = `Bearer ${localStorage.getItem("token")}`;
+export const getProducts = (category) => async (dispatch) => {
+  try {
+    axios.defaults.headers.get[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
 
-      axios.defaults.headers.post[
-        "Authorization"
-      ] = `Bearer ${localStorage.getItem("token")}`;
-      dispatch({ type: ALL_PRODUCTS_REQUEST });
+    axios.defaults.headers.post[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
+    dispatch({ type: ALL_PRODUCTS_REQUEST });
 
-      let link = `${process.env.REACT_APP_URL}/api/product/getAllProduct`;
-      if (category) {
-        link = `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=${category}`;
-      }
-      const { data } = await axios.get(link);
-
-      dispatch({
-        type: ALL_PRODUCTS_SUCCESS,
-        payload: data,
-      });
-    } catch (error) {
-      dispatch({
-        type: ALL_PRODUCTS_FAIL,
-        payload: error.response.data.message,
-      });
+    let link = `${process.env.REACT_APP_URL}/api/product/getAllProduct`;
+    if (category) {
+      link = `${process.env.REACT_APP_URL}/api/product/getAllProduct?category=${category}`;
     }
-  };
+    const { data } = await axios.get(link);
+
+    dispatch({
+      type: ALL_PRODUCTS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ALL_PRODUCTS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 export const getProductDetails = (id) => async (dispatch) => {
   try {
