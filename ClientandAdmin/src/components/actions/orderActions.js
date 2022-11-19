@@ -21,13 +21,7 @@ import {
   ORDER_DETAILS_FAIL,
   CLEAR_ERRORS,
 } from "../constants/orderConstants";
-axios.defaults.headers.get["Authorization"] = `Bearer ${localStorage.getItem(
-  "token"
-)}`;
 
-axios.defaults.headers.post["Authorization"] = `Bearer ${localStorage.getItem(
-  "token"
-)}`;
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
     axios.defaults.headers.post[
